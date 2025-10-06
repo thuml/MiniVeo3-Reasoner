@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+{% set path_to_root = "../" * (module.modulename.count(".")) %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc {{ __version__ }}"/>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ path_to_root }}resources/favicon.png"/>
+    {% block head %}{% endblock %}
+    {% filter minify_css | indent %}
+        {% block style %}
+            <link rel="stylesheet" href="{{ path_to_root }}resources/css/bootstrap-reboot.min.css">
+            <link rel="stylesheet" href="{{ path_to_root }}resources/css/syntax-highlighting.css">
+            <link rel="stylesheet" href="{{ path_to_root }}resources/css/theme.css">
+            <link rel="stylesheet" href="{{ path_to_root }}resources/css/layout.css">
+            <link rel="stylesheet" href="{{ path_to_root }}resources/css/content.css">
+            <link rel="stylesheet" href="{{ path_to_root }}resources/css/custom.css">
+        {% endblock %}
+    {% endfilter %}
+    {% if math %}{% include "math.html.jinja2" %}{% endif %}
+    {% if mermaid %}{% include "mermaid.html.jinja2" %}{% endif %}
+</head>
+<body>
+<div class="package-version">
+    docs for <a href="{{- package_repo_url -}}">{{- package_name -}}</a> v{{- package_version }}<br>
+</div>
+{% block body %}
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button">
+            <img src="{{ path_to_root }}resources/svg/navtoggle.svg" alt="Toggle navigation"> 
+        </label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div>{% block nav %}{% endblock %}</div>
+    </nav>
+    {% block content %}{% endblock %}
+{% endblock body %}
+</body>
+</html>

@@ -1,0 +1,41 @@
+{# this template is used by pdoc's integrated web server to display runtime errors. #}
+{% extends "frame.html.jinja2" %}
+{% block title %}{{ error }}{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="resources/css/bootstrap-reboot.min.css">
+    <style>
+        body {
+            padding: 2rem;
+            max-width: 54rem;
+        }
+
+        footer {
+            text-align: right;
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+        }
+
+        footer svg {
+            max-width: 70px;
+            max-height: 35px;
+            transition: all 200ms;
+            filter: grayscale(100%);
+        }
+
+        footer svg:hover {
+            filter: grayscale(0%);
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <h1>{{ error }}</h1>
+    <pre>{{ details }}</pre>
+    <hr>
+    <footer>
+        <a title="built with pdoc {{ __version__ }}" href="https://pdoc.dev">
+        <img src="resources/svg/doc-logo.svg">
+        </a>
+    </footer>
+{% endblock %}

@@ -1,0 +1,95 @@
+{
+  "name": "p0.5",
+  "grid_n": 15,
+  "maze_ctor": "gen_percolation",
+  "maze_ctor_kwargs": {
+    "p": 0.5
+  },
+  "description": "Pure percolation (p=0.5) (15x15)",
+  "tags": [
+    "algo:percolation",
+    "percolation",
+    "percolation:0.5",
+    "grid:15"
+  ],
+  "config": {
+    "__muutils_format__": "MazeDatasetConfig(SerializableDataclass)",
+    "name": "p0.5",
+    "seq_len_min": 1,
+    "seq_len_max": 512,
+    "seed": 42,
+    "applied_filters": [],
+    "grid_n": 15,
+    "n_mazes": 10,
+    "maze_ctor": {
+      "__name__": "gen_percolation",
+      "__module__": "maze_dataset.generation.generators",
+      "__doc__": [
+        "generate a lattice maze using simple percolation",
+        "note that p in the range (0.4, 0.7) gives the most interesting mazes",
+        "# Arguments",
+        "- `grid_shape: Coord`: the shape of the grid",
+        "- `lattice_dim: int`: the dimension of the lattice (default: `2`)",
+        "- `p: float`: the probability of a cell being accessible (default: `0.5`)",
+        "- `start_coord: Coord | None`: the starting coordinate for the connected component (default: `None` will give a random start)"
+      ],
+      "source_code": [
+        "\t@staticmethod",
+        "\tdef gen_percolation(",
+        "\t\tgrid_shape: Coord | CoordTup,",
+        "\t\tp: float = 0.4,",
+        "\t\tlattice_dim: int = 2,",
+        "\t\tstart_coord: Coord | None = None,",
+        "\t) -> LatticeMaze:",
+        "\t\t\"\"\"generate a lattice maze using simple percolation",
+        "",
+        "\t\tnote that p in the range (0.4, 0.7) gives the most interesting mazes",
+        "",
+        "\t\t# Arguments",
+        "\t\t- `grid_shape: Coord`: the shape of the grid",
+        "\t\t- `lattice_dim: int`: the dimension of the lattice (default: `2`)",
+        "\t\t- `p: float`: the probability of a cell being accessible (default: `0.5`)",
+        "\t\t- `start_coord: Coord | None`: the starting coordinate for the connected component (default: `None` will give a random start)",
+        "\t\t\"\"\"",
+        "\t\tassert p >= 0 and p <= 1, f\"p must be between 0 and 1, got {p}\"  # noqa: PT018",
+        "\t\tgrid_shape_: Coord = np.array(grid_shape)",
+        "",
+        "\t\tstart_coord = _random_start_coord(grid_shape_, start_coord)",
+        "",
+        "\t\tconnection_list: ConnectionList = np.random.rand(lattice_dim, *grid_shape_) < p",
+        "",
+        "\t\tconnection_list = _fill_edges_with_walls(connection_list)",
+        "",
+        "\t\toutput: LatticeMaze = LatticeMaze(",
+        "\t\t\tconnection_list=connection_list,",
+        "\t\t\tgeneration_meta=dict(",
+        "\t\t\t\tfunc_name=\"gen_percolation\",",
+        "\t\t\t\tgrid_shape=grid_shape_,",
+        "\t\t\t\tpercolation_p=p,",
+        "\t\t\t\tstart_coord=start_coord,",
+        "\t\t\t),",
+        "\t\t)",
+        "",
+        "\t\t# generation_meta is sometimes None, but not here since we just made it a dict above",
+        "\t\toutput.generation_meta[\"visited_cells\"] = output.gen_connected_component_from(  # type: ignore[index]",
+        "\t\t\tstart_coord,",
+        "\t\t)",
+        "",
+        "\t\treturn output"
+      ]
+    },
+    "maze_ctor_kwargs": {
+      "p": 0.5
+    },
+    "endpoint_kwargs": {
+      "except_on_no_valid_endpoint": false
+    },
+    "_fname_loaded": null,
+    "fname": "p0.5-g15-n10-a_percolation-h94355",
+    "versions": {
+      "config": "1.0",
+      "maze_dataset": "1.3.2"
+    }
+  },
+  "fname": "p0.5-g15-n10-a_percolation-h94355"
+}

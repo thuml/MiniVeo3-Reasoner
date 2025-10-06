@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Benchmark Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #ccc;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div id="user-content">
+        <!-- Space for user to add content -->
+        <h1>Speed Benchmark Results</h1>
+        <p>
+            <a href="../">Back to main page</a>
+        </p>
+    </div>
+
+    <div id="tabButtons" class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Images')">Images</button>
+        <!-- JSONL file tabs will be added here dynamically -->
+    </div>
+
+    <div id="Images" class="tabcontent">
+        <h2>Images</h2>
+		<img src="figures/gridsize-vs-gentime.svg" alt="gridsize-vs-gentime" style="width: 100%; height: auto;">
+		<img src="figures/n_mazes-vs-gentime.svg" alt="n_mazes-vs-gentime" style="width: 100%; height: auto;">
+    </div>
+
+    <!-- JSONL file content divs will be added here dynamically -->
+
+    <script>
+        // Specify your list of JSONL files here
+        const jsonlFiles = [
+            'benchmark_large.jsonl',
+            'benchmark_medium.jsonl',
+            'benchmark_small.jsonl',
+            'benchmark_tiny.jsonl'
+        ];
+
+        function createTabs() {
+            const tabButtons = document.getElementById('tabButtons');
+            const body = document.body;
+
+            jsonlFiles.forEach(file => {
+                const fileNameWithoutExt = file.replace('.jsonl', '');
+                const tabId = fileNameWithoutExt + 'Tab';
+
+                // Create tab button
+                const button = document.createElement('button');
+                button.className = 'tablinks';
+                button.onclick = function(event) { openTab(event, tabId); };
+                button.textContent = fileNameWithoutExt;
+                tabButtons.appendChild(button);
+
+                // Create tab content
+                const tabContent = document.createElement('div');
+                tabContent.id = tabId;
+                tabContent.className = 'tabcontent';
+
+                const h2 = document.createElement('h2');
+                h2.textContent = fileNameWithoutExt;
+                tabContent.appendChild(h2);
+
+                const p = document.createElement('p');
+                const a = document.createElement('a');
+                a.href = 'data/' + file;
+                a.target = '_blank';
+                a.textContent = 'View source file';
+                p.appendChild(a);
+                tabContent.appendChild(p);
+
+                const tableDiv = document.createElement('div');
+                tableDiv.id = fileNameWithoutExt + 'Table';
+                tabContent.appendChild(tableDiv);
+
+                body.appendChild(tabContent);
+            });
+        }
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        function processJSONLFile(file, tableId) {
+            fetch('data/' + file)
+                .then(response => response.text())
+                .then(data => {
+                    const lines = data.trim().split('\n');
+                    const jsonData = lines.map(line => JSON.parse(line));
+                    createTable(jsonData, tableId);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function createTable(data, tableId) {
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            // Create header
+            const headerRow = document.createElement('tr');
+            Object.keys(data[0]).forEach(key => {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create body
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                Object.values(row).forEach(value => {
+                    const td = document.createElement('td');
+                    td.textContent = processValue(value);
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            document.getElementById(tableId).appendChild(table);
+        }
+
+        function processValue(value) {
+            if (typeof value === 'object' && value !== null) {
+                return JSON.stringify(value);
+            }
+            return value;
+        }
+
+        // Create tabs and process JSONL files
+        createTabs();
+        jsonlFiles.forEach(file => {
+            const fileNameWithoutExt = file.replace('.jsonl', '');
+            processJSONLFile(file, fileNameWithoutExt + 'Table');
+        });
+
+        // Open the first tab by default
+        document.getElementsByClassName("tablinks")[0].click();
+    </script>
+</body>
+</html>

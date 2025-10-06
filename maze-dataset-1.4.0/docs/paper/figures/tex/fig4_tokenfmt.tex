@@ -1,0 +1,23 @@
+\begin{figure} 
+	\centering
+	\hspace{-1em}
+	\begin{minipage}{5in}
+		\footnotesize
+		\input{figures/outputs-tokens-colored.tex}
+	\end{minipage}
+	\caption{
+		Example text output format with token regions highlighted.
+		\colorbox[RGB]{ 217,210,233 }{Adjacency list}: text representation of the graph,
+		\colorbox[RGB]{ 217,234,211 }{Origin}: starting coordinate,
+		\colorbox[RGB]{ 234,209,220 }{Target}: ending coordinate,
+		\colorbox[RGB]{ 207,226,243 }{Path}: maze solution sequence.
+		By passing an instance of
+		\href{https://understanding-search.github.io/maze-dataset/maze_dataset/tokenization.html\#MazeTokenizerModular}{\texttt{MazeTokenizerModular}}
+		to
+		\href{https://understanding-search.github.io/maze-dataset/maze_dataset.html\#MazeDataset.as_tokens}{\texttt{as\_tokens(...)}}
+		a maze can be converted to a text sequence. The
+		\href{https://understanding-search.github.io/maze-dataset/maze_dataset/tokenization.html\#MazeTokenizerModular}{\texttt{MazeTokenizerModular}}
+		class contains a rich set of options with 19 discrete parameters, resulting in over 5.8 million unique possible tokenizers.
+	}
+	\label{fig:token-regions}
+\end{figure}

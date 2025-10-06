@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List Viewer</title>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f8f9fa;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        th:hover {
+            background: #e9ecef;
+        }
+
+        th.sorted::after {
+            content: '';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+        }
+
+        th.sorted.asc::after {
+            border-bottom: 6px solid #666;
+        }
+
+        th.sorted.desc::after {
+            border-top: 6px solid #666;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .code-context {
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre-wrap;
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 8px 0;
+            font-size: 14px;
+            display: none;
+        }
+
+        .code-context.expanded {
+            display: block;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: #666;
+            transition: transform 0.2s;
+        }
+
+        .content-cell {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .chevron {
+            width: 8px;
+            height: 8px;
+            border: solid #666;
+            border-width: 0 2px 2px 0;
+            padding: 2px;
+            transform: rotate(45deg);
+            /* point down */
+            transition: transform 0.2s;
+            margin-top: 6px;
+        }
+
+        .expanded .chevron {
+            transform: rotate(225deg);
+            /* point up */
+        }
+
+        .controls-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-button {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .control-button:hover {
+            background: #f8f9fa;
+        }
+
+        .highlight-line {
+            background: #fff3cd;
+        }
+
+        .file-path {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #e9ecef;
+        }
+
+        .github-link {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        .github-link:hover {
+            text-decoration: underline;
+        }
+
+        th .resizer {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            cursor: col-resize;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Search..." style="flex: 1">
+        <select id="tagFilter">
+            <option value="">All tags</option>
+        </select>
+        <select id="langFilter">
+            <option value="">All languages</option>
+        </select>
+        <div class="controls-group">
+            <button class="control-button" onclick="toggleAll(true)">Expand All</button>
+            <button class="control-button" onclick="toggleAll(false)">Collapse All</button>
+        </div>
+    </div>
+    <table id="todoTable">
+        <thead>
+            <tr>
+                <th data-sort="tag">Tag</th>
+                <th data-sort="file">File</th>
+                <th data-sort="content">Content</th>
+                <th data-sort="file_lang">Language</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        function toggleAll(expand) {
+            const buttons = document.querySelectorAll('.expand-btn');
+            const contexts = document.querySelectorAll('.code-context');
+            buttons.forEach(btn => {
+                if (expand) {
+                    btn.classList.add('expanded');
+                } else {
+                    btn.classList.remove('expanded');
+                }
+            });
+            contexts.forEach(ctx => {
+                if (expand) {
+                    ctx.classList.add('expanded');
+                } else {
+                    ctx.classList.remove('expanded');
+                }
+            });
+        }
+
+        function toggleCode(button) {
+            button.classList.toggle('expanded');
+            const codeContext = button.parentElement.querySelector('.code-context');
+            codeContext.classList.toggle('expanded');
+        }
+
+        let todos = [];
+        let currentSort = { column: null, direction: 'asc' };
+
+        function formatContext(context) {
+            const lines = context.split('\\n');
+            return lines.map((line, i) => {
+                const isHighlight = line.includes('TODO:');
+                return `<div class="${isHighlight ? 'highlight-line' : ''}">${line}</div>`;
+            }).join('\\n');
+        }
+
+
+        function updateSortIndicators() {
+            document.querySelectorAll('th').forEach(th => {
+                th.classList.remove('sorted', 'asc', 'desc');
+                if (th.dataset.sort === currentSort.column) {
+                    th.classList.add('sorted', currentSort.direction);
+                }
+            });
+        }
+
+        function renderTable() {
+            updateSortIndicators();
+            const tbody = document.querySelector('tbody');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const tagFilter = document.getElementById('tagFilter').value;
+            const langFilter = document.getElementById('langFilter').value;
+
+            let filteredTodos = todos.filter(todo => {
+                const matchesSearch = todo.content.toLowerCase().includes(searchTerm) ||
+                    todo.file.toLowerCase().includes(searchTerm);
+                const matchesTag = !tagFilter || todo.tag === tagFilter;
+                const matchesLang = !langFilter || todo.file_lang === langFilter;
+                return matchesSearch && matchesTag && matchesLang;
+            });
+
+            if (currentSort.column) {
+                filteredTodos.sort((a, b) => {
+                    const aVal = a[currentSort.column];
+                    const bVal = b[currentSort.column];
+                    const modifier = currentSort.direction === 'asc' ? 1 : -1;
+                    return aVal > bVal ? modifier : -modifier;
+                });
+            }
+
+            tbody.innerHTML = filteredTodos.map(todo => `
+                <tr>
+                    <td><span class="tag">${todo.tag}</span></td>
+                    <td>
+                        <div class="file-path">
+                            <a href="${todo.code_url}" target="_blank" class="github-link">${todo.file}:${todo.line_num}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <button class="expand-btn" onclick="toggleCode(this)">
+                                <div class="chevron"></div>
+                            </button>
+                            <div>
+                                <div><strong>${todo.stripped_title || todo.content}</strong></div>
+                                <div class="code-context">${formatContext(todo.context)}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${todo.file_lang}</td>
+                    <td>
+                        <a href="${todo.issue_url}" target="_blank" class="github-link">Create Issue</a>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateFilters() {
+            const tagSet = new Set(todos.map(t => t.tag));
+            const langSet = new Set(todos.map(t => t.file_lang));
+
+            const tagFilter = document.getElementById('tagFilter');
+            const langFilter = document.getElementById('langFilter');
+
+            tagFilter.innerHTML = '<option value="">All tags</option>' +
+                Array.from(tagSet).map(tag => `<option value="${tag}">${tag}</option>`).join('');
+
+            langFilter.innerHTML = '<option value="">All languages</option>' +
+                Array.from(langSet).map(lang => `<option value="${lang}">${lang}</option>`).join('');
+        }
+
+        // Event Listeners
+        document.getElementById('searchInput').addEventListener('input', renderTable);
+        document.getElementById('tagFilter').addEventListener('change', renderTable);
+        document.getElementById('langFilter').addEventListener('change', renderTable);
+
+        document.querySelectorAll('th[data-sort]').forEach(th => {
+            th.addEventListener('click', () => {
+                const column = th.dataset.sort;
+                if (currentSort.column === column) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort = { column, direction: 'asc' };
+                }
+                renderTable();
+            });
+        });
+        function initResizableColumns() {
+            const table = document.getElementById('todoTable');
+            const thElements = table.querySelectorAll('th');
+            thElements.forEach((th) => {
+                const resizer = document.createElement('div');
+                resizer.classList.add('resizer');
+                th.appendChild(resizer);
+
+                resizer.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const startX = e.pageX;
+                    const startWidth = th.offsetWidth;
+
+                    function onMouseMove(e) {
+                        // Enforce a minimum width of 40px
+                        const newWidth = Math.max(startWidth + (e.pageX - startX), 40);
+                        th.style.width = newWidth + 'px';
+                    }
+
+                    function onMouseUp() {
+                        document.removeEventListener('mousemove', onMouseMove);
+                        document.removeEventListener('mouseup', onMouseUp);
+                    }
+
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                });
+            });
+        }
+
+
+
+        // Initialize with data
+        todos = //{{DATA}}//;
+            updateFilters();
+        renderTable();
+        initResizableColumns();
+    </script>
+</body>
+
+</html>

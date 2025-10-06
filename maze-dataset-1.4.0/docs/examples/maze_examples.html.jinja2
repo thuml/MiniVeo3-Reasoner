@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <title>Maze Dataset Examples</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .search-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .filter-section {
+            margin-bottom: 15px;
+        }
+        .filter-section h3 {
+            margin-bottom: 8px;
+        }
+        .tag-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .tag-filter {
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .tag-filter.active {
+            background-color: #007bff;
+            color: white;
+        }
+        input[type="text"], select {
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .maze-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .maze-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .maze-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .maze-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .maze-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .maze-image img[data-type="png"] {
+            image-rendering: pixelated;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .maze-details {
+            padding: 15px;
+        }
+        .maze-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .maze-description {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .maze-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        .maze-thumbnail {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            overflow: hidden;
+            flex: 0 0 80px; /* Fixed width and height for square thumbnails */
+        }
+        .maze-thumbnail.active {
+            border-color: #007bff;
+        }
+        .maze-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .maze-thumbnail img[data-type="png"] {
+            image-rendering: pixelated;
+        }
+        .maze-description {
+            margin-bottom: 10px;
+            color: #777;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        .maze-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .maze-tag {
+            background-color: #e0e0e0;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        .button svg {
+            margin-right: 5px;
+        }
+        .button-constructor {
+            background-color: #4a6bdf;
+            color: white;
+        }
+        .button-constructor:hover {
+            background-color: #3451b2;
+        }
+        .button-json {
+            background-color: #28a745;
+            color: white;
+        }
+        .button-json:hover {
+            background-color: #218838;
+        }
+        .config-code {
+            display: none;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .image-toggle {
+            display: flex;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .toggle-option {
+            padding: 8px 16px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .toggle-option.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Maze Dataset Examples</h1>
+    
+    <div class="toggle-container">
+        <div class="image-toggle">
+            <div class="toggle-option active" data-type="svg">SVG (Vector)</div>
+            <div class="toggle-option" data-type="png">PNG (Pixel)</div>
+        </div>
+    </div>
+    
+    <div class="search-container">
+        <div class="filter-section">
+            <h3>Search by Keywords</h3>
+            <input type="text" id="search-input" placeholder="Search by name, description, or configuration...">
+        </div>
+        
+        <div class="filter-section">
+            <h3>Filter by Tags</h3>
+            <div class="tag-filters">
+                {%- for tag in all_tags %}
+                <div class="tag-filter" data-tag="{{ tag }}">{{ tag }}</div>
+                {%- endfor %}
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <h3>Sort By</h3>
+            <select id="sort-select">
+                <option value="name">Name</option>
+                <option value="grid_n">Grid Size</option>
+                <option value="maze_ctor">Generator</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="maze-grid" id="maze-grid">
+        {%- for example in maze_examples %}
+        <div class="maze-card" 
+             data-name="{{ example.name }}" 
+             data-grid-n="{{ example.grid_n }}" 
+             data-maze-ctor="{{ example.maze_ctor }}" 
+             data-tags="{{ example.tags|join(',') }}" 
+             data-fname="{{ example.fname }}"
+             data-config-path="plots/{{ example.fname }}/metadata.json">
+            <div class="maze-image">
+                <img src="plots/{{ example.fname }}/plot-0.svg" alt="{{ example.name }}" class="main-image" data-type="svg">
+            </div>
+            <div class="maze-carousel">
+                {% for i in range(6) %}
+                <div class="maze-thumbnail {% if i == 0 %}active{% endif %}" data-index="{{ i }}">
+                    <img src="plots/{{ example.fname }}/plot-{{ i }}.svg" alt="Example {{ i }}" loading="lazy" data-type="svg">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="maze-details">
+                <div class="maze-title">{{ example.fname }}</div>
+                <div class="maze-description">{{ example.description }}</div>
+                <div class="maze-tags">
+                    {%- for tag in example.tags %}
+                    <span class="maze-tag">{{ tag }}</span>
+                    {%- endfor %}
+                </div>
+                <div class="button-group">
+                    <button class="button button-constructor show-constructor-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        Show Constructor
+                    </button>
+                    <button class="button button-constructor copy-constructor-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Constructor
+                    </button>
+                    <button class="button button-json show-json-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        Show Config JSON
+                    </button>
+                    <button class="button button-json copy-json-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Config JSON
+                    </button>
+                </div>
+                <div class="config-code constructor-code"></div>
+            </div>
+        </div>
+        {%- endfor %}
+        <div class="no-results" style="display: none;">No mazes match your search criteria.</div>
+    </div>
+
+    <footer>
+        Generated using <a href="https://github.com/understanding-search/maze-dataset">maze-dataset</a>
+    </footer>
+
+    <script>
+        // Load configuration data
+        document.querySelectorAll('.maze-card').forEach(card => {
+            const configPath = card.getAttribute('data-config-path');
+            
+            // Preload the configuration data
+            fetch(configPath)
+                .then(response => response.json())
+                .then(data => {
+                    // Store data in card's dataset for later use
+                    card.dataset.name = data.name;
+                    card.dataset.gridN = data.grid_n;
+                    card.dataset.constructorName = data.maze_ctor;
+                    card.dataset.constructorParams = JSON.stringify(data.maze_ctor_kwargs, null, 2);
+                    card.dataset.endpointParams = data.endpoint_kwargs ? JSON.stringify(data.endpoint_kwargs, null, 2) : null;
+                    card.dataset.configJson = JSON.stringify(data.config, null, 2);
+                    card.dataset.configLoaded = 'true';
+                    
+                    // Format constructor code block
+                    let constructorCode = `MazeDatasetConfig(\n`;
+                    constructorCode += `    name="${data.name}", # you can set this to whatever you like\n`;
+                    constructorCode += `    grid_n=${data.grid_n},\n`;
+                    constructorCode += `    n_mazes=1, # the number of mazes you want\n`;
+                    constructorCode += `    maze_ctor=LatticeMazeGenerators.${data.maze_ctor},\n`;
+                    
+                    if (data.maze_ctor_kwargs && Object.keys(data.maze_ctor_kwargs).length > 0) {
+                        constructorCode += `    maze_ctor_kwargs=${JSON.stringify(data.maze_ctor_kwargs)},\n`;
+                    }
+                    
+                    if (data.endpoint_kwargs && Object.keys(data.endpoint_kwargs).length > 0) {
+                        constructorCode += `    endpoint_kwargs=${JSON.stringify(data.endpoint_kwargs)},\n`;
+                    }
+                    
+                    constructorCode += `)`;
+                    
+                    card.dataset.constructorCode = constructorCode;
+                })
+                .catch(error => {
+                    console.error('Error loading configuration:', error);
+                });
+        });
+
+        // Image Type Toggle Functionality
+        const toggleOptions = document.querySelectorAll('.toggle-option');
+        
+        toggleOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Update active toggle
+                toggleOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Get selected image type
+                const imageType = this.getAttribute('data-type');
+                
+                // Update all images
+                document.querySelectorAll('.main-image, .maze-thumbnail img').forEach(img => {
+                    const imgSrc = img.src;
+                    const currentType = img.getAttribute('data-type');
+                    
+                    if (currentType !== imageType) {
+                        // Change from SVG to PNG or vice versa
+                        if (imageType === 'png') {
+                            img.src = imgSrc.replace('plot-', 'pixels-').replace('.svg', '.png');
+                            img.setAttribute('data-type', 'png');
+                        } else {
+                            img.src = imgSrc.replace('pixels-', 'plot-').replace('.png', '.svg');
+                            img.setAttribute('data-type', 'svg');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Show Constructor button functionality
+        document.querySelectorAll('.show-constructor-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.maze-card');
+                const codeBlock = card.querySelector('.constructor-code');
+                
+                // Check if data is loaded
+                if (card.dataset.configLoaded) {
+                    if (codeBlock.style.display === 'none' || codeBlock.style.display === '') {
+                        codeBlock.innerHTML = `<pre>${card.dataset.constructorCode}</pre>`;
+                        
+                        codeBlock.style.display = 'block';
+                        this.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                            Hide Constructor
+                        `;
+                    } else {
+                        codeBlock.style.display = 'none';
+                        this.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            Show Constructor
+                        `;
+                    }
+                } else {
+                    codeBlock.innerHTML = '<p>Loading configuration data...</p>';
+                    codeBlock.style.display = 'block';
+                }
+            });
+        });
+
+        // Copy Constructor button functionality
+        document.querySelectorAll('.copy-constructor-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.maze-card');
+                
+                if (card.dataset.configLoaded) {
+                    navigator.clipboard.writeText(card.dataset.constructorCode)
+                        .then(() => {
+                            // Show temporary success message
+                            const originalHTML = this.innerHTML;
+                            this.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Copied!
+                            `;
+                            setTimeout(() => {
+                                this.innerHTML = originalHTML;
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Error copying text: ', err);
+                        });
+                }
+            });
+        });
+
+        // Show Config JSON button functionality
+        document.querySelectorAll('.show-json-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.maze-card');
+                
+                if (card.dataset.configLoaded) {
+                    const fname = card.getAttribute('data-fname');
+                    const jsonContent = card.dataset.configJson;
+                    
+                    // Open a new window with the JSON content
+                    const newWindow = window.open('', fname, 'width=800,height=600');
+                    newWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>${fname}</title>
+                            <style>
+                                body {
+                                    font-family: monospace;
+                                    padding: 20px;
+                                    white-space: pre-wrap;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            ${jsonContent}
+                        </body>
+                        </html>
+                    `);
+                }
+            });
+        });
+
+        // Copy Config JSON button functionality
+        document.querySelectorAll('.copy-json-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.maze-card');
+                
+                if (card.dataset.configLoaded) {
+                    navigator.clipboard.writeText(card.dataset.configJson)
+                        .then(() => {
+                            // Show temporary success message
+                            const originalHTML = this.innerHTML;
+                            this.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Copied!
+                            `;
+                            setTimeout(() => {
+                                this.innerHTML = originalHTML;
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Error copying text: ', err);
+                        });
+                }
+            });
+        });
+
+        // Image carousel functionality
+        document.querySelectorAll('.maze-thumbnail').forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                const card = this.closest('.maze-card');
+                const imageIndex = this.getAttribute('data-index');
+                const mainImage = card.querySelector('.main-image');
+                const fname = card.getAttribute('data-fname');
+                const currentType = mainImage.getAttribute('data-type');
+                
+                // Update main image
+                if (currentType === 'svg') {
+                    mainImage.src = `plots/${fname}/plot-${imageIndex}.svg`;
+                } else {
+                    mainImage.src = `plots/${fname}/pixels-${imageIndex}.png`;
+                }
+                
+                // Update active thumbnail
+                card.querySelectorAll('.maze-thumbnail').forEach(thumb => {
+                    thumb.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Filter functionality
+        const searchInput = document.getElementById('search-input');
+        const sortSelect = document.getElementById('sort-select');
+        const mazeCards = document.querySelectorAll('.maze-card');
+        const tagFilters = document.querySelectorAll('.tag-filter');
+        const noResults = document.querySelector('.no-results');
+        
+        let activeTagFilters = [];
+        
+        function filterMazes() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+            
+            mazeCards.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                const gridN = card.getAttribute('data-grid-n');
+                const mazeCtor = card.getAttribute('data-maze-ctor');
+                const fname = card.getAttribute('data-fname').toLowerCase();
+                const tags = card.getAttribute('data-tags').split(',');
+                
+                const matchesSearch = name.includes(searchTerm) || 
+                                     gridN.includes(searchTerm) ||
+                                     mazeCtor.includes(searchTerm) ||
+                                     fname.includes(searchTerm);
+                
+                const matchesTags = activeTagFilters.length === 0 || 
+                                  activeTagFilters.every(tag => tags.includes(tag));
+                
+                if (matchesSearch && matchesTags) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+        
+        function sortMazes() {
+            const sortBy = sortSelect.value;
+            const mazeGrid = document.getElementById('maze-grid');
+            const mazeArray = Array.from(mazeCards);
+            
+            mazeArray.sort((a, b) => {
+                if (sortBy === 'name') {
+                    return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+                } else if (sortBy === 'grid_n') {
+                    return parseInt(a.getAttribute('data-grid-n')) - parseInt(b.getAttribute('data-grid-n'));
+                } else if (sortBy === 'maze_ctor') {
+                    return a.getAttribute('data-maze-ctor').localeCompare(b.getAttribute('data-maze-ctor'));
+                }
+                return 0;
+            });
+            
+            mazeArray.forEach(card => {
+                mazeGrid.appendChild(card);
+            });
+        }
+        
+        searchInput.addEventListener('input', filterMazes);
+        sortSelect.addEventListener('change', sortMazes);
+        
+        tagFilters.forEach(tag => {
+            tag.addEventListener('click', function() {
+                const tagValue = this.getAttribute('data-tag');
+                
+                if (this.classList.contains('active')) {
+                    // Remove tag from active filters
+                    this.classList.remove('active');
+                    activeTagFilters = activeTagFilters.filter(t => t !== tagValue);
+                } else {
+                    // Add tag to active filters
+                    this.classList.add('active');
+                    activeTagFilters.push(tagValue);
+                }
+                
+                filterMazes();
+            });
+        });
+        
+        // Initial sort
+        sortMazes();
+    </script>
+</body>
+</html>

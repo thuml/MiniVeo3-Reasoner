@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1100" height="640" viewBox="0 0 1100 640" style="background: white" version="1.1" id="svg81"
+   xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+   <defs id="defs5">
+      <!-- Arrow marker definition -->
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+         <path d="M 0 0 L 0 6 L 6 3 z" fill="#333333" id="path2" />
+      </marker>
+      <marker id="arrow-3" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+         <path d="M 0 0 V 6 L 6 3 Z" fill="#333333" id="path2-6" />
+      </marker>
+      <!-- Bidirectional arrow markers -->
+      <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+         <path d="M 6 0 L 6 6 L 0 3 z" fill="#333333" id="path6" />
+      </marker>
+      <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+         <path d="M 0 0 L 0 6 L 6 3 z" fill="#333333" id="path9" />
+      </marker>
+   </defs>
+   <!-- CSS Styles for syntax highlighting and boxes -->
+   <style type="text/css" id="style13">
+      /* Syntax highlighting */
+      .variable {
+         fill: #069f6f;
+      }
+
+      .class {
+         fill: #ff2fff;
+      }
+
+      .function {
+         fill: #f08604;
+      }
+
+      .literal {
+         fill: #0000FF;
+      }
+
+      .keyword {
+         fill: #000000;
+      }
+
+      .comment {
+         fill: #f82a2a;
+         font-style: italic;
+      }
+
+      /* Link hover effect */
+      a:hover {
+         text-decoration: underline;
+      }
+
+      /* Code block styles */
+      .code-block {
+         fill: #e6e6e6;
+         stroke: #6f6f6f;
+         stroke-width: 2;
+      }
+
+      /* Box radius */
+      .rounded-box {
+         rx: 20;
+         ry: 20;
+      }
+   </style>
+   <!-- Config box (top) -->
+      <rect x="10" y="14" width="395" height="221" class="code-block rounded-box" id="rect7" />
+      <!-- Config content (Top box) -->
+      <text x="25" y="44" font-family="monospace" font-size="24px" id="text13"><a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDatasetConfig" id="a15">
+            <tspan class="variable" id="tspan18">cfg</tspan>
+         </a> =
+         <a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDatasetConfig" id="a18">
+            <tspan class="class" id="tspan20">MazeDatasetConfig</tspan></a>(
+      </text>
+      <text x="45" y="74" font-family="monospace" font-size="24px" id="text15">
+         <tspan class="keyword" id="tspan21">name</tspan> = <tspan class="literal" id="tspan23">&quot;test&quot;</tspan>,
+      </text>
+      <text x="45" y="104" font-family="monospace" font-size="24px" id="text23">
+         <tspan class="keyword" id="tspan26">grid_n</tspan> = <tspan class="literal" id="tspan28">5</tspan>,
+      </text>
+      <text x="45" y="134" font-family="monospace" font-size="24px" id="text31">
+         <tspan class="keyword" id="tspan31">n_mazes</tspan> = <tspan class="literal" id="tspan33">1</tspan>,
+      </text>
+      <text x="45" y="164" font-family="monospace" font-size="24px" id="text39">
+         <tspan class="keyword" id="tspan36">maze_ctor</tspan> =
+         <a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMazeGenerators.gen_dfs"
+            id="a40">
+            <tspan class="function" id="tspan38">gen_dfs</tspan></a>,
+      </text>
+      <text x="45" y="194" font-family="monospace" font-size="24px" id="text-options"> ... <tspan class="comment"
+            id="tspan43"># many,
+            many options</tspan></text>
+      <text x="25" y="214" font-family="monospace" font-size="24px" id="text47">)</text>
+   <!-- Dataset box (middle) -->
+      <rect x="6" y="282" width="506" height="64" class="code-block rounded-box" id="rect9" />
+      <!-- Dataset box text (Middle box) -->
+      <text x="25" y="321" font-family="monospace" font-size="24px" id="text49"><a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDataset" id="a49">
+            <tspan class="variable" id="tspan40">ds</tspan>
+         </a> = <a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDataset" id="a52">
+            <tspan class="class" id="tspan42">MazeDataset</tspan></a>.<a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDataset.from_config"
+            id="a55"><tspan class="function" id="tspan44">from_config</tspan></a>(<tspan class="variable" id="tspan46">cfg</tspan>)
+      </text>
+   <!-- SolvedMaze box (right) -->
+      <rect x="418.98935" y="147.98935" width="310.1731" height="59.021297" class="code-block rounded-box" id="rect11" />
+      <!-- SolvedMaze box text (Right box) -->
+      <text x="424.61621" y="185.35892" font-family="monospace" font-size="24px" id="text51">
+         <tspan class="variable" id="tspan49">m</tspan>: <a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#SolvedMaze" id="a62">
+            <tspan class="class" id="tspan51">SolvedMaze</tspan>
+         </a> = <tspan class="variable" id="tspan53">ds</tspan>[<tspan class="literal" id="tspan55">0</tspan>]
+      </text>
+   <!-- Arrows between code boxes -->
+      <path d="m 193.6957,234.4825 0.22054,48.242" fill="none" stroke="#333333" stroke-width="3" marker-end="url(#arrow)"
+         id="path53" />
+      <path d="m 513,315 c 72,2 50.29562,-16.79679 54.29562,-108.79679" fill="none" stroke="#333333" stroke-width="3"
+         marker-end="url(#arrow-3)" id="path53-7" style="marker-end:url(#arrow-3)" />
+   <!-- Right-Aligned raster formats -->
+      <!-- ASCII Maze - top right -->
+      <image x="900" y="0" width="200" height="200" href="./ascii.svg" id="image57" />
+      <!-- Pixel Grid - middle right -->
+      <image x="900" y="220" width="200" height="200" href="./pixels.svg" id="image59" />
+      <!-- MazePlot - bottom right -->
+      <image x="900" y="440" width="200" height="200" href="./mazeplot.svg" id="image61" />
+   <!-- Arrows from SolvedMaze box to formats -->
+      <!-- bidirectional for as_ascii -->
+      <path d="M 729.51947,164.2179 C 756.81043,156.39983 772.3542,131.2753 901,132" fill="none" stroke="#333333"
+         stroke-width="2" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" id="path63"
+         />
+      <text x="837.41815" y="110" font-family="monospace" font-size="16px" text-anchor="middle" id="text65">
+         <tspan class="variable" id="tspan64">m</tspan>.<a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMaze.as_ascii"
+            id="a75"><tspan class="function" id="tspan66">as_ascii</tspan></a>()
+      </text>
+      <!-- Bidirectional arrow for as_pixels -->
+      <path d="m 728.03997,176.72525 c 96,-5 87.60883,120.07235 173.96003,122.27475" fill="none" stroke="#333333"
+         stroke-width="2" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" id="path67"
+         />
+      <text x="836.12598" y="320" font-family="monospace" font-size="16px" text-anchor="middle" id="text69">
+         <tspan class="variable" id="tspan70">m</tspan>.<a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMaze.as_pixels"
+            id="a81"><tspan class="function" id="tspan72">as_pixels</tspan></a>()
+      </text>
+      <!-- To MazePlot - single direction -->
+      <path d="M 698.31935,206.78258 C 777.04836,303.14005 689.68044,510.73745 901,509" fill="none" stroke="#333333"
+         stroke-width="2" marker-end="url(#arrow)" id="path71" />
+      <text x="846.75305" y="540" font-family="monospace" font-size="16px" text-anchor="middle" id="text73"><a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset/plotting.html#MazePlot" id="a86">
+            <tspan class="class" id="tspan76">MazePlot</tspan></a>(<tspan class="variable" id="tspan78">m</tspan>)</text>
+      <!-- Bidirectional arrow from SolvedMaze box to Token representation -->
+      <path d="m 649.4163,207 1.50486,202.95295" fill="none" stroke="#333333" stroke-width="2"
+         marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" id="path77" />
+      <text x="571.10529" y="386.16418" font-family="monospace" font-size="16px" text-anchor="middle" id="text79">
+         <tspan class="variable" id="tspan83">m</tspan>.<a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMaze.as_tokens"
+            id="a94"><tspan class="function" id="tspan85">as_tokens</tspan></a>(...)
+      </text>
+   <!-- Text Representation Box (Bottom) -->
+   <rect x="2" y="408" width="680" height="230" fill="white" stroke="#666666" stroke-width="2" rx="20" ry="20" />
+
+   <!-- ADJLIST section (purple) -->
+      <rect x="15" y="419" width="650" height="140" fill="rgb(176,152,232)" rx="3" ry="3" />
+      <text x="20" y="433" font-family="monospace" font-size="14px" fill="black">
+      &lt;ADJLIST_START&gt; (2,4) &lt;--&gt; (3,4) ; (1,3) &lt;--&gt; (1,4) ; (2,4) &lt;--&gt; (2,3) ;
+      </text>
+      <text x="20" y="453" font-family="monospace" font-size="14px" fill="black">
+      (1,4) &lt;--&gt; (0,4) ; (2,0) &lt;--&gt; (3,0) ; (4,4) &lt;--&gt; (4,3) ; (4,2) &lt;--&gt; (4,3) ;
+      </text>
+      <text x="20" y="473" font-family="monospace" font-size="14px" fill="black">
+      (3,1) &lt;--&gt; (3,2) ; (3,0) &lt;--&gt; (4,0) ; (4,1) &lt;--&gt; (4,2) ; (0,1) &lt;--&gt; (0,0) ;
+      </text>
+      <text x="20" y="493" font-family="monospace" font-size="14px" fill="black">
+      (0,2) &lt;--&gt; (0,3) ; (2,2) &lt;--&gt; (1,2) ; (0,2) &lt;--&gt; (0,1) ; (1,1) &lt;--&gt; (1,0) ;
+      </text>
+      <text x="20" y="513" font-family="monospace" font-size="14px" fill="black">
+      (3,3) &lt;--&gt; (3,2) ; (1,0) &lt;--&gt; (0,0) ; (0,2) &lt;--&gt; (1,2) ; (2,1) &lt;--&gt; (2,2) ;
+      </text>
+      <text x="20" y="533" font-family="monospace" font-size="14px" fill="black">
+       (4,0) &lt;--&gt; (4,1) ; (2,1) &lt;--&gt; (2,0) ; (3,2) &lt;--&gt; (2,2) ; (1,3) &lt;--&gt; (0,3) ;
+      </text>
+      <text x="20" y="553" font-family="monospace" font-size="14px" fill="black">
+      (3,4) &lt;--&gt; (4,4) ; &lt;ADJLIST_END&gt;
+      </text>
+
+   <!-- ORIGIN section (green) and TARGET section (red) on the same line -->
+      <rect x="15" y="563" width="289" height="20" fill="rgb(154,239,123)" rx="3" ry="3" />
+      <text x="20" y="578" font-family="monospace" font-size="14px" fill="black">
+      &lt;ORIGIN_START&gt; (1,3) &lt;ORIGIN_END&gt;
+      </text>
+
+      <rect x="304" y="563" width="293" height="20" fill="rgb(246,136,136)" rx="3" ry="3" />
+      <text x="309" y="578" font-family="monospace" font-size="14px" fill="black">
+      &lt;TARGET_START&gt; (2,3) &lt;TARGET_END&gt;
+      </text>
+
+   <!-- PATH section (blue) -->
+      <rect x="15" y="588" width="620" height="40" fill="rgb(111,187,254)" rx="3" ry="3" />
+      <text x="20" y="602" font-family="monospace" font-size="14px" fill="black">
+      &lt;PATH_START&gt; (1,3) (0,3) (0,2) (1,2) (2,2) (2,1) (2,0) (3,0) (4,0) (4,1)
+      </text>
+      <text x="20" y="622" font-family="monospace" font-size="14px" fill="black">
+      (4,2) (4,3) (4,4) (3,4) (2,4) (2,3) &lt;PATH_END&gt;
+      </text>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220">
+  <g id="maze" transform="translate(0,0)">
+    <style>
+      text { font-family: monospace; font-size: 16px; }
+      .w { fill: black; } /* wall */
+      .p { fill: blue; }  /* path */
+      .s { fill: green; } /* start */
+      .e { fill: red; }   /* end */
+      
+      /* Add span styling for individual characters */
+      .row text { dominant-baseline: central; }
+      .row text tspan { text-anchor: middle; }
+    </style>
+    
+    <!-- Row 1 -->
+    <g class="row">
+      <text y="10"><tspan x="10" class="w">#</tspan><tspan x="30" class="w">#</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w">#</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w">#</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 2 -->
+    <g class="row">
+      <text y="30"><tspan x="10" class="w">#</tspan><tspan x="30" class="w"> </tspan><tspan x="50" class="w"> </tspan><tspan x="70" class="w"> </tspan><tspan x="90" class="w"> </tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="p">X</tspan><tspan x="150" class="p">X</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w"> </tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 3 -->
+    <g class="row">
+      <text y="50"><tspan x="10" class="w">#</tspan><tspan x="30" class="w"> </tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="p">X</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w"> </tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 4 -->
+    <g class="row">
+      <text y="70"><tspan x="10" class="w">#</tspan><tspan x="30" class="w"> </tspan><tspan x="50" class="w"> </tspan><tspan x="70" class="w"> </tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="s">S</tspan><tspan x="170" class="w"> </tspan><tspan x="190" class="w"> </tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 5 -->
+    <g class="row">
+      <text y="90"><tspan x="10" class="w">#</tspan><tspan x="30" class="w">#</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w">#</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 6 -->
+    <g class="row">
+      <text y="110"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="p">X</tspan><tspan x="70" class="p">X</tspan><tspan x="90" class="p">X</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="e">E</tspan><tspan x="170" class="p">X</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 7 -->
+    <g class="row">
+      <text y="130"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w"> </tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 8 -->
+    <g class="row">
+      <text y="150"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w"> </tspan><tspan x="90" class="w"> </tspan><tspan x="110" class="w"> </tspan><tspan x="130" class="w"> </tspan><tspan x="150" class="w"> </tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 9 -->
+    <g class="row">
+      <text y="170"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w">#</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 10 -->
+    <g class="row">
+      <text y="190"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="p">X</tspan><tspan x="70" class="p">X</tspan><tspan x="90" class="p">X</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="p">X</tspan><tspan x="150" class="p">X</tspan><tspan x="170" class="p">X</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+    
+    <!-- Row 11 -->
+    <g class="row">
+      <text y="210"><tspan x="10" class="w">#</tspan><tspan x="30" class="w">#</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w">#</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w">#</tspan><tspan x="210" class="w">#</tspan></text>
+    </g>
+  </g>
+</svg>

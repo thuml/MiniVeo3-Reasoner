@@ -1,0 +1,19 @@
+.github-link-button {
+    display: inline-block;
+    float: right;
+	margin-right: 1em;
+}
+
+.package-version {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1030;
+    background-color: #d0d2d3;
+    padding: 3px 3px;
+    text-align: right;
+    border-bottom: 1px solid #7c7c7c;
+    border-left: 1px solid #7c7c7c;
+    font-size: 1em;
+    border-bottom-left-radius: 5px;
+}

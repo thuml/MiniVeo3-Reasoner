@@ -1,0 +1,212 @@
+{% extends "frame.html.jinja2" %}
+{% set edit_url = package_code_url + module.modulename.replace(".", "/") + ".py" %}
+{% block title %}{{ module.modulename }} API documentation{% endblock %}
+{% block nav %}
+
+{% block nav_index %}
+{% set index = module.docstring | to_markdown %}
+{% if index %}
+## Contents
+{{ index | safe }}
+{% endif %}
+{% endblock %}
+
+{% block nav_submodules %}
+{% if module.submodules %}
+## Submodules
+
+{% for submodule in module.submodules if is_public(submodule) | trim %}
+- [`{{ submodule.name }}`](#{{ submodule.name }})
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+{% block nav_members %}
+{% if module.members %}
+## API Documentation
+
+{{ nav_members(module.members.values()) }}
+{% endif %}
+{% endblock %}
+
+{% endblock nav %}
+{% block content %}
+
+{% block module_info %}
+
+{% block edit_button %}
+{% if edit_url %}
+[View Source on GitHub]({{ edit_url }})
+{% endif %}
+{% endblock %}
+
+{{ module_name() }}
+{{ docstring(module) }}
+{{ view_source_button(module) }}
+{% endblock %}
+
+{% block module_contents %}
+{% for m in module.flattened_own_members if is_public(m) | trim %}
+{{ member(m) }}
+{% if m.kind == "class" %}
+{% for m in m.own_members if m.kind != "class" and is_public(m) | trim %}
+{{ member(m) }}
+{% endfor %}
+{% set inherited_members = inherited(m) %}
+{% if inherited_members %}
+### Inherited Members                                
+
+{{ inherited_members }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endblock %}
+
+{% endblock content %}
+
+
+
+{#
+End of content, beginning of helper macros.
+See https://pdoc.dev/docs/pdoc/render_helpers.html#DefaultMacroExtension for an explanation of defaultmacro.
+#}
+{% defaultmacro bases(cls) %}
+{%- if cls.bases -%}
+({%- for base in cls.bases -%}{{base[2]}}{%- if loop.nextitem %}, {% endif %}{%- endfor -%})
+{%- endif -%}
+{% enddefaultmacro %}
+
+{% defaultmacro default_value(var) -%}
+{%- if var.default_value_str %}
+= {{ var.default_value_str | markup_safe }}
+{%- endif -%}
+{% enddefaultmacro %}
+
+{% defaultmacro annotation(var) %}
+{%- if var.annotation_str -%}
+{{ var.annotation_str | markup_safe }}
+{%- endif -%}
+{% enddefaultmacro %}
+
+
+{% defaultmacro function(fn) -%}
+{% if fn.name == "__init__" %}
+## `{{ ".".join(fn.qualname.split(".")[:-1]) }}` { #{{ fn.qualname }} }
+```python
+{{ fn.signature_without_self | markup_safe }}
+```
+{% else %}
+## `{{ fn.funcdef }} {{ fn.name }}` { #{{ fn.qualname }} }
+```python
+{{ fn.signature | markup_safe }}
+```
+
+{% endif %}
+{% enddefaultmacro %}
+
+{% defaultmacro variable(var) -%}
+- {% if var.is_type_alias_type %}type {% endif %}`{{ var.name }}{{ annotation(var) | markup_safe }} {{ default_value(var) | markup_safe }}`
+{% enddefaultmacro %}
+
+{% defaultmacro submodule(mod) -%}
+{{ mod.taken_from | link }}
+{% enddefaultmacro %}
+
+{% defaultmacro class(cls) -%}
+## `class {{ cls.qualname }}{{- bases(cls) -}}:` { #{{ cls.qualname }} }
+{% enddefaultmacro %}
+
+{% defaultmacro member(doc) %}
+{% if doc.kind == "class" %}
+#{{- class(doc) }}
+{% elif doc.kind == "function" %}
+#{{- function(doc) }}
+{% elif doc.kind == "module" %}
+{{ submodule(doc) }}
+{% else %}
+{{ variable(doc) }}
+{% endif %}
+{{ view_source_button(doc) }}
+{{ docstring(doc) }}
+{% enddefaultmacro %}
+
+{% defaultmacro docstring(var) %}
+{% if var.docstring %}
+{{ var.docstring | replace("@public", "") | to_markdown | increment_markdown_headings | linkify(namespace=var.qualname) }}
+{% endif %}
+{% enddefaultmacro %}
+
+{% defaultmacro nav_members(members) %}
+{% for m in members if is_public(m) | trim %}
+ - [`{{m.qualname}}`](#{{ m.qualname }})
+{% endfor %}
+{% enddefaultmacro %}
+
+{% defaultmacro is_public(doc) %}
+    {#
+    This macro is a bit unconventional in that its output is not rendered, but treated as a boolean:
+    Returning no text is interpreted as false, returning any other text is iterpreted as true.
+    Implementing this as a macro makes it very easy to override with a custom template, see
+    https://github.com/mitmproxy/pdoc/tree/main/examples/custom-template.
+    #}
+    {% if "@private" in doc.docstring %}
+        {# hide members explicitly marked as @private #}
+    {% elif "@public" in doc.docstring %}
+        {# show members explicitly marked as @public #}
+        true
+    {% elif not include_undocumented and not doc.docstring and doc.kind != "module" %}
+        {# hide members that are undocumented if include_undocumented has been toggled off. #}
+    {% elif doc.name == "__init__" and (doc.docstring or (doc.kind == "function" and doc.signature_without_self.parameters)) %}
+        {# show constructors that have a docstring or at least one extra argument #}
+        true
+    {% elif doc.name == "__doc__" %}
+        {# We don't want to document __doc__ itself, https://github.com/mitmproxy/pdoc/issues/235 #}
+    {% elif doc.kind == "variable" and doc.is_typevar and not doc.docstring %}
+        {# do not document TypeVars, that only clutters the docs. #}
+    {% elif doc.kind == "module" and doc.fullname not in all_modules %}
+        {# Skip modules that were manually excluded, https://github.com/mitmproxy/pdoc/issues/334 #}
+    {% elif (doc.qualname or doc.name) is in(module.obj.__all__ or []) %}
+        {# members starting with an underscore are still public if mentioned in __all__ #}
+        true
+    {% elif not doc.name.startswith("_") %}
+        {# members not starting with an underscore are considered public by default #}
+        true
+    {% endif %}
+{% enddefaultmacro %}
+
+{# fmt: off #}
+{% defaultmacro inherited(cls) %}
+{% for base, members in cls.inherited_members.items() %}
+{% set m = None %}{# workaround for https://github.com/pallets/jinja/issues/1427 #}
+{% set member_html %}
+{% for m in members if is_public(m) | trim %}
+- [`{{m.name.replace("__init__",base[1]) | markup_safe }}`](#{{ m.qualname }})
+{% endfor %}
+{% endset %}
+{# we may not have any public members, in which case we don't want to print anything. #}
+{% if member_html %}
+{{ member_html }}
+{% endif %}
+{% endfor %}
+{% enddefaultmacro %}
+
+
+{% defaultmacro view_source_button(doc) %}
+{% if show_source and doc.source %}
+{% set github_line_url = edit_url.replace(module.source_file|string, doc.source_file|string) %}
+{% set github_line_url = github_line_url + "#L" + doc.source_lines[0]|string + "-L" + doc.source_lines[1]|string %}
+[View Source on GitHub]({{ github_line_url }})
+
+{# ```python
+{{ doc.source}}
+``` #}
+{# <details>
+<summary>View Source</summary>
+<pre><code>{{ doc.source | escape }}</code></pre>
+</details> #}
+{% endif %}
+{% enddefaultmacro %}
+
+{% defaultmacro module_name() %}
+# `{{ module.modulename }}` { #{{ module.modulename }} }
+{% enddefaultmacro %}

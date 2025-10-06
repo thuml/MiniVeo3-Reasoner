@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc 15.0.4"/>
+    <title>maze_dataset.tokenization.modular.all_instances API documentation</title>
+    <link rel="icon" href="../../../resources/favicon.png"/>
+<link rel="stylesheet" href="../../../resources/css/bootstrap-reboot.min.css"><link rel="stylesheet" href="../../../resources/css/syntax-highlighting.css"><link rel="stylesheet" href="../../../resources/css/theme.css"><link rel="stylesheet" href="../../../resources/css/layout.css"><link rel="stylesheet" href="../../../resources/css/content.css"><link rel="stylesheet" href="../../../resources/css/custom.css"><script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+    /* Re-invoke MathJax when DOM content changes, for example during search. */
+    document.addEventListener("DOMContentLoaded", () => {
+        new MutationObserver(() => MathJax.typeset()).observe(
+            document.querySelector("main.pdoc").parentNode,
+            {childList: true}
+        );
+    })
+</script>
+<style>
+    mjx-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+</style><style>
+    .pdoc .mermaid-pre {
+        border: none;
+        background: none;
+    }
+</style>
+<script type="module" defer>
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+    /* Re-invoke Mermaid when DOM content changes, for example during search. */
+    document.addEventListener("DOMContentLoaded", () => {
+        new MutationObserver(() => mermaid.run()).observe(
+            document.querySelector("main.pdoc").parentNode,
+            {childList: true}
+        );
+    })
+</script></head>
+<body>
+<div class="package-version">
+    docs for <a href="https://github.com/understanding-search/maze-dataset">maze-dataset</a> v1.4.0<br>
+</div>
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button">
+            <img src="../../../resources/svg/navtoggle.svg" alt="Toggle navigation"> 
+        </label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div>            <a class="pdoc-button module-list-button" href="../modular.html">
+                <img src="../../../resources/svg/box-arrow-in-left.svg" alt="Back to parent module"/>
+                &nbsp;maze_dataset.tokenization.modular</a>
+
+
+            <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
+                   pattern=".+" required>
+
+
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="variable" href="#FiniteValued">FiniteValued</a>
+            </li>
+            <li>
+                    <a class="class" href="#UnsupportedAllInstancesError">UnsupportedAllInstancesError</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#UnsupportedAllInstancesError.__init__">UnsupportedAllInstancesError</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="function" href="#all_instances">all_instances</a>
+            </li>
+    </ul>
+
+
+    <hr/>
+    
+    <div>
+        <a href="../../../coverage/html/index.html" class="pdoc-button" title="View test coverage report">
+            Coverage
+        </a>
+        <a href="../../../other/todo-inline.html" class="pdoc-button" title="Table of TODOs scraped from source code, with links to create issues from them">
+            TODOs
+        </a>
+        <a href="../../../other/lmcat.txt" class="pdoc-button" title="a view of the repo contents made for LLMs, using https://miv.name/lmcat">
+            lmcat
+        </a>
+    </div>
+
+
+        <a class="attribution" title="pdoc: Python API documentation generator" href="https://pdoc.dev" target="_blank">
+            built with <span class="visually-hidden">pdoc</span>
+            <img src="../../../resources/svg/pdoc-logo.svg" alt="pdoc logo"/>
+        </a>
+</div>
+    </nav>
+    <main class="pdoc">
+            <section class="module-info">
+                        <a class="pdoc-button git-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/all_instances.py">View Source on GitHub</a>
+                    <h1 class="modulename">
+<a href="./../../../maze_dataset.html">maze_dataset</a><wbr>.<a href="./../../tokenization.html">tokenization</a><wbr>.<a href="./../modular.html">modular</a><wbr>.all_instances    </h1>
+
+                        <div class="docstring"><p><code><a href="#all_instances">all_instances</a></code>, <code><a href="#FiniteValued">FiniteValued</a></code>, and related code for tokenizers</p>
+</div>
+
+                        <input id="mod-all_instances-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+
+                        <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="mod-all_instances-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/all_instances.py#L0-L262" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+                <br/>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="s2">&quot;`all_instances`, `FiniteValued`, and related code for tokenizers&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">enum</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span>  <span class="c1"># noqa: TC003</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span><span class="p">,</span> <span class="n">wraps</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnionType</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>	<span class="n">Callable</span><span class="p">,</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>	<span class="n">Generator</span><span class="p">,</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>	<span class="n">Iterable</span><span class="p">,</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>	<span class="n">Literal</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>	<span class="n">TypeVar</span><span class="p">,</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>	<span class="n">get_args</span><span class="p">,</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>	<span class="n">get_origin</span><span class="p">,</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a><span class="p">)</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="k">try</span><span class="p">:</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>	<span class="kn">import</span><span class="w"> </span><span class="nn">frozendict</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a><span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>	<span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>		<span class="s2">&quot;You need to install the `frozendict` package to use `all_instances` -- try installing `maze_dataset[tokenization]`&quot;</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>	<span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">muutils.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsDataclass</span><span class="p">,</span> <span class="n">flatten</span><span class="p">,</span> <span class="n">is_abstract</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a><span class="n">FiniteValued</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;FiniteValued&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="nb">bool</span> <span class="o">|</span> <span class="n">IsDataclass</span> <span class="o">|</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">)</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="sd"># `FiniteValued`</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">The details of this type are not possible to fully define via the Python 3.10 typing library.</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">This custom generic type is a generic domain of many types which have a finite, discrete, and well-defined range space.</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">`FiniteValued` defines the domain of supported types for the `all_instances` function, since that function relies heavily on static typing.</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="sd">These types may be nested in an arbitrarily deep tree via Container Types and Superclass Types (see below).</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">The leaves of the tree must always be Primitive Types.</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd"># `FiniteValued` Subtypes</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">*: Indicates that this subtype is not yet supported by `all_instances`</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">## Non-`FiniteValued` (Unbounded) Types</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">These are NOT valid subtypes, and are listed for illustrative purposes only.</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">This list is not comprehensive.</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">While the finite and discrete nature of digital computers means that the cardinality of these types is technically finite,</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">they are considered unbounded types in this context.</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">- No Container subtype may contain any of these unbounded subtypes.</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">- `int`</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">- `float`</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">- `str`</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">- `list`</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">- `set`: Set types without a `FiniteValued` argument are unbounded</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">- `tuple`: Tuple types without a fixed length are unbounded</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">## Primitive Types</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">Primitive types are non-nested types which resolve directly to a concrete range of values</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">- `bool`: has 2 possible values</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">- *`enum.Enum`: The range of a concrete `Enum` subclass is its set of enum members</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">- `typing.Literal`: Every type constructed using `Literal` has a finite set of possible literal values in its definition.</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">This is the preferred way to include limited ranges of non-`FiniteValued` types such as `int` or `str` in a `FiniteValued` hierarchy.</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">## Container Types</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">Container types are types which contain zero or more fields of `FiniteValued` type.</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">The range of a container type is the cartesian product of their field types, except for `set[FiniteValued]`.</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="sd">- `tuple[FiniteValued]`: Tuples of fixed length whose elements are each `FiniteValued`.</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="sd">- `IsDataclass`: Concrete dataclasses whose fields are `FiniteValued`.</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="sd">- *Standard concrete class: Regular classes could be supported just like dataclasses if all their data members are `FiniteValued`-typed.</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">- *`set[FiniteValued]`: Sets of fixed length of a `FiniteValued` type.</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">## Superclass Types</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">Superclass types don&#39;t directly contain data members like container types.</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">Their range is the union of the ranges of their subtypes.</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">- Abstract dataclasses: Abstract dataclasses whose subclasses are all `FiniteValued` superclass or container types</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">- *`IsDataclass`: Concrete dataclasses which also have their own subclasses.</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">- *Standard abstract classes: Abstract dataclasses whose subclasses are all `FiniteValued` superclass or container types</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="sd">- `UnionType`: Any union of `FiniteValued` types, e.g., bool | Literal[2, 3]</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_apply_validation_func</span><span class="p">(</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>	<span class="n">type_</span><span class="p">:</span> <span class="n">FiniteValued</span><span class="p">,</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>	<span class="n">vals</span><span class="p">:</span> <span class="n">Generator</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>	<span class="n">validation_funcs</span><span class="p">:</span> <span class="p">(</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>		<span class="n">frozendict</span><span class="o">.</span><span class="n">frozendict</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">FiniteValued</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>	<span class="p">)</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Helper function for `all_instances`.</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="sd">	Filters `vals` according to `validation_funcs`.</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="sd">	If `type_` is a regular type, searches in MRO order in `validation_funcs` and applies the first match, if any.</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">	Handles generic types supported by `all_instances` with special `if` clauses.</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">	# Parameters</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">	- `type_: FiniteValued`: A type</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">	- `vals: Generator[FiniteValued, None, None]`: Instances of `type_`</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">	- `validation_funcs: dict`: Collection of types mapped to filtering validation functions</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>	<span class="k">if</span> <span class="n">validation_funcs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>		<span class="k">return</span> <span class="n">vals</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>	<span class="k">if</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">validation_funcs</span><span class="p">:</span>  <span class="c1"># Only possible catch of UnionTypes</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>		<span class="c1"># TYPING: Incompatible return value type (got &quot;filter[FiniteValued]&quot;, expected &quot;Generator[FiniteValued, None, None]&quot;)  [return-value]</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>		<span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="n">validation_funcs</span><span class="p">[</span><span class="n">type_</span><span class="p">],</span> <span class="n">vals</span><span class="p">)</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>	<span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>		<span class="n">type_</span><span class="p">,</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>		<span class="s2">&quot;__mro__&quot;</span><span class="p">,</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>	<span class="p">):</span>  <span class="c1"># Generic types like UnionType, Literal don&#39;t have `__mro__`</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>		<span class="k">for</span> <span class="n">superclass</span> <span class="ow">in</span> <span class="n">type_</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">:</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>			<span class="k">if</span> <span class="n">superclass</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">validation_funcs</span><span class="p">:</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>				<span class="k">continue</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>			<span class="c1"># TYPING: error: Incompatible types in assignment (expression has type &quot;filter[FiniteValued]&quot;, variable has type &quot;Generator[FiniteValued, None, None]&quot;)  [assignment]</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>			<span class="n">vals</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">validation_funcs</span><span class="p">[</span><span class="n">superclass</span><span class="p">],</span> <span class="n">vals</span><span class="p">)</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>			<span class="k">break</span>  <span class="c1"># Only the first validation function hit in the mro is applied</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>	<span class="k">elif</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span> <span class="o">==</span> <span class="n">Literal</span><span class="p">:</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>		<span class="k">return</span> <span class="n">flatten</span><span class="p">(</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>			<span class="p">(</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>				<span class="n">_apply_validation_func</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>				<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>			<span class="p">),</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>			<span class="n">levels_to_flatten</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>		<span class="p">)</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>	<span class="k">return</span> <span class="n">vals</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="c1"># TYPING: some better type hints would be nice here</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_all_instances_wrapper</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Converts dicts to frozendicts to allow caching and applies `_apply_validation_func`.&quot;&quot;&quot;</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>	<span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>	<span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># noqa: ANN202</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>		<span class="nd">@cache</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>		<span class="k">def</span><span class="w"> </span><span class="nf">cached_wrapper</span><span class="p">(</span>  <span class="c1"># noqa: ANN202</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>			<span class="n">type_</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>			<span class="n">all_instances_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>			<span class="n">validation_funcs</span><span class="p">:</span> <span class="p">(</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>				<span class="n">frozendict</span><span class="o">.</span><span class="n">frozendict</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">FiniteValued</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>				<span class="o">|</span> <span class="kc">None</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>			<span class="p">),</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>		<span class="p">):</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>			<span class="k">return</span> <span class="n">_apply_validation_func</span><span class="p">(</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>				<span class="n">type_</span><span class="p">,</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>				<span class="n">all_instances_func</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">),</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>				<span class="n">validation_funcs</span><span class="p">,</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>			<span class="p">)</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>		<span class="n">validation_funcs</span><span class="p">:</span> <span class="n">frozendict</span><span class="o">.</span><span class="n">frozendict</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>		<span class="c1"># TODO: what is this magic value here exactly?</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: PLR2004</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>			<span class="n">validation_funcs</span> <span class="o">=</span> <span class="n">frozendict</span><span class="o">.</span><span class="n">frozendict</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>		<span class="k">elif</span> <span class="s2">&quot;validation_funcs&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;validation_funcs&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>			<span class="n">validation_funcs</span> <span class="o">=</span> <span class="n">frozendict</span><span class="o">.</span><span class="n">frozendict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;validation_funcs&quot;</span><span class="p">])</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>		<span class="k">else</span><span class="p">:</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>			<span class="n">validation_funcs</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>		<span class="k">return</span> <span class="n">cached_wrapper</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>	<span class="k">return</span> <span class="n">wrapper</span>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>
+</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>
+</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a><span class="k">class</span><span class="w"> </span><span class="nc">UnsupportedAllInstancesError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Raised when `all_instances` is called on an unsupported type</span>
+</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a>
+</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a><span class="sd">	either has unbounded possible values or is not supported (Enum is not supported)</span>
+</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>
+</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>		<span class="s2">&quot;constructs an error message with the type and mro of the type&quot;</span>
+</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a>		<span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Type </span><span class="si">{</span><span class="n">type_</span><span class="si">}</span><span class="s2"> is not supported by `all_instances`. See docstring for details. </span><span class="si">{</span><span class="n">type_</span><span class="o">.</span><span class="vm">__mro__</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span>
+</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>
+</span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a>
+</span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a><span class="nd">@_all_instances_wrapper</span>
+</span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a><span class="k">def</span><span class="w"> </span><span class="nf">all_instances</span><span class="p">(</span>
+</span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a>	<span class="n">type_</span><span class="p">:</span> <span class="n">FiniteValued</span><span class="p">,</span>
+</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a>	<span class="n">validation_funcs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">FiniteValued</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Returns all possible values of an instance of `type_` if finite instances exist.</span>
+</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a>
+</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a><span class="sd">	Uses type hinting to construct the possible values.</span>
+</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a><span class="sd">	All nested elements of `type_` must themselves be typed.</span>
+</span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a><span class="sd">	Do not use with types whose members contain circular references.</span>
+</span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a><span class="sd">	Function is susceptible to infinite recursion if `type_` is a dataclass whose member tree includes another instance of `type_`.</span>
+</span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a>
+</span><span id="L-179"><a href="#L-179"><span class="linenos">179</span></a><span class="sd">	# Parameters</span>
+</span><span id="L-180"><a href="#L-180"><span class="linenos">180</span></a><span class="sd">	- `type_: FiniteValued`</span>
+</span><span id="L-181"><a href="#L-181"><span class="linenos">181</span></a><span class="sd">		A finite-valued type. See docstring on `FiniteValued` for full details.</span>
+</span><span id="L-182"><a href="#L-182"><span class="linenos">182</span></a><span class="sd">	- `validation_funcs: dict[FiniteValued, Callable[[FiniteValued], bool]] | None`</span>
+</span><span id="L-183"><a href="#L-183"><span class="linenos">183</span></a><span class="sd">		A mapping of types to auxiliary functions to validate instances of that type.</span>
+</span><span id="L-184"><a href="#L-184"><span class="linenos">184</span></a><span class="sd">		This optional argument can provide an additional, more precise layer of validation for the instances generated beyond what type hinting alone can provide.</span>
+</span><span id="L-185"><a href="#L-185"><span class="linenos">185</span></a><span class="sd">		See `validation_funcs` Details section below.</span>
+</span><span id="L-186"><a href="#L-186"><span class="linenos">186</span></a><span class="sd">		(default: `None`)</span>
+</span><span id="L-187"><a href="#L-187"><span class="linenos">187</span></a>
+</span><span id="L-188"><a href="#L-188"><span class="linenos">188</span></a><span class="sd">	## Supported `type_` Values</span>
+</span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a><span class="sd">	See docstring on `FiniteValued` for full details.</span>
+</span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a><span class="sd">	`type_` may be:</span>
+</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a><span class="sd">	- `FiniteValued`</span>
+</span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a><span class="sd">	- A finite-valued, fixed-length Generic tuple type.</span>
+</span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a><span class="sd">	E.g., `tuple[bool]`, `tuple[bool, MyEnum]` are OK.</span>
+</span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a><span class="sd">	`tuple[bool, ...]` is NOT supported, since the length of the tuple is not fixed.</span>
+</span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a><span class="sd">	- Nested versions of any of the types in this list</span>
+</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a><span class="sd">	- A `UnionType` of any of the types in this list</span>
+</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a>
+</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a><span class="sd">	## `validation_funcs` Details</span>
+</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a><span class="sd">	- `validation_funcs` is applied after all instances have been generated according to type hints.</span>
+</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a><span class="sd">	- If `type_` is in `validation_funcs`, then the list of instances is filtered by `validation_funcs[type_](instance)`.</span>
+</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a><span class="sd">	- `validation_funcs` is passed down for all recursive calls of `all_instances`.</span>
+</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a><span class="sd">	- This allows for improved performance through maximal pruning of the exponential tree.</span>
+</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a><span class="sd">	- `validation_funcs` supports subclass checking.</span>
+</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a><span class="sd">	- If `type_` is not found in `validation_funcs`, then the search is performed iteratively in mro order.</span>
+</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a><span class="sd">	- If a superclass of `type_` is found while searching in mro order, that validation function is applied and the list is returned.</span>
+</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a><span class="sd">	- If no superclass of `type_` is found, then no filter is applied.</span>
+</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a>
+</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a><span class="sd">	# Raises:</span>
+</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a><span class="sd">	- `UnsupportedAllInstancesError`: If `type_` is not supported by `all_instances`.</span>
+</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a>	<span class="k">if</span> <span class="n">type_</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># noqa: E721</span>
+</span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a>		<span class="k">yield from</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+</span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a>	<span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="s2">&quot;__dataclass_fields__&quot;</span><span class="p">):</span>
+</span><span id="L-214"><a href="#L-214"><span class="linenos">214</span></a>		<span class="k">if</span> <span class="n">is_abstract</span><span class="p">(</span><span class="n">type_</span><span class="p">):</span>
+</span><span id="L-215"><a href="#L-215"><span class="linenos">215</span></a>			<span class="c1"># Abstract dataclass: call `all_instances` on each subclass</span>
+</span><span id="L-216"><a href="#L-216"><span class="linenos">216</span></a>			<span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span>
+</span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a>				<span class="p">(</span>
+</span><span id="L-218"><a href="#L-218"><span class="linenos">218</span></a>					<span class="n">all_instances</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a>					<span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">type_</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a>				<span class="p">),</span>
+</span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a>				<span class="n">levels_to_flatten</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a>			<span class="p">)</span>
+</span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a>		<span class="k">else</span><span class="p">:</span>
+</span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a>			<span class="c1"># Concrete dataclass: construct dataclass instances with all possible combinations of fields</span>
+</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a>			<span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Field</span><span class="p">]</span> <span class="o">=</span> <span class="n">type_</span><span class="o">.</span><span class="n">__dataclass_fields__</span>
+</span><span id="L-226"><a href="#L-226"><span class="linenos">226</span></a>			<span class="n">fields_to_types</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="p">:</span> <span class="n">fields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">}</span>
+</span><span id="L-227"><a href="#L-227"><span class="linenos">227</span></a>			<span class="n">all_arg_sequences</span><span class="p">:</span> <span class="n">Iterable</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+</span><span id="L-228"><a href="#L-228"><span class="linenos">228</span></a>				<span class="o">*</span><span class="p">[</span>
+</span><span id="L-229"><a href="#L-229"><span class="linenos">229</span></a>					<span class="n">all_instances</span><span class="p">(</span><span class="n">arg_type</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="L-230"><a href="#L-230"><span class="linenos">230</span></a>					<span class="k">for</span> <span class="n">arg_type</span> <span class="ow">in</span> <span class="n">fields_to_types</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a>				<span class="p">],</span>
+</span><span id="L-232"><a href="#L-232"><span class="linenos">232</span></a>			<span class="p">)</span>
+</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a>			<span class="k">yield from</span> <span class="p">(</span>
+</span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a>				<span class="n">type_</span><span class="p">(</span>
+</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a>					<span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fields_to_types</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">args</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a>				<span class="p">)</span>
+</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a>				<span class="k">for</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">all_arg_sequences</span>
+</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a>			<span class="p">)</span>
+</span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a>	<span class="k">else</span><span class="p">:</span>
+</span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a>		<span class="n">type_origin</span> <span class="o">=</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a>		<span class="k">if</span> <span class="n">type_origin</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">:</span>  <span class="c1"># noqa: E721</span>
+</span><span id="L-242"><a href="#L-242"><span class="linenos">242</span></a>			<span class="c1"># Only matches Generic type tuple since regular tuple is not finite-valued</span>
+</span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a>			<span class="c1"># Generic tuple: Similar to concrete dataclass. Construct all possible combinations of tuple fields.</span>
+</span><span id="L-244"><a href="#L-244"><span class="linenos">244</span></a>			<span class="k">yield from</span> <span class="p">(</span>
+</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a>				<span class="nb">tuple</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+</span><span id="L-246"><a href="#L-246"><span class="linenos">246</span></a>				<span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a>					<span class="o">*</span><span class="p">(</span>
+</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a>						<span class="n">all_instances</span><span class="p">(</span><span class="n">tup_item</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a>						<span class="k">for</span> <span class="n">tup_item</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a>					<span class="p">),</span>
+</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a>				<span class="p">)</span>
+</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a>			<span class="p">)</span>
+</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a>		<span class="k">elif</span> <span class="n">type_origin</span> <span class="ow">in</span> <span class="p">(</span><span class="n">UnionType</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">):</span>
+</span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>			<span class="c1"># Union: call `all_instances` for each type in the Union</span>
+</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a>			<span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span>
+</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>				<span class="p">[</span><span class="n">all_instances</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)],</span>
+</span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a>				<span class="n">levels_to_flatten</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a>			<span class="p">)</span>
+</span><span id="L-259"><a href="#L-259"><span class="linenos">259</span></a>		<span class="k">elif</span> <span class="n">type_origin</span> <span class="ow">is</span> <span class="n">Literal</span><span class="p">:</span>
+</span><span id="L-260"><a href="#L-260"><span class="linenos">260</span></a>			<span class="c1"># Literal: return all Literal arguments</span>
+</span><span id="L-261"><a href="#L-261"><span class="linenos">261</span></a>			<span class="k">yield from</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a>		<span class="k">else</span><span class="p">:</span>
+</span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a>			<span class="k">raise</span> <span class="n">UnsupportedAllInstancesError</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span></pre></div>
+
+
+                <br/>
+            </section>
+                <section id="FiniteValued">
+                    <div class="attr variable">
+            <span class="name">FiniteValued</span>        =
+<span class="default_value">~FiniteValued</span>
+
+        
+    </div>
+    <a class="headerlink" href="#FiniteValued"></a>
+    
+            <div class="docstring"><h1 id="finitevalued"><code><a href="#FiniteValued">FiniteValued</a></code></h1>
+
+<p>The details of this type are not possible to fully define via the Python 3.10 typing library.
+This custom generic type is a generic domain of many types which have a finite, discrete, and well-defined range space.
+<code><a href="#FiniteValued">FiniteValued</a></code> defines the domain of supported types for the <code><a href="#all_instances">all_instances</a></code> function, since that function relies heavily on static typing.
+These types may be nested in an arbitrarily deep tree via Container Types and Superclass Types (see below).
+The leaves of the tree must always be Primitive Types.</p>
+
+<h1 id="finitevalued-subtypes"><code><a href="#FiniteValued">FiniteValued</a></code> Subtypes</h1>
+
+<p>*: Indicates that this subtype is not yet supported by <code><a href="#all_instances">all_instances</a></code></p>
+
+<h2 id="non-finitevalued-unbounded-types">Non-<code><a href="#FiniteValued">FiniteValued</a></code> (Unbounded) Types</h2>
+
+<p>These are NOT valid subtypes, and are listed for illustrative purposes only.
+This list is not comprehensive.
+While the finite and discrete nature of digital computers means that the cardinality of these types is technically finite,
+they are considered unbounded types in this context.</p>
+
+<ul>
+<li>No Container subtype may contain any of these unbounded subtypes.</li>
+<li><code>int</code></li>
+<li><code>float</code></li>
+<li><code>str</code></li>
+<li><code>list</code></li>
+<li><code>set</code>: Set types without a <code><a href="#FiniteValued">FiniteValued</a></code> argument are unbounded</li>
+<li><code>tuple</code>: Tuple types without a fixed length are unbounded</li>
+</ul>
+
+<h2 id="primitive-types">Primitive Types</h2>
+
+<p>Primitive types are non-nested types which resolve directly to a concrete range of values</p>
+
+<ul>
+<li><code>bool</code>: has 2 possible values</li>
+<li>*<code>enum.Enum</code>: The range of a concrete <code>Enum</code> subclass is its set of enum members</li>
+<li><code>typing.Literal</code>: Every type constructed using <code>Literal</code> has a finite set of possible literal values in its definition.
+This is the preferred way to include limited ranges of non-<code><a href="#FiniteValued">FiniteValued</a></code> types such as <code>int</code> or <code>str</code> in a <code><a href="#FiniteValued">FiniteValued</a></code> hierarchy.</li>
+</ul>
+
+<h2 id="container-types">Container Types</h2>
+
+<p>Container types are types which contain zero or more fields of <code><a href="#FiniteValued">FiniteValued</a></code> type.
+The range of a container type is the cartesian product of their field types, except for <code>set[FiniteValued]</code>.</p>
+
+<ul>
+<li><code>tuple[FiniteValued]</code>: Tuples of fixed length whose elements are each <code><a href="#FiniteValued">FiniteValued</a></code>.</li>
+<li><code>IsDataclass</code>: Concrete dataclasses whose fields are <code><a href="#FiniteValued">FiniteValued</a></code>.</li>
+<li>*Standard concrete class: Regular classes could be supported just like dataclasses if all their data members are <code><a href="#FiniteValued">FiniteValued</a></code>-typed.</li>
+<li>*<code>set[FiniteValued]</code>: Sets of fixed length of a <code><a href="#FiniteValued">FiniteValued</a></code> type.</li>
+</ul>
+
+<h2 id="superclass-types">Superclass Types</h2>
+
+<p>Superclass types don't directly contain data members like container types.
+Their range is the union of the ranges of their subtypes.</p>
+
+<ul>
+<li>Abstract dataclasses: Abstract dataclasses whose subclasses are all <code><a href="#FiniteValued">FiniteValued</a></code> superclass or container types</li>
+<li>*<code>IsDataclass</code>: Concrete dataclasses which also have their own subclasses.</li>
+<li>*Standard abstract classes: Abstract dataclasses whose subclasses are all <code><a href="#FiniteValued">FiniteValued</a></code> superclass or container types</li>
+<li><code>UnionType</code>: Any union of <code><a href="#FiniteValued">FiniteValued</a></code> types, e.g., bool | Literal[2, 3]</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="UnsupportedAllInstancesError">
+                            <input id="UnsupportedAllInstancesError-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">UnsupportedAllInstancesError</span><wbr>(<span class="base">builtins.TypeError</span>):
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="UnsupportedAllInstancesError-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/all_instances.py#L155-L164" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#UnsupportedAllInstancesError"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="UnsupportedAllInstancesError-156"><a href="#UnsupportedAllInstancesError-156"><span class="linenos">156</span></a><span class="k">class</span><span class="w"> </span><span class="nc">UnsupportedAllInstancesError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+</span><span id="UnsupportedAllInstancesError-157"><a href="#UnsupportedAllInstancesError-157"><span class="linenos">157</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Raised when `all_instances` is called on an unsupported type</span>
+</span><span id="UnsupportedAllInstancesError-158"><a href="#UnsupportedAllInstancesError-158"><span class="linenos">158</span></a>
+</span><span id="UnsupportedAllInstancesError-159"><a href="#UnsupportedAllInstancesError-159"><span class="linenos">159</span></a><span class="sd">	either has unbounded possible values or is not supported (Enum is not supported)</span>
+</span><span id="UnsupportedAllInstancesError-160"><a href="#UnsupportedAllInstancesError-160"><span class="linenos">160</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="UnsupportedAllInstancesError-161"><a href="#UnsupportedAllInstancesError-161"><span class="linenos">161</span></a>
+</span><span id="UnsupportedAllInstancesError-162"><a href="#UnsupportedAllInstancesError-162"><span class="linenos">162</span></a>	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="UnsupportedAllInstancesError-163"><a href="#UnsupportedAllInstancesError-163"><span class="linenos">163</span></a>		<span class="s2">&quot;constructs an error message with the type and mro of the type&quot;</span>
+</span><span id="UnsupportedAllInstancesError-164"><a href="#UnsupportedAllInstancesError-164"><span class="linenos">164</span></a>		<span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Type </span><span class="si">{</span><span class="n">type_</span><span class="si">}</span><span class="s2"> is not supported by `all_instances`. See docstring for details. </span><span class="si">{</span><span class="n">type_</span><span class="o">.</span><span class="vm">__mro__</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span>
+</span><span id="UnsupportedAllInstancesError-165"><a href="#UnsupportedAllInstancesError-165"><span class="linenos">165</span></a>		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Raised when <code><a href="#all_instances">all_instances</a></code> is called on an unsupported type</p>
+
+<p>either has unbounded possible values or is not supported (Enum is not supported)</p>
+</div>
+
+
+                            <div id="UnsupportedAllInstancesError.__init__" class="classattr">
+                                        <input id="UnsupportedAllInstancesError.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="name">UnsupportedAllInstancesError</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">type_</span><span class="p">:</span> <span class="nb">type</span></span>)</span>
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="UnsupportedAllInstancesError.__init__-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/all_instances.py#L161-L164" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#UnsupportedAllInstancesError.__init__"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="UnsupportedAllInstancesError.__init__-162"><a href="#UnsupportedAllInstancesError.__init__-162"><span class="linenos">162</span></a>	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="UnsupportedAllInstancesError.__init__-163"><a href="#UnsupportedAllInstancesError.__init__-163"><span class="linenos">163</span></a>		<span class="s2">&quot;constructs an error message with the type and mro of the type&quot;</span>
+</span><span id="UnsupportedAllInstancesError.__init__-164"><a href="#UnsupportedAllInstancesError.__init__-164"><span class="linenos">164</span></a>		<span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Type </span><span class="si">{</span><span class="n">type_</span><span class="si">}</span><span class="s2"> is not supported by `all_instances`. See docstring for details. </span><span class="si">{</span><span class="n">type_</span><span class="o">.</span><span class="vm">__mro__</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span>
+</span><span id="UnsupportedAllInstancesError.__init__-165"><a href="#UnsupportedAllInstancesError.__init__-165"><span class="linenos">165</span></a>		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>constructs an error message with the type and mro of the type</p>
+</div>
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>builtins.BaseException</dt>
+                                <dd id="UnsupportedAllInstancesError.with_traceback" class="function">with_traceback</dd>
+                <dd id="UnsupportedAllInstancesError.add_note" class="function">add_note</dd>
+                <dd id="UnsupportedAllInstancesError.args" class="variable">args</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="all_instances">
+                            <input id="all_instances-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">all_instances</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">type_</span><span class="p">:</span> <span class="o">~</span><span class="n">FiniteValued</span>,</span><span class="param">	<span class="n">validation_funcs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="o">~</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[[</span><span class="o">~</span><span class="n">FiniteValued</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Generator</span><span class="p">[</span><span class="o">~</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span>:</span></span>
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="all_instances-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/all_instances.py#L167-L263" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#all_instances"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="all_instances-168"><a href="#all_instances-168"><span class="linenos">168</span></a><span class="nd">@_all_instances_wrapper</span>
+</span><span id="all_instances-169"><a href="#all_instances-169"><span class="linenos">169</span></a><span class="k">def</span><span class="w"> </span><span class="nf">all_instances</span><span class="p">(</span>
+</span><span id="all_instances-170"><a href="#all_instances-170"><span class="linenos">170</span></a>	<span class="n">type_</span><span class="p">:</span> <span class="n">FiniteValued</span><span class="p">,</span>
+</span><span id="all_instances-171"><a href="#all_instances-171"><span class="linenos">171</span></a>	<span class="n">validation_funcs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">FiniteValued</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="all_instances-172"><a href="#all_instances-172"><span class="linenos">172</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">FiniteValued</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="all_instances-173"><a href="#all_instances-173"><span class="linenos">173</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Returns all possible values of an instance of `type_` if finite instances exist.</span>
+</span><span id="all_instances-174"><a href="#all_instances-174"><span class="linenos">174</span></a>
+</span><span id="all_instances-175"><a href="#all_instances-175"><span class="linenos">175</span></a><span class="sd">	Uses type hinting to construct the possible values.</span>
+</span><span id="all_instances-176"><a href="#all_instances-176"><span class="linenos">176</span></a><span class="sd">	All nested elements of `type_` must themselves be typed.</span>
+</span><span id="all_instances-177"><a href="#all_instances-177"><span class="linenos">177</span></a><span class="sd">	Do not use with types whose members contain circular references.</span>
+</span><span id="all_instances-178"><a href="#all_instances-178"><span class="linenos">178</span></a><span class="sd">	Function is susceptible to infinite recursion if `type_` is a dataclass whose member tree includes another instance of `type_`.</span>
+</span><span id="all_instances-179"><a href="#all_instances-179"><span class="linenos">179</span></a>
+</span><span id="all_instances-180"><a href="#all_instances-180"><span class="linenos">180</span></a><span class="sd">	# Parameters</span>
+</span><span id="all_instances-181"><a href="#all_instances-181"><span class="linenos">181</span></a><span class="sd">	- `type_: FiniteValued`</span>
+</span><span id="all_instances-182"><a href="#all_instances-182"><span class="linenos">182</span></a><span class="sd">		A finite-valued type. See docstring on `FiniteValued` for full details.</span>
+</span><span id="all_instances-183"><a href="#all_instances-183"><span class="linenos">183</span></a><span class="sd">	- `validation_funcs: dict[FiniteValued, Callable[[FiniteValued], bool]] | None`</span>
+</span><span id="all_instances-184"><a href="#all_instances-184"><span class="linenos">184</span></a><span class="sd">		A mapping of types to auxiliary functions to validate instances of that type.</span>
+</span><span id="all_instances-185"><a href="#all_instances-185"><span class="linenos">185</span></a><span class="sd">		This optional argument can provide an additional, more precise layer of validation for the instances generated beyond what type hinting alone can provide.</span>
+</span><span id="all_instances-186"><a href="#all_instances-186"><span class="linenos">186</span></a><span class="sd">		See `validation_funcs` Details section below.</span>
+</span><span id="all_instances-187"><a href="#all_instances-187"><span class="linenos">187</span></a><span class="sd">		(default: `None`)</span>
+</span><span id="all_instances-188"><a href="#all_instances-188"><span class="linenos">188</span></a>
+</span><span id="all_instances-189"><a href="#all_instances-189"><span class="linenos">189</span></a><span class="sd">	## Supported `type_` Values</span>
+</span><span id="all_instances-190"><a href="#all_instances-190"><span class="linenos">190</span></a><span class="sd">	See docstring on `FiniteValued` for full details.</span>
+</span><span id="all_instances-191"><a href="#all_instances-191"><span class="linenos">191</span></a><span class="sd">	`type_` may be:</span>
+</span><span id="all_instances-192"><a href="#all_instances-192"><span class="linenos">192</span></a><span class="sd">	- `FiniteValued`</span>
+</span><span id="all_instances-193"><a href="#all_instances-193"><span class="linenos">193</span></a><span class="sd">	- A finite-valued, fixed-length Generic tuple type.</span>
+</span><span id="all_instances-194"><a href="#all_instances-194"><span class="linenos">194</span></a><span class="sd">	E.g., `tuple[bool]`, `tuple[bool, MyEnum]` are OK.</span>
+</span><span id="all_instances-195"><a href="#all_instances-195"><span class="linenos">195</span></a><span class="sd">	`tuple[bool, ...]` is NOT supported, since the length of the tuple is not fixed.</span>
+</span><span id="all_instances-196"><a href="#all_instances-196"><span class="linenos">196</span></a><span class="sd">	- Nested versions of any of the types in this list</span>
+</span><span id="all_instances-197"><a href="#all_instances-197"><span class="linenos">197</span></a><span class="sd">	- A `UnionType` of any of the types in this list</span>
+</span><span id="all_instances-198"><a href="#all_instances-198"><span class="linenos">198</span></a>
+</span><span id="all_instances-199"><a href="#all_instances-199"><span class="linenos">199</span></a><span class="sd">	## `validation_funcs` Details</span>
+</span><span id="all_instances-200"><a href="#all_instances-200"><span class="linenos">200</span></a><span class="sd">	- `validation_funcs` is applied after all instances have been generated according to type hints.</span>
+</span><span id="all_instances-201"><a href="#all_instances-201"><span class="linenos">201</span></a><span class="sd">	- If `type_` is in `validation_funcs`, then the list of instances is filtered by `validation_funcs[type_](instance)`.</span>
+</span><span id="all_instances-202"><a href="#all_instances-202"><span class="linenos">202</span></a><span class="sd">	- `validation_funcs` is passed down for all recursive calls of `all_instances`.</span>
+</span><span id="all_instances-203"><a href="#all_instances-203"><span class="linenos">203</span></a><span class="sd">	- This allows for improved performance through maximal pruning of the exponential tree.</span>
+</span><span id="all_instances-204"><a href="#all_instances-204"><span class="linenos">204</span></a><span class="sd">	- `validation_funcs` supports subclass checking.</span>
+</span><span id="all_instances-205"><a href="#all_instances-205"><span class="linenos">205</span></a><span class="sd">	- If `type_` is not found in `validation_funcs`, then the search is performed iteratively in mro order.</span>
+</span><span id="all_instances-206"><a href="#all_instances-206"><span class="linenos">206</span></a><span class="sd">	- If a superclass of `type_` is found while searching in mro order, that validation function is applied and the list is returned.</span>
+</span><span id="all_instances-207"><a href="#all_instances-207"><span class="linenos">207</span></a><span class="sd">	- If no superclass of `type_` is found, then no filter is applied.</span>
+</span><span id="all_instances-208"><a href="#all_instances-208"><span class="linenos">208</span></a>
+</span><span id="all_instances-209"><a href="#all_instances-209"><span class="linenos">209</span></a><span class="sd">	# Raises:</span>
+</span><span id="all_instances-210"><a href="#all_instances-210"><span class="linenos">210</span></a><span class="sd">	- `UnsupportedAllInstancesError`: If `type_` is not supported by `all_instances`.</span>
+</span><span id="all_instances-211"><a href="#all_instances-211"><span class="linenos">211</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="all_instances-212"><a href="#all_instances-212"><span class="linenos">212</span></a>	<span class="k">if</span> <span class="n">type_</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># noqa: E721</span>
+</span><span id="all_instances-213"><a href="#all_instances-213"><span class="linenos">213</span></a>		<span class="k">yield from</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+</span><span id="all_instances-214"><a href="#all_instances-214"><span class="linenos">214</span></a>	<span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="s2">&quot;__dataclass_fields__&quot;</span><span class="p">):</span>
+</span><span id="all_instances-215"><a href="#all_instances-215"><span class="linenos">215</span></a>		<span class="k">if</span> <span class="n">is_abstract</span><span class="p">(</span><span class="n">type_</span><span class="p">):</span>
+</span><span id="all_instances-216"><a href="#all_instances-216"><span class="linenos">216</span></a>			<span class="c1"># Abstract dataclass: call `all_instances` on each subclass</span>
+</span><span id="all_instances-217"><a href="#all_instances-217"><span class="linenos">217</span></a>			<span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span>
+</span><span id="all_instances-218"><a href="#all_instances-218"><span class="linenos">218</span></a>				<span class="p">(</span>
+</span><span id="all_instances-219"><a href="#all_instances-219"><span class="linenos">219</span></a>					<span class="n">all_instances</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="all_instances-220"><a href="#all_instances-220"><span class="linenos">220</span></a>					<span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">type_</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+</span><span id="all_instances-221"><a href="#all_instances-221"><span class="linenos">221</span></a>				<span class="p">),</span>
+</span><span id="all_instances-222"><a href="#all_instances-222"><span class="linenos">222</span></a>				<span class="n">levels_to_flatten</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="all_instances-223"><a href="#all_instances-223"><span class="linenos">223</span></a>			<span class="p">)</span>
+</span><span id="all_instances-224"><a href="#all_instances-224"><span class="linenos">224</span></a>		<span class="k">else</span><span class="p">:</span>
+</span><span id="all_instances-225"><a href="#all_instances-225"><span class="linenos">225</span></a>			<span class="c1"># Concrete dataclass: construct dataclass instances with all possible combinations of fields</span>
+</span><span id="all_instances-226"><a href="#all_instances-226"><span class="linenos">226</span></a>			<span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Field</span><span class="p">]</span> <span class="o">=</span> <span class="n">type_</span><span class="o">.</span><span class="n">__dataclass_fields__</span>
+</span><span id="all_instances-227"><a href="#all_instances-227"><span class="linenos">227</span></a>			<span class="n">fields_to_types</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="p">:</span> <span class="n">fields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">}</span>
+</span><span id="all_instances-228"><a href="#all_instances-228"><span class="linenos">228</span></a>			<span class="n">all_arg_sequences</span><span class="p">:</span> <span class="n">Iterable</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+</span><span id="all_instances-229"><a href="#all_instances-229"><span class="linenos">229</span></a>				<span class="o">*</span><span class="p">[</span>
+</span><span id="all_instances-230"><a href="#all_instances-230"><span class="linenos">230</span></a>					<span class="n">all_instances</span><span class="p">(</span><span class="n">arg_type</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="all_instances-231"><a href="#all_instances-231"><span class="linenos">231</span></a>					<span class="k">for</span> <span class="n">arg_type</span> <span class="ow">in</span> <span class="n">fields_to_types</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</span><span id="all_instances-232"><a href="#all_instances-232"><span class="linenos">232</span></a>				<span class="p">],</span>
+</span><span id="all_instances-233"><a href="#all_instances-233"><span class="linenos">233</span></a>			<span class="p">)</span>
+</span><span id="all_instances-234"><a href="#all_instances-234"><span class="linenos">234</span></a>			<span class="k">yield from</span> <span class="p">(</span>
+</span><span id="all_instances-235"><a href="#all_instances-235"><span class="linenos">235</span></a>				<span class="n">type_</span><span class="p">(</span>
+</span><span id="all_instances-236"><a href="#all_instances-236"><span class="linenos">236</span></a>					<span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fields_to_types</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">args</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+</span><span id="all_instances-237"><a href="#all_instances-237"><span class="linenos">237</span></a>				<span class="p">)</span>
+</span><span id="all_instances-238"><a href="#all_instances-238"><span class="linenos">238</span></a>				<span class="k">for</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">all_arg_sequences</span>
+</span><span id="all_instances-239"><a href="#all_instances-239"><span class="linenos">239</span></a>			<span class="p">)</span>
+</span><span id="all_instances-240"><a href="#all_instances-240"><span class="linenos">240</span></a>	<span class="k">else</span><span class="p">:</span>
+</span><span id="all_instances-241"><a href="#all_instances-241"><span class="linenos">241</span></a>		<span class="n">type_origin</span> <span class="o">=</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span><span id="all_instances-242"><a href="#all_instances-242"><span class="linenos">242</span></a>		<span class="k">if</span> <span class="n">type_origin</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">:</span>  <span class="c1"># noqa: E721</span>
+</span><span id="all_instances-243"><a href="#all_instances-243"><span class="linenos">243</span></a>			<span class="c1"># Only matches Generic type tuple since regular tuple is not finite-valued</span>
+</span><span id="all_instances-244"><a href="#all_instances-244"><span class="linenos">244</span></a>			<span class="c1"># Generic tuple: Similar to concrete dataclass. Construct all possible combinations of tuple fields.</span>
+</span><span id="all_instances-245"><a href="#all_instances-245"><span class="linenos">245</span></a>			<span class="k">yield from</span> <span class="p">(</span>
+</span><span id="all_instances-246"><a href="#all_instances-246"><span class="linenos">246</span></a>				<span class="nb">tuple</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+</span><span id="all_instances-247"><a href="#all_instances-247"><span class="linenos">247</span></a>				<span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+</span><span id="all_instances-248"><a href="#all_instances-248"><span class="linenos">248</span></a>					<span class="o">*</span><span class="p">(</span>
+</span><span id="all_instances-249"><a href="#all_instances-249"><span class="linenos">249</span></a>						<span class="n">all_instances</span><span class="p">(</span><span class="n">tup_item</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span>
+</span><span id="all_instances-250"><a href="#all_instances-250"><span class="linenos">250</span></a>						<span class="k">for</span> <span class="n">tup_item</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span><span id="all_instances-251"><a href="#all_instances-251"><span class="linenos">251</span></a>					<span class="p">),</span>
+</span><span id="all_instances-252"><a href="#all_instances-252"><span class="linenos">252</span></a>				<span class="p">)</span>
+</span><span id="all_instances-253"><a href="#all_instances-253"><span class="linenos">253</span></a>			<span class="p">)</span>
+</span><span id="all_instances-254"><a href="#all_instances-254"><span class="linenos">254</span></a>		<span class="k">elif</span> <span class="n">type_origin</span> <span class="ow">in</span> <span class="p">(</span><span class="n">UnionType</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">):</span>
+</span><span id="all_instances-255"><a href="#all_instances-255"><span class="linenos">255</span></a>			<span class="c1"># Union: call `all_instances` for each type in the Union</span>
+</span><span id="all_instances-256"><a href="#all_instances-256"><span class="linenos">256</span></a>			<span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span>
+</span><span id="all_instances-257"><a href="#all_instances-257"><span class="linenos">257</span></a>				<span class="p">[</span><span class="n">all_instances</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">validation_funcs</span><span class="p">)</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)],</span>
+</span><span id="all_instances-258"><a href="#all_instances-258"><span class="linenos">258</span></a>				<span class="n">levels_to_flatten</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="all_instances-259"><a href="#all_instances-259"><span class="linenos">259</span></a>			<span class="p">)</span>
+</span><span id="all_instances-260"><a href="#all_instances-260"><span class="linenos">260</span></a>		<span class="k">elif</span> <span class="n">type_origin</span> <span class="ow">is</span> <span class="n">Literal</span><span class="p">:</span>
+</span><span id="all_instances-261"><a href="#all_instances-261"><span class="linenos">261</span></a>			<span class="c1"># Literal: return all Literal arguments</span>
+</span><span id="all_instances-262"><a href="#all_instances-262"><span class="linenos">262</span></a>			<span class="k">yield from</span> <span class="n">get_args</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span><span id="all_instances-263"><a href="#all_instances-263"><span class="linenos">263</span></a>		<span class="k">else</span><span class="p">:</span>
+</span><span id="all_instances-264"><a href="#all_instances-264"><span class="linenos">264</span></a>			<span class="k">raise</span> <span class="n">UnsupportedAllInstancesError</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Returns all possible values of an instance of <code>type_</code> if finite instances exist.</p>
+
+<p>Uses type hinting to construct the possible values.
+All nested elements of <code>type_</code> must themselves be typed.
+Do not use with types whose members contain circular references.
+Function is susceptible to infinite recursion if <code>type_</code> is a dataclass whose member tree includes another instance of <code>type_</code>.</p>
+
+<h1 id="parameters">Parameters</h1>
+
+<ul>
+<li><code>type_: FiniteValued</code>
+A finite-valued type. See docstring on <code><a href="#FiniteValued">FiniteValued</a></code> for full details.</li>
+<li><code>validation_funcs: dict[FiniteValued, Callable[[FiniteValued], bool]] | None</code>
+A mapping of types to auxiliary functions to validate instances of that type.
+This optional argument can provide an additional, more precise layer of validation for the instances generated beyond what type hinting alone can provide.
+See <code>validation_funcs</code> Details section below.
+(default: <code>None</code>)</li>
+</ul>
+
+<h2 id="supported-type_-values">Supported <code>type_</code> Values</h2>
+
+<p>See docstring on <code><a href="#FiniteValued">FiniteValued</a></code> for full details.
+<code>type_</code> may be:</p>
+
+<ul>
+<li><code><a href="#FiniteValued">FiniteValued</a></code></li>
+<li>A finite-valued, fixed-length Generic tuple type.
+E.g., <code>tuple[bool]</code>, <code>tuple[bool, MyEnum]</code> are OK.
+<code>tuple[bool, ...]</code> is NOT supported, since the length of the tuple is not fixed.</li>
+<li>Nested versions of any of the types in this list</li>
+<li>A <code>UnionType</code> of any of the types in this list</li>
+</ul>
+
+<h2 id="validation_funcs-details"><code>validation_funcs</code> Details</h2>
+
+<ul>
+<li><code>validation_funcs</code> is applied after all instances have been generated according to type hints.</li>
+<li>If <code>type_</code> is in <code>validation_funcs</code>, then the list of instances is filtered by <code>validation_funcs[type_](instance)</code>.</li>
+<li><code>validation_funcs</code> is passed down for all recursive calls of <code><a href="#all_instances">all_instances</a></code>.</li>
+<li>This allows for improved performance through maximal pruning of the exponential tree.</li>
+<li><code>validation_funcs</code> supports subclass checking.</li>
+<li>If <code>type_</code> is not found in <code>validation_funcs</code>, then the search is performed iteratively in mro order.</li>
+<li>If a superclass of <code>type_</code> is found while searching in mro order, that validation function is applied and the list is returned.</li>
+<li>If no superclass of <code>type_</code> is found, then no filter is applied.</li>
+</ul>
+
+<h1 id="raises">Raises:</h1>
+
+<ul>
+<li><code><a href="#UnsupportedAllInstancesError">UnsupportedAllInstancesError</a></code>: If <code>type_</code> is not supported by <code><a href="#all_instances">all_instances</a></code>.</li>
+</ul>
+</div>
+
+
+                </section>
+    </main>
+<script>
+    function escapeHTML(html) {
+        return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
+    }
+
+    const originalContent = document.querySelector("main.pdoc");
+    let currentContent = originalContent;
+
+    function setContent(innerHTML) {
+        let elem;
+        if (innerHTML) {
+            elem = document.createElement("main");
+            elem.classList.add("pdoc");
+            elem.innerHTML = innerHTML;
+        } else {
+            elem = originalContent;
+        }
+        if (currentContent !== elem) {
+            currentContent.replaceWith(elem);
+            currentContent = elem;
+        }
+    }
+
+    function getSearchTerm() {
+        return (new URL(window.location)).searchParams.get("search");
+    }
+
+    const searchBox = document.querySelector(".pdoc input[type=search]");
+    searchBox.addEventListener("input", function () {
+        let url = new URL(window.location);
+        if (searchBox.value.trim()) {
+            url.hash = "";
+            url.searchParams.set("search", searchBox.value);
+        } else {
+            url.searchParams.delete("search");
+        }
+        history.replaceState("", "", url.toString());
+        onInput();
+    });
+    window.addEventListener("popstate", onInput);
+
+
+    let search, searchErr;
+
+    async function initialize() {
+        try {
+            search = await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.type = "text/javascript";
+                script.async = true;
+                script.onload = () => resolve(window.pdocSearch);
+                script.onerror = (e) => reject(e);
+                script.src = "../../../search.js";
+                document.getElementsByTagName("head")[0].appendChild(script);
+            });
+        } catch (e) {
+            console.error("Cannot fetch pdoc search index");
+            searchErr = "Cannot fetch search index.";
+        }
+        onInput();
+
+        document.querySelector("nav.pdoc").addEventListener("click", e => {
+            if (e.target.hash) {
+                searchBox.value = "";
+                searchBox.dispatchEvent(new Event("input"));
+            }
+        });
+    }
+
+    function onInput() {
+        setContent((() => {
+            const term = getSearchTerm();
+            if (!term) {
+                return null
+            }
+            if (searchErr) {
+                return `<h3>Error: ${searchErr}</h3>`
+            }
+            if (!search) {
+                return "<h3>Searching...</h3>"
+            }
+
+            window.scrollTo({top: 0, left: 0, behavior: 'auto'});
+
+            const results = search(term);
+
+            let html;
+            if (results.length === 0) {
+                html = `No search results for '${escapeHTML(term)}'.`
+            } else {
+                html = `<h4>${results.length} search result${results.length > 1 ? "s" : ""} for '${escapeHTML(term)}'.</h4>`;
+            }
+            for (let result of results.slice(0, 10)) {
+                let doc = result.doc;
+                let url = `../../../${doc.modulename.replaceAll(".", "/")}.html`;
+                if (doc.qualname) {
+                    url += `#${doc.qualname}`;
+                }
+
+                let heading;
+                switch (result.doc.kind) {
+                    case "function":
+                        if (doc.fullname.endsWith(".__init__")) {
+                            heading = `<span class="name">${doc.fullname.replace(/\.__init__$/, "")}</span>${doc.signature}`;
+                        } else {
+                            heading = `<span class="def">${doc.funcdef}</span> <span class="name">${doc.fullname}</span>${doc.signature}`;
+                        }
+                        break;
+                    case "class":
+                        heading = `<span class="def">class</span> <span class="name">${doc.fullname}</span>`;
+                        if (doc.bases)
+                            heading += `<wbr>(<span class="base">${doc.bases}</span>)`;
+                        heading += `:`;
+                        break;
+                    case "variable":
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        if (doc.annotation)
+                            heading += `<span class="annotation">${doc.annotation}</span>`;
+                        if (doc.default_value)
+                            heading += `<span class="default_value"> = ${doc.default_value}</span>`;
+                        break;
+                    default:
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        break;
+                }
+                html += `
+                        <section class="search-result">
+                        <a href="${url}" class="attr ${doc.kind}">${heading}</a>
+                        <div class="docstring">${doc.doc}</div>
+                        </section>
+                    `;
+
+            }
+            return html;
+        })());
+    }
+
+    if (getSearchTerm()) {
+        initialize();
+        searchBox.value = getSearchTerm();
+        onInput();
+    } else {
+        searchBox.addEventListener("focus", initialize, {once: true});
+    }
+
+    searchBox.addEventListener("keydown", e => {
+        if (["ArrowDown", "ArrowUp", "Enter"].includes(e.key)) {
+            let focused = currentContent.querySelector(".search-result.focused");
+            if (!focused) {
+                currentContent.querySelector(".search-result").classList.add("focused");
+            } else if (
+                e.key === "ArrowDown"
+                && focused.nextElementSibling
+                && focused.nextElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.nextElementSibling.classList.add("focused");
+                focused.nextElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "ArrowUp"
+                && focused.previousElementSibling
+                && focused.previousElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.previousElementSibling.classList.add("focused");
+                focused.previousElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "Enter"
+            ) {
+                focused.querySelector("a").click();
+            }
+        }
+    });
+</script></body>
+</html>

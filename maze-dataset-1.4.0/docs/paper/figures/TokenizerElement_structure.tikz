@@ -1,0 +1,106 @@
+\begin{tikzpicture}[
+S1/.style={rectangle, rounded corners, draw=red!60, fill=red!5, very thick,
+minimum size=5mm},
+S2/.style={rectangle, rounded corners, draw=blue!60, fill=blue!5, very thick, minimum size=5mm},
+]
+	\node[
+	S1, 
+	minimum height=0.42\textwidth, 
+	minimum width=0.65\textwidth, 
+	text depth=0.42\textwidth,
+	] (MTM) 
+	{\docslink{maze_dataset/tokenization.html\#MazeTokenizerModular}{\texttt{MazeTokenizerModular}}};
+	\node[
+	S2, 
+	minimum height=0.37\textwidth, 
+	minimum width=0.62\textwidth, 
+	text depth=0.37\textwidth,
+	] (PS) 
+	at ($ (MTM) + (0,-0.01\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#PromptSequencers}{\texttt{\_PromptSequencer}}};
+	\node[
+	S1, 
+	% minimum height=0.1\textwidth, 
+	minimum width=0.59\textwidth, 
+	% text depth=0.1\textwidth,
+	] (CT) 
+	at ($ (PS) + (0,0.135\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#CoordTokenizers}{\texttt{\_CoordTokenizer}}};
+	\node[
+	S1, 
+	minimum height=0.07\textwidth, 
+	minimum width=0.59\textwidth, 
+	text depth=0.05\textwidth,
+	% fill={rgb:red,217;green,210;blue,233}, % TODO: get colors to match the ones in fig:output-tokenized
+	] (Adj) 
+	at ($ (CT) + (0,-0.07\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#AdjListTokenizers}{\texttt{\_AdjListTokenizer}}};
+	\node[
+	S1, 
+	% minimum height=0.1\textwidth, 
+	minimum width=0.59\textwidth, 
+	% text depth=0.1\textwidth,
+	] (Target) 
+	at ($ (Adj) + (0,-0.07\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#TargetTokenizers}{\texttt{\_TargetTokenizer}}};
+	\node[
+	S1, 
+	minimum height=0.14\textwidth, 
+	minimum width=0.59\textwidth, 
+	text depth=0.12\textwidth,
+	] (Path) 
+	at ($ (Target) + (0,-0.105\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#PathTokenizers}{\texttt{\_PathTokenizer}}};
+	\node[
+	S2, 
+	% minimum height=0.1\textwidth, 
+	minimum width=0.17\textwidth, 
+	% text depth=0.1\textwidth,
+	] (ESubset) 
+	at ($ (Adj) + (-0.19\textwidth,-0.01\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#EdgeSubsets}{\texttt{\_EdgeSubset}}};
+	\node[
+	S2, 
+	% minimum height=0.1\textwidth, 
+	minimum width=0.17\textwidth, 
+	% text depth=0.1\textwidth,
+	] (EGrouping) 
+	at ($ (Adj) + (-0.0\textwidth,-0.01\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#EdgeGroupings}{\texttt{\_EdgeGrouping}}};
+	\node[
+	S2, 
+	% minimum height=0.1\textwidth, 
+	minimum width=0.17\textwidth, 
+	% text depth=0.1\textwidth,
+	] (EPermuter) 
+	at ($ (Adj) + (0.19\textwidth,-0.01\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#EdgePermuters}{\texttt{\_EdgePermuter}}};
+	
+	\node[
+	S2, 
+	minimum height=0.1\textwidth, 
+	minimum width=0.2\textwidth, 
+	% text depth=0.1\textwidth,
+	] (StepSize) 
+	at ($ (Path) + (-0.105\textwidth,-0.01\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#StepSizes}{\texttt{\_StepSize}}};
+	\node[
+	S2, 
+	% minimum height=0.1\textwidth, 
+	minimum width=0.2\textwidth, 
+	% text depth=0.1\textwidth,
+	] (StepTok1) 
+	at ($ (Path) + (0.105\textwidth,0.025\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#StepTokenizers}{\texttt{\_StepTokenizer}}};
+	\node[
+	S2, 
+	% minimum height=0.1\textwidth, 
+	minimum width=0.2\textwidth, 
+	% text depth=0.1\textwidth,
+	] (StepTok2) 
+	at ($ (StepTok1) + (0,-0.04\textwidth) $)
+	{\docslink{maze_dataset/tokenization/modular/elements.html\#StepTokenizers}{\texttt{\_StepTokenizer}}};
+	\node
+	at ($ (StepTok2) + (0,-0.03\textwidth) $)
+	{$\vdots$};
+\end{tikzpicture}
