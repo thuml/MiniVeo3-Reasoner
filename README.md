@@ -8,11 +8,11 @@
 
 ## 🎯 Overview
 
-Advanced video models have recently demonstrated remarkable [zero-shot capabilities of visual reasoning](https://video-zero-shot.github.io/), solving tasks like maze, symmetry, and analogy completion through a **chain-of-frames (CoF)** reasoning process. 
+Advanced video models have recently demonstrated remarkable [zero-shot capabilities of visual reasoning](https://video-zero-shot.github.io/), solving tasks like maze, symmetry, and analogy completion through a **chain-of-frames (CoF)** reasoning process.
 
-This project shows that such CoF capability can be **acquired by fine-tuning open-source video models** like [Wan2.2](https://github.com/Wan-Video/Wan2.2). 
+This project shows that such CoF capability can be **acquired by fine-tuning open-source video models** like [Wan2.2](https://github.com/Wan-Video/Wan2.2).
 
-In the maze domain, the fine-tuned models—dubbed **MiniVeo3-Reasoner**—exhibit **surprisingly strong visual reasoning performance**, achieving **near-perfect accuracy** on in-distribution tests and **robust out-of-distribution generalization**. 
+In the maze domain, the fine-tuned models—dubbed **MiniVeo3-Reasoner**—exhibit **surprisingly strong visual reasoning performance**, achieving **near-perfect accuracy** on in-distribution tests and **robust out-of-distribution generalization**.
 
 Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms baseline approaches** that reason in other modalities such as text or images.
 
@@ -24,8 +24,8 @@ Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms base
 
 ## 🤗 Models
 
-| Models                    | Download Links                                               | Description                                                  |
-| ------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Models                    | Download Links                                                           | Description                                                                                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | MiniVeo3-Reasoner-Maze-5B | 🤗 [HuggingFace](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) | Fine-tuned for [Maze](https://github.com/understanding-search/maze-dataset) tasks (3x3 to 6x6 sizes) from the base model [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) |
 
 ## ✨ Examples
@@ -73,10 +73,9 @@ Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms base
   </tr>
 </table>
 
-
 ### OOD Generalization
 
-OOD Solution Lengths: 
+OOD Solution Lengths:
 
 <table style="width: 100%; text-align: center; margin-top: 20px;">
     <tr>
@@ -93,7 +92,6 @@ OOD Solution Lengths:
       </td>
   </tr>
 </table>
-
 
 OOD Maze Sizes:
 
@@ -122,34 +120,33 @@ OOD Maze Sizes:
   </tr>
 </table>
 
-
 ## 📊 Performance
 
-| Maze                      | MiniVeo3-Reasoner-Maze-5B |
-| ------------------------- | ------------------------- |
-| 3x3                       | 100                       |
-| 4x4                       | 100                       |
-| 5x5                       | 100                       |
-| 6x6                       | 98.4                      |
-| 6x6 (OOD solution length) | 53.6                      |
-| 7x7 (OOD size)            | 86.8                      |
-| 8x8 (OOD size)            | 59.6                      |
+| Success Rate                   | MiniVeo3-Reasoner-Maze-5B |
+| ------------------------------ | ------------------------- |
+| Maze 3x3                       | 100                       |
+| Maze 4x4                       | 100                       |
+| Maze 5x5                       | 100                       |
+| Maze 6x6                       | 98.4                      |
+| Maze 6x6 (OOD solution length) | 53.6                      |
+| Maze 7x7 (OOD size)            | 86.8                      |
+| Maze 8x8 (OOD size)            | 59.6                      |
 
 ### Comparisons
 
 Under the same amount of training data, we include performance metrics reported in [Visual Planning: Let's Think Only with Images](https://arxiv.org/abs/2505.11409) for reference and comparison.
 
-| Model                            | Thinking Modality | Maze Overall |
-| -------------------------------- | ----------------- | ------------ |
-| Gemini 2.0 Flash - Direct        | Text              | 8.3          |
-| Gemini 2.0 Flash - CoT           | Text              | 6.9          |
-| Gemini 2.0 Pro (think)           | Text              | 21.5         |
-| Qwen 2.5-VL-Instruct-3B - Direct | Text              | 0.5          |
-| Qwen 2.5-VL-Instruct-3B - CoT    | Text              | 0.8          |
-| Qwen 2.5-VL-Instruct-3B - SFT    | Text              | 33.3         |
-| LVM-3B - VPFT                    | Image             | 59.0         |
-| LVM-3B - VPRL                    | Image             | 74.5         |
-| MiniVeo3-Reasoner-Maze-5B        | Video             | **99.6**     |
+| Model                            | Thinking Modality | Maze Success Rate |
+| -------------------------------- | ----------------- | ----------------- |
+| Gemini 2.0 Flash - Direct        | Text              | 8.3               |
+| Gemini 2.0 Flash - CoT           | Text              | 6.9               |
+| Gemini 2.0 Pro (think)           | Text              | 21.5              |
+| Qwen 2.5-VL-Instruct-3B - Direct | Text              | 0.5               |
+| Qwen 2.5-VL-Instruct-3B - CoT    | Text              | 0.8               |
+| Qwen 2.5-VL-Instruct-3B - SFT    | Text              | 33.3              |
+| LVM-3B - VPFT                    | Image             | 59.0              |
+| LVM-3B - VPRL                    | Image             | 74.5              |
+| MiniVeo3-Reasoner-Maze-5B        | Video             | **99.6**          |
 
 ## 🚀 Get Started
 
@@ -189,7 +186,7 @@ Our inference is based on [Wan](https://github.com/Wan-Video/Wan2.2) model. By t
 
 You can check `./inference/inference5b.py`.
 
-### Success Evaluation 
+### Success Evaluation
 
 We use serveral metrics to evaluate the result.
 
@@ -202,14 +199,14 @@ We provide max-distance and PR (see [Visual Planning](https://github.com/yix8/Vi
 If you follow the same dataset setting as ours, we provide you a shell script to easily evaluate.
 
 ```bash
-./evaluate_script.sh
+bash scripts/evaluate_script.sh
 ```
 
 ### Training Models
 
 We train [Wan](https://github.com/Wan-Video/Wan2.2) model, which is well-instructed. You can easily fine-tune your own models.
 
-For your convenience if you follow ours, we provide you a metadata generator, `./train/metadata_gen.py`, which generates the metadata for our training. You can easily read it and modify it. 
+For your convenience if you follow ours, we provide you a metadata generator, `./train/metadata_gen.py`, which generates the metadata for our training. You can easily read it and modify it.
 
 Notice that the prompt in `metadata_gen.py` is actually the prompt we use in our training.
 
@@ -228,9 +225,9 @@ We welcome contributions! Feel free to open [GitHub issues](https://github.com/t
 - [Visual Planning](https://github.com/yix8/VisualPlanning): Baseline benchmark for performance comparison.
 - [Nano Banana](https://aistudio.google.com/models/gemini-2-5-flash-image): Help in generating the project logo.
 
-## 📜 Citation 
+## 📜 Citation
 
-There is currently no technical report available. 
+There is currently no technical report available.
 
 If you find MiniVeo3-Reasoner useful, we would appreciate it if you could cite our work:
 
