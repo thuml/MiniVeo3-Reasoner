@@ -1,8 +1,7 @@
+<p align="center"><img src="assets/miniveo3-reasoner-logo-pure.png" width="200px" alt="MiniVeo3-Reasoner icon" /></p>
 <h1 align="center"> MiniVeo3-Reasoner: Thinking with Videos from Open-Source Priors </h1>
 
 <!-- Overview -->
-
-
 
 ## 🔥 News
 
@@ -135,10 +134,11 @@ We welcome contributions! Feel free to create [GitHub issues](https://github.com
 - [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio/tree/main/examples/wanvideo): Video diffusion model training.
 - [maze-dataset](https://github.com/understanding-search/maze-dataset): Dataset generation.
 - [Visual Planning](https://github.com/yix8/VisualPlanning): Benchmark performance.
+- [Nano Banana](https://aistudio.google.com/models/gemini-2-5-flash-image): Help generate the project logo.
 
 ## 📜 Citation 
 
-If you find MiniVeo3-Reasoner useful, we would appreciate it if you consider citing our work:
+The technical report is ongoing. If you find MiniVeo3-Reasoner useful, we would appreciate it if you consider citing our work:
 
 ```
 @misc{miniveo3reasoner,
