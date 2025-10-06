@@ -25,37 +25,37 @@
     <tr>
         <td>Maze 3x3</td>
       <td >
-          <video src="https://github.com/user-attachments/assets/661a4248-bb95-4625-89a9-43d4d67d0b13" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/2621f354-b180-4d9a-b508-bbb39a9eda74" width="100%" controls autoplay loop></video>
       </td>
         <td>
-          <video src="https://github.com/user-attachments/assets/5eb477c3-00f2-41f8-952b-c6f8f04b4c5f" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/c7984e4b-24dd-4f84-9132-22d2c60f38f9" width="100%" controls autoplay loop></video>
       </td>
   </tr>
    <tr>
         <td>Maze 4x4</td>
       <td >
-          <video src="https://github.com/user-attachments/assets/cb324702-a027-431e-808a-4474be77994c" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/eb07653b-223d-47ac-aa6a-3d8eef371c46" width="100%" controls autoplay loop></video>
       </td>
         <td>
-          <video src="https://github.com/user-attachments/assets/0461f438-b88a-4fd4-bff8-b3ddb1394d3b" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/b759a98f-50ea-425a-9aea-221585a5b96b" width="100%" controls autoplay loop></video>
       </td>
   </tr>
      <tr>
         <td>Maze 5x5</td>
       <td >
-          <video src="https://github.com/user-attachments/assets/0f650f24-744f-4250-856d-90d127e381bd" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/9ee1e2f0-11a5-4d94-8c42-b7dd49f245d2" width="100%" controls autoplay loop></video>
       </td>
         <td>
-          <video src="https://github.com/user-attachments/assets/e7958084-d327-4a86-978b-5430195d5e7d" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/fc54cda0-c4ea-4804-a4f5-276a4eba13a2" width="100%" controls autoplay loop></video>
       </td>
   </tr>
     <tr>
         <td>Maze 6x6</td>
       <td >
-          <video src="https://github.com/user-attachments/assets/bff875d9-5c1b-491b-a3db-07d6e433bc5c" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/3b1e8a42-bffc-43ef-a600-65e263104408" width="100%" controls autoplay loop></video>
       </td>
         <td>
-          <video src="https://github.com/user-attachments/assets/02bcc87b-11cc-4bcb-958a-b6a4573f459a" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/2c69b4d5-3818-4179-8714-7de9d2107122" width="100%" controls autoplay loop></video>
       </td>
   </tr>
 </table>
@@ -73,10 +73,10 @@ OOD Solution Lengths:
     <tr>
         <td>Maze 6x6</td>
       <td >
-          <video src="https://github.com/user-attachments/assets/042d4f68-b75d-47c4-b114-0afa6f2d696b" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/5974d363-a928-404b-8c8a-b51c92778f1b" width="100%" controls autoplay loop></video>
       </td>
         <td>
-          <video src="https://github.com/user-attachments/assets/29509f81-e36d-4db5-9ba3-c658410d99b9" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/46fda423-80c6-4831-a53a-3c9f817ff594" width="100%" controls autoplay loop></video>
       </td>
   </tr>
 </table>
@@ -91,19 +91,19 @@ OOD Maze Sizes:
     <tr>
         <td>Maze 7x7</td>
       <td >
-          <video src="https://github.com/user-attachments/assets/2aa97273-04ac-4c76-a2cf-92e96286dc5e" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/d83174ba-7dbf-4397-a33b-de995450dcfa" width="100%" controls autoplay loop></video>
       </td>
         <td>
-          <video src="https://github.com/user-attachments/assets/20c3e8d8-5343-41a8-bfac-d64c1d899d7d" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/7c24b7ee-65e9-4dfc-8dab-aeca7cd0f631" width="100%" controls autoplay loop></video>
       </td>
   </tr>
    <tr>
         <td>Maze 8x8</td>
       <td >
-          <video src="https://github.com/user-attachments/assets/a327336a-735b-4821-807e-cb0fe9413a4d" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/04fdd1aa-cd01-4a87-8a6f-0f398d51cf5b" width="100%" controls autoplay loop></video>
       </td>
         <td>
-          <video src="https://github.com/user-attachments/assets/46d350f9-a19f-4d4a-95a6-74fea5ad7e3e" width="100%" controls autoplay loop></video>
+          <video src="https://github.com/user-attachments/assets/07e63fd8-d224-4c64-b2e6-c483c2069857" width="100%" controls autoplay loop></video>
       </td>
   </tr>
 </table>
