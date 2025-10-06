@@ -17,27 +17,97 @@
 
 ### Maze
 
-| Problem Setup | Examples |
-| ------------- | -------- |
-| Maze 3x3      | <video src="https://github.com/thuml/MiniVeo3-Reasoner/blob/b9b80aa4b142d8d297da63d0f5a3b34b4774df66/example_videos/maze3_1004_epoch-2_inference.mp4"/> ![](example_videos/maze3_1005_epoch-2_inference.mp4) |
-| Maze 4x4      | ![](example_videos/maze4_1007_epoch-2_inference.mp4) ![](example_videos/maze4_1008_epoch-2_inference.mp4) |
-| Maze 5x5      | ![](example_videos/maze5_1006_epoch-2_inference.mp4) ![](example_videos/maze5_1008_epoch-2_inference.mp4) |
-| Maze 6x6      | ![](example_videos/maze6_1001_epoch-2_inference.mp4) ![](example_videos/maze6_1012_epoch-2_inference.mp4) |
+<table style="width: 100%; text-align: center; margin-top: 20px;">
+    <tr>
+        <td> <b>Problem Setup</b></td>
+        <td colspan=2> <b>Examples</b></td>
+    </tr>
+    <tr>
+        <td>Maze 3x3</td>
+      <td >
+          <video src="https://github.com/user-attachments/assets/661a4248-bb95-4625-89a9-43d4d67d0b13" width="100%" controls autoplay loop></video>
+      </td>
+        <td>
+          <video src="https://github.com/user-attachments/assets/5eb477c3-00f2-41f8-952b-c6f8f04b4c5f" width="100%" controls autoplay loop></video>
+      </td>
+  </tr>
+   <tr>
+        <td>Maze 4x4</td>
+      <td >
+          <video src="https://github.com/user-attachments/assets/cb324702-a027-431e-808a-4474be77994c" width="100%" controls autoplay loop></video>
+      </td>
+        <td>
+          <video src="https://github.com/user-attachments/assets/0461f438-b88a-4fd4-bff8-b3ddb1394d3b" width="100%" controls autoplay loop></video>
+      </td>
+  </tr>
+     <tr>
+        <td>Maze 5x5</td>
+      <td >
+          <video src="https://github.com/user-attachments/assets/0f650f24-744f-4250-856d-90d127e381bd" width="100%" controls autoplay loop></video>
+      </td>
+        <td>
+          <video src="https://github.com/user-attachments/assets/e7958084-d327-4a86-978b-5430195d5e7d" width="100%" controls autoplay loop></video>
+      </td>
+  </tr>
+    <tr>
+        <td>Maze 6x6</td>
+      <td >
+          <video src="https://github.com/user-attachments/assets/bff875d9-5c1b-491b-a3db-07d6e433bc5c" width="100%" controls autoplay loop></video>
+      </td>
+        <td>
+          <video src="https://github.com/user-attachments/assets/02bcc87b-11cc-4bcb-958a-b6a4573f459a" width="100%" controls autoplay loop></video>
+      </td>
+  </tr>
+</table>
+
 
 ### OOD Generalization
 
 OOD Solution Lengths: 
 
-| Problem Setup | Examples |
-| ------------- | -------- |
-| Maze 6x6      | ![](example_videos/maze6ood_0004_epoch-2_inference.mp4) ![](example_videos/maze6ood_0010_epoch-2_inference.mp4) |
+<table style="width: 100%; text-align: center; margin-top: 20px;">
+    <tr>
+        <td> <b>Problem Setup</b></td>
+        <td colspan=2> <b>Examples</b></td>
+    </tr>
+    <tr>
+        <td>Maze 6x6</td>
+      <td >
+          <video src="https://github.com/user-attachments/assets/042d4f68-b75d-47c4-b114-0afa6f2d696b" width="100%" controls autoplay loop></video>
+      </td>
+        <td>
+          <video src="https://github.com/user-attachments/assets/29509f81-e36d-4db5-9ba3-c658410d99b9" width="100%" controls autoplay loop></video>
+      </td>
+  </tr>
+</table>
 
 OOD Maze Sizes:
 
-| Problem Setup | Examples |
-| ------------- | -------- |
-| Maze 7x7      | ![](example_videos/maze7_0011_epoch-2_inference.mp4) ![](example_videos/maze7_0012_epoch-2_inference.mp4) |
-| Maze 8x8      | ![](example_videos/maze8_0024_epoch-2_inference.mp4) ![](example_videos/maze8_0029_epoch-2_inference.mp4) |
+<table style="width: 100%; text-align: center; margin-top: 20px;">
+    <tr>
+        <td> <b>Problem Setup</b></td>
+        <td colspan=2> <b>Examples</b></td>
+    </tr>
+    <tr>
+        <td>Maze 7x7</td>
+      <td >
+          <video src="https://github.com/user-attachments/assets/2aa97273-04ac-4c76-a2cf-92e96286dc5e" width="100%" controls autoplay loop></video>
+      </td>
+        <td>
+          <video src="https://github.com/user-attachments/assets/20c3e8d8-5343-41a8-bfac-d64c1d899d7d" width="100%" controls autoplay loop></video>
+      </td>
+  </tr>
+   <tr>
+        <td>Maze 8x8</td>
+      <td >
+          <video src="https://github.com/user-attachments/assets/a327336a-735b-4821-807e-cb0fe9413a4d" width="100%" controls autoplay loop></video>
+      </td>
+        <td>
+          <video src="https://github.com/user-attachments/assets/46d350f9-a19f-4d4a-95a6-74fea5ad7e3e" width="100%" controls autoplay loop></video>
+      </td>
+  </tr>
+</table>
+
 
 ## 📊 Performance
 
