@@ -165,10 +165,12 @@ class MazePlot:
 				self.add_true_path(SolvedMaze.from_targeted_lattice_maze(maze).solution)
     
 		import matplotlib.image as mpimg
-		self.icon_orig=mpimg.imread('icons/orig.png')
-		self.icon_flag=mpimg.imread('icons/flag.png')
-		self.icon_star=mpimg.imread('icons/star.png')
-		self.icon_trophy=mpimg.imread('icons/trophy.png')
+		import os.path as osp
+		icon_path = osp.join(osp.dirname(osp.dirname(__file__)), 'icons')
+		self.icon_orig = mpimg.imread(osp.join(icon_path, 'orig.png'))
+		self.icon_flag = mpimg.imread(osp.join(icon_path, 'flag.png'))
+		self.icon_star = mpimg.imread(osp.join(icon_path, 'star.png'))
+		self.icon_trophy = mpimg.imread(osp.join(icon_path, 'trophy.png'))
 	@property
 	def solved_maze(self) -> SolvedMaze:
 		"get the underlying `SolvedMaze` object"
@@ -699,15 +701,15 @@ class MazePlot:
 
 		if arr_eq(cur_pos,orig_pos):
 			# self.ax.imshow(self.icon_flag,extent=calc_extent(tar_pos))
-   			self.ax.imshow(self.icon_flag,extent=[tar_pos[0]-grid_size/2,tar_pos[0]+grid_size/2,tar_pos[1]-grid_size/2,tar_pos[1]+grid_size/2],zorder=2)
+			self.ax.imshow(self.icon_flag,extent=[tar_pos[0]-grid_size/2,tar_pos[0]+grid_size/2,tar_pos[1]-grid_size/2,tar_pos[1]+grid_size/2],zorder=2)
 		elif arr_eq(cur_pos,tar_pos):
 			# self.ax.imshow(self.icon_trophy,extent=calc_extent(tar_pos))
-   			self.ax.imshow(self.icon_trophy,extent=[tar_pos[0]-grid_size/2,tar_pos[0]+grid_size/2,tar_pos[1]-grid_size/2,tar_pos[1]+grid_size/2],zorder=2)
+			self.ax.imshow(self.icon_trophy,extent=[tar_pos[0]-grid_size/2,tar_pos[0]+grid_size/2,tar_pos[1]-grid_size/2,tar_pos[1]+grid_size/2],zorder=2)
 		else:
 			# self.ax.imshow(self.icon_flag,extent=calc_extent(tar_pos))
-   			self.ax.imshow(self.icon_flag,extent=[tar_pos[0]-grid_size/2,tar_pos[0]+grid_size/2,tar_pos[1]-grid_size/2,tar_pos[1]+grid_size/2],zorder=2)
+			self.ax.imshow(self.icon_flag,extent=[tar_pos[0]-grid_size/2,tar_pos[0]+grid_size/2,tar_pos[1]-grid_size/2,tar_pos[1]+grid_size/2],zorder=2)
 			# self.ax.imshow(self.icon_star,extent=calc_extent(cur_pos))
-   			self.ax.imshow(self.icon_star,extent=[cur_pos[0]-grid_size/2,cur_pos[0]+grid_size/2,cur_pos[1]-grid_size/2,cur_pos[1]+grid_size/2],zorder=2)
+			self.ax.imshow(self.icon_star,extent=[cur_pos[0]-grid_size/2,cur_pos[0]+grid_size/2,cur_pos[1]-grid_size/2,cur_pos[1]+grid_size/2],zorder=2)
 			
   
 		# if target is not None:

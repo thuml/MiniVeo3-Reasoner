@@ -156,24 +156,32 @@ Under the same amount of training data, we include performance metrics reported 
 ### Environment Setup
 
 ```bash
-
+conda create -n miniveo3_reasoner python==3.12
+conda activate miniveo3_reasoner
+pip install -r requirements.txt
 ```
 
 ### Data Preparation
 
-Our data generator generates a series of mazes of certain size, path length and amount, outputting a .mp4 file and a .png file (the first frame of .mp4 file).
+Our data generator produces a series of mazes with configurable size, path length and amount, outputting a `.mp4` video file and a `.png` image (the first frame of the video).
 
-We use adapted maze-dataset to generate mazes. You can install it as follows:
+We use a customized version of [maze-dataset](https://github.com/understanding-search/maze-dataset). You can install it as follows:
 
 ```bash
-cd maze-dataset-1.4.0
-pip install -e .
-cd ..
+pip install -e data/maze/maze-dataset
 ```
 
-Thereafter, use `generate/maze_generator.py` to generate mazes with certain conditions. You can check the arguments in this Python file.
+After installation, use the script below to generate mazes with custom configurations:
 
-If you want to generate the same distribution dataset as ours, simply run `./generate_our_dataset.sh` and the output will be in `./generate/default_dataset`.
+```bash
+python data/maze/maze_generator.py
+```
+
+To reproduce the same data distribution used in our experiments, simply run:
+
+```bash
+bash scripts/generate_maze_dataset.sh
+```
 
 ### Inference
 

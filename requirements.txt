@@ -1,0 +1,6 @@
+matplotlib
+numpy
+imageio
+imageio-ffmpeg
+opencv-python
+tqdm
