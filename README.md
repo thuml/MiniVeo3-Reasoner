@@ -1,21 +1,34 @@
 <p align="center"><img src="assets/miniveo3-reasoner-logo-pure.png" width="200px" alt="MiniVeo3-Reasoner icon" /></p>
 <h1 align="center"> MiniVeo3-Reasoner: Thinking with Videos from Open-Source Priors </h1>
 
-<!-- Overview -->
+<p align="center">
+  <a href="https://github.com/thuml/MiniVeo3-Reasoner"><img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B"><img src="https://img.shields.io/badge/🤗_HuggingFace-fcd022?style=for-the-badge" alt="HuggingFace"></a>
+</p>
+
+## 🎯 Overview
+
+Advanced video models have recently demonstrated remarkable [zero-shot capabilities of visual reasoning](https://video-zero-shot.github.io/), solving tasks like maze, symmetry, and analogy completion through a **chain-of-frames (CoF)** reasoning process. 
+
+This project shows that such CoF capability can be **acquired by fine-tuning open-source video models** like [Wan2.2](https://github.com/Wan-Video/Wan2.2). 
+
+In the maze domain, the fine-tuned models—dubbed **MiniVeo3-Reasoner**—exhibit **surprisingly strong visual reasoning performance**, achieving **near-perfect accuracy** on in-distribution tests and **robust out-of-distribution generalization**. 
+
+Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms baseline models** that reason in other modalities such as text or images.
+
+![method overview](assets/overview.png)
 
 ## 🔥 News
 
-- 🚩 **2025.10**: We release MiniVeo3-Reasoner using mazes as testbed!
+- 🚩 **2025.10**: We are thrilled to release MiniVeo3-Reasoner, with mazes as a testbed for visual reasoning!
 
 ## 🤗 Models
 
 | Models                    | Download Links                                               | Description                                                  |
 | ------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| MiniVeo3-Reasoner-Maze-5B | 🤗 [HuggingFace](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) | Finetuned for [Maze](https://github.com/understanding-search/maze-dataset) (3x3 to 6x6 sizes) from [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) |
+| MiniVeo3-Reasoner-Maze-5B | 🤗 [HuggingFace](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) | Fine-tuned for [Maze](https://github.com/understanding-search/maze-dataset) tasks (3x3 to 6x6 sizes) from the base model [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) |
 
 ## ✨ Examples
-
-### Maze
 
 <table style="width: 100%; text-align: center; margin-top: 20px;">
     <tr>
@@ -59,8 +72,6 @@
       </td>
   </tr>
 </table>
-
-
 ### OOD Generalization
 
 OOD Solution Lengths: 
@@ -71,7 +82,7 @@ OOD Solution Lengths:
         <td colspan=2> <b>Examples</b></td>
     </tr>
     <tr>
-        <td>Maze 6x6</td>
+      <td>Maze 6x6 <br/> (solution len > 12)</td>
       <td >
           <video src="https://github.com/user-attachments/assets/5974d363-a928-404b-8c8a-b51c92778f1b" width="100%" controls autoplay loop></video>
       </td>
@@ -80,6 +91,7 @@ OOD Solution Lengths:
       </td>
   </tr>
 </table>
+
 
 OOD Maze Sizes:
 
@@ -107,8 +119,6 @@ OOD Maze Sizes:
       </td>
   </tr>
 </table>
-
-
 ## 📊 Performance
 
 | Maze                      | MiniVeo3-Reasoner-Maze-5B |
@@ -123,7 +133,7 @@ OOD Maze Sizes:
 
 ### Comparisons
 
-We include performance reported from [Visual Planning: Let's Think Only with Images](https://arxiv.org/abs/2505.11409)
+Under the same amount of training data, we include performance metrics reported in [Visual Planning: Let's Think Only with Images](https://arxiv.org/abs/2505.11409) for reference and comparison.
 
 | Model                            | Thinking Modality | Maze Overall |
 | -------------------------------- | ----------------- | ------------ |
@@ -193,22 +203,24 @@ Notice that the prompt in `metadata_gen.py` is actually the prompt we use in our
 
 ## 🤝 Contributors
 
-[Jialong Wu](https://manchery.github.io/)\*, [Tianhao Huang](https://github.com/MrH2T)\*, [Changjing He](https://github.com/hcjqwq)\*, [Mingsheng Long](https://ise.thss.tsinghua.edu.cn/~mlong/). (\* Equal Contribution)
+[Jialong Wu](https://manchery.github.io/)\*, [Tianhao Huang](https://github.com/MrH2T)\*, [Changjing He](https://github.com/hcjqwq)\*, [Mingsheng Long](https://ise.thss.tsinghua.edu.cn/~mlong/). (\*Equal Contribution)
 
-We welcome contributions! Feel free to create [GitHub issues](https://github.com/thuml/MiniVeo3-Reasoner/issues) to track bugs and feature requests.
+We welcome contributions! Feel free to open [GitHub issues](https://github.com/thuml/MiniVeo3-Reasoner/issues) for bug reports or feature requests.
 
 ## 💡 Acknowledgements
 
 - [Veo 3](https://video-zero-shot.github.io/): This project is inspired by the impressive zero-shot performance of Veo 3!
-- [Wan](https://github.com/Wan-Video/Wan2.2): The strong open-sourced video diffusion models.
+- [Wan](https://github.com/Wan-Video/Wan2.2): Powerful open-source video diffusion models used as base models.
 - [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio/tree/main/examples/wanvideo): Video diffusion model training.
-- [maze-dataset](https://github.com/understanding-search/maze-dataset): Dataset generation.
-- [Visual Planning](https://github.com/yix8/VisualPlanning): Benchmark performance.
-- [Nano Banana](https://aistudio.google.com/models/gemini-2-5-flash-image): Help generate the project logo.
+- [maze-dataset](https://github.com/understanding-search/maze-dataset): Data generation for maze reasoning tasks.
+- [Visual Planning](https://github.com/yix8/VisualPlanning): Baseline benchmark for performance comparison.
+- [Nano Banana](https://aistudio.google.com/models/gemini-2-5-flash-image): Help in generating the project logo.
 
 ## 📜 Citation 
 
-The technical report is ongoing. If you find MiniVeo3-Reasoner useful, we would appreciate it if you consider citing our work:
+There is currently no technical report available. 
+
+If you find MiniVeo3-Reasoner useful, we would appreciate it if you could cite our work:
 
 ```
 @misc{miniveo3reasoner,
