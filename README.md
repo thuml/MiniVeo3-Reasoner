@@ -14,7 +14,7 @@ This project shows that such CoF capability can be **acquired by fine-tuning ope
 
 In the maze domain, the fine-tuned models—dubbed **MiniVeo3-Reasoner**—exhibit **surprisingly strong visual reasoning performance**, achieving **near-perfect accuracy** on in-distribution tests and **robust out-of-distribution generalization**. 
 
-Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms baseline models** that reason in other modalities such as text or images.
+Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms baseline approaches** that reason in other modalities such as text or images.
 
 ![method overview](assets/overview.png)
 
@@ -72,6 +72,8 @@ Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms base
       </td>
   </tr>
 </table>
+
+
 ### OOD Generalization
 
 OOD Solution Lengths: 
@@ -119,6 +121,8 @@ OOD Maze Sizes:
       </td>
   </tr>
 </table>
+
+
 ## 📊 Performance
 
 | Maze                      | MiniVeo3-Reasoner-Maze-5B |
@@ -203,7 +207,7 @@ Notice that the prompt in `metadata_gen.py` is actually the prompt we use in our
 
 ## 🤝 Contributors
 
-[Jialong Wu](https://manchery.github.io/)\*, [Tianhao Huang](https://github.com/MrH2T)\*, [Changjing He](https://github.com/hcjqwq)\*, [Mingsheng Long](https://ise.thss.tsinghua.edu.cn/~mlong/). (\*Equal Contribution)
+[Jialong Wu](https://manchery.github.io/)\*, [Tianhao Huang](https://github.com/MrH2T)\*, [Changjing He](https://github.com/hcjqwq)\*, [Mingsheng Long](https://ise.thss.tsinghua.edu.cn/~mlong/). (\*: Equal Contribution)
 
 We welcome contributions! Feel free to open [GitHub issues](https://github.com/thuml/MiniVeo3-Reasoner/issues) for bug reports or feature requests.
 
