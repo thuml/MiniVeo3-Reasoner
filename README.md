@@ -20,10 +20,10 @@
 
 | Problem Setup | Examples |
 | ------------- | -------- |
-| Maze 3x3      | <video width="208" height="120" controls><source src="./example_videos/maze3_1004_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze3_1005_epoch-2_inference.mp4" type="video/mp4"></video> |
-| Maze 4x4      | <video width="208" height="120" controls><source src="./example_videos/maze4_1007_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze4_1008_epoch-2_inference.mp4" type="video/mp4"></video> |
-| Maze 5x5      | <video width="208" height="120" controls><source src="./example_videos/maze5_1006_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze5_1008_epoch-2_inference.mp4" type="video/mp4"></video> |
-| Maze 6x6      | <video width="208" height="120" controls><source src="./example_videos/maze6_1001_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze6_1012_epoch-2_inference.mp4" type="video/mp4"></video> |
+| Maze 3x3      | <video src="https://github.com/thuml/MiniVeo3-Reasoner/blob/b9b80aa4b142d8d297da63d0f5a3b34b4774df66/example_videos/maze3_1004_epoch-2_inference.mp4"/> ![](example_videos/maze3_1005_epoch-2_inference.mp4) |
+| Maze 4x4      | ![](example_videos/maze4_1007_epoch-2_inference.mp4) ![](example_videos/maze4_1008_epoch-2_inference.mp4) |
+| Maze 5x5      | ![](example_videos/maze5_1006_epoch-2_inference.mp4) ![](example_videos/maze5_1008_epoch-2_inference.mp4) |
+| Maze 6x6      | ![](example_videos/maze6_1001_epoch-2_inference.mp4) ![](example_videos/maze6_1012_epoch-2_inference.mp4) |
 
 ### OOD Generalization
 
@@ -31,14 +31,14 @@ OOD Solution Lengths:
 
 | Problem Setup | Examples |
 | ------------- | -------- |
-| Maze 6x6      | <video width="208" height="120" controls><source src="./example_videos/maze6ood_0004_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze6ood_0010_epoch-2_inference.mp4" type="video/mp4"></video> |
+| Maze 6x6      | ![](example_videos/maze6ood_0004_epoch-2_inference.mp4) ![](example_videos/maze6ood_0010_epoch-2_inference.mp4) |
 
 OOD Maze Sizes:
 
 | Problem Setup | Examples |
 | ------------- | -------- |
-| Maze 7x7      | <video width="208" height="120" controls><source src="./example_videos/maze7_0011_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze7_0012_epoch-2_inference.mp4" type="video/mp4"></video> |
-| Maze 8x8      | <video width="208" height="120" controls><source src="./example_videos/maze8_0024_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze8_0029_epoch-2_inference.mp4" type="video/mp4"></video> |
+| Maze 7x7      | ![](example_videos/maze7_0011_epoch-2_inference.mp4) ![](example_videos/maze7_0012_epoch-2_inference.mp4) |
+| Maze 8x8      | ![](example_videos/maze8_0024_epoch-2_inference.mp4) ![](example_videos/maze8_0029_epoch-2_inference.mp4) |
 
 ## 📊 Performance
 
