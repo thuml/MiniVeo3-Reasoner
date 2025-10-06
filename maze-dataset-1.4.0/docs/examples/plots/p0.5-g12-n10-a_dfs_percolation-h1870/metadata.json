@@ -1,0 +1,89 @@
+{
+  "name": "p0.5",
+  "grid_n": 12,
+  "maze_ctor": "gen_dfs_percolation",
+  "maze_ctor_kwargs": {
+    "p": 0.5
+  },
+  "description": "DFS with percolation (p=0.5) (12x12)",
+  "tags": [
+    "algo:dfs_percolation",
+    "dfs",
+    "percolation",
+    "percolation:0.5",
+    "grid:12"
+  ],
+  "config": {
+    "__muutils_format__": "MazeDatasetConfig(SerializableDataclass)",
+    "name": "p0.5",
+    "seq_len_min": 1,
+    "seq_len_max": 512,
+    "seed": 42,
+    "applied_filters": [],
+    "grid_n": 12,
+    "n_mazes": 10,
+    "maze_ctor": {
+      "__name__": "gen_dfs_percolation",
+      "__module__": "maze_dataset.generation.generators",
+      "__doc__": [
+        "dfs and then percolation (adds cycles)"
+      ],
+      "source_code": [
+        "\t@staticmethod",
+        "\tdef gen_dfs_percolation(",
+        "\t\tgrid_shape: Coord | CoordTup,",
+        "\t\tp: float = 0.4,",
+        "\t\tlattice_dim: int = 2,",
+        "\t\taccessible_cells: int | None = None,",
+        "\t\tmax_tree_depth: int | None = None,",
+        "\t\tstart_coord: Coord | None = None,",
+        "\t) -> LatticeMaze:",
+        "\t\t\"\"\"dfs and then percolation (adds cycles)\"\"\"",
+        "\t\tgrid_shape_: Coord = np.array(grid_shape)",
+        "\t\tstart_coord = _random_start_coord(grid_shape_, start_coord)",
+        "",
+        "\t\t# generate initial maze via dfs",
+        "\t\tmaze: LatticeMaze = LatticeMazeGenerators.gen_dfs(",
+        "\t\t\tgrid_shape=grid_shape_,",
+        "\t\t\tlattice_dim=lattice_dim,",
+        "\t\t\taccessible_cells=accessible_cells,",
+        "\t\t\tmax_tree_depth=max_tree_depth,",
+        "\t\t\tstart_coord=start_coord,",
+        "\t\t)",
+        "",
+        "\t\t# percolate",
+        "\t\tconnection_list_perc: np.ndarray = (",
+        "\t\t\tnp.random.rand(*maze.connection_list.shape) < p",
+        "\t\t)",
+        "\t\tconnection_list_perc = _fill_edges_with_walls(connection_list_perc)",
+        "",
+        "\t\tmaze.__dict__[\"connection_list\"] = np.logical_or(",
+        "\t\t\tmaze.connection_list,",
+        "\t\t\tconnection_list_perc,",
+        "\t\t)",
+        "",
+        "\t\t# generation_meta is sometimes None, but not here since we just made it a dict above",
+        "\t\tmaze.generation_meta[\"func_name\"] = \"gen_dfs_percolation\"  # type: ignore[index]",
+        "\t\tmaze.generation_meta[\"percolation_p\"] = p  # type: ignore[index]",
+        "\t\tmaze.generation_meta[\"visited_cells\"] = maze.gen_connected_component_from(  # type: ignore[index]",
+        "\t\t\tstart_coord,",
+        "\t\t)",
+        "",
+        "\t\treturn maze"
+      ]
+    },
+    "maze_ctor_kwargs": {
+      "p": 0.5
+    },
+    "endpoint_kwargs": {
+      "except_on_no_valid_endpoint": false
+    },
+    "_fname_loaded": null,
+    "fname": "p0.5-g12-n10-a_dfs_percolation-h1870",
+    "versions": {
+      "config": "1.0",
+      "maze_dataset": "1.3.2"
+    }
+  },
+  "fname": "p0.5-g12-n10-a_dfs_percolation-h1870"
+}

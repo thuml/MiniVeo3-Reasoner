@@ -19,10 +19,10 @@
 
 | Problem Setup | Examples |
 | ------------- | -------- |
-| Maze 3x3      |          |
-| Maze 4x4      |          |
-| Maze 5x5      |          |
-| Maze 6x6      |          |
+| Maze 3x3      | <video width="208" height="120" controls><source src="./example_videos/maze3_1004_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze3_1005_epoch-2_inference.mp4" type="video/mp4"></video> |
+| Maze 4x4      | <video width="208" height="120" controls><source src="./example_videos/maze4_1007_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze4_1008_epoch-2_inference.mp4" type="video/mp4"></video> |
+| Maze 5x5      | <video width="208" height="120" controls><source src="./example_videos/maze5_1006_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze5_1008_epoch-2_inference.mp4" type="video/mp4"></video> |
+| Maze 6x6      | <video width="208" height="120" controls><source src="./example_videos/maze6_1001_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze6_1012_epoch-2_inference.mp4" type="video/mp4"></video> |
 
 ### OOD Generalization
 
@@ -30,14 +30,14 @@ OOD Solution Lengths:
 
 | Problem Setup | Examples |
 | ------------- | -------- |
-| Maze 6x6      |          |
+| Maze 6x6      | <video width="208" height="120" controls><source src="./example_videos/maze6ood_0004_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze6ood_0010_epoch-2_inference.mp4" type="video/mp4"></video> |
 
 OOD Maze Sizes:
 
 | Problem Setup | Examples |
 | ------------- | -------- |
-| Maze 7x7      |          |
-| Maze 8x8      |          |
+| Maze 7x7      | <video width="208" height="120" controls><source src="./example_videos/maze7_0011_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze7_0012_epoch-2_inference.mp4" type="video/mp4"></video> |
+| Maze 8x8      | <video width="208" height="120" controls><source src="./example_videos/maze8_0024_epoch-2_inference.mp4" type="video/mp4"></video> <video width="208" height="120" controls><source src="./example_videos/maze8_0029_epoch-2_inference.mp4" type="video/mp4"></video> |
 
 ## 📊 Performance
 
@@ -47,7 +47,7 @@ OOD Maze Sizes:
 | 4x4                       | 100                       |
 | 5x5                       | 100                       |
 | 6x6                       | 98.4                      |
-| 6x6 (OOD solution length) | 58.3                      |
+| 6x6 (OOD solution length) | 53.6                      |
 | 7x7 (OOD size)            | 86.8                      |
 | 8x8 (OOD size)            | 59.6                      |
 
@@ -77,23 +77,49 @@ We include performance reported from [Visual Planning: Let's Think Only with Ima
 
 ### Data Preparation
 
-```bash
+Our data generator generates a series of mazes of certain size, path length and amount, outputting a .mp4 file and a .png file (the first frame of .mp4 file).
 
+We use adapted maze-dataset to generate mazes. You can install it as follows:
+
+```bash
+cd maze-dataset-1.4.0
+pip install -e .
+cd ..
 ```
+
+Thereafter, use `generate/maze_generator.py` to generate mazes with certain conditions. You can check the arguments in this Python file.
+
+If you want to generate the same distribution dataset as ours, simply run `./generate_our_dataset.sh` and the output will be in `./generate/default_dataset`.
 
 ### Inference
 
-```bash
+Our inference is based on [Wan](https://github.com/Wan-Video/Wan2.2) model. By the time of writing this MD, the provided `inference5b.py` works for our inferencing. We will soon provide a generalized version.
 
-```
+You can check `./inference/inference5b.py`.
 
 ### Success Evaluation 
 
+We use serveral metrics to evaluate the result.
 
+Our evaluator compares the inferenced version and the answer version of one single output, then give the max distance of these two trajectories.
+
+The results are divided into several categories based on the distances, and then determine whether it's correct, or it's imperfect.
+
+We provide max-distance and PR (see [Visual Planning](https://github.com/yix8/VisualPlanning)) metrics output. You can add your own metrics at will.
+
+If you follow the same dataset setting as ours, we provide you a shell script to easily evaluate.
+
+```bash
+./evaluate_script.sh
+```
 
 ### Training Models
 
+We train [Wan](https://github.com/Wan-Video/Wan2.2) model, which is well-instructed. You can easily fine-tune your own models.
 
+For your convenience if you follow ours, we provide you a metadata generator, `./train/metadata_gen.py`, which generates the metadata for our training. You can easily read it and modify it. 
+
+Notice that the prompt in `metadata_gen.py` is actually the prompt we use in our training.
 
 ## 🤝 Contributors
 

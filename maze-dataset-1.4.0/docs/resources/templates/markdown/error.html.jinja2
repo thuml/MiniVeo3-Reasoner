@@ -1,0 +1,9 @@
+{# this template is used by pdoc's integrated web server to display runtime errors. #}
+{% extends "frame.html.jinja2" %}
+{% block title %}{{ error }}{% endblock %}
+{% block body %}
+# {{ error }}
+```
+{{ details }}
+```
+{% endblock %}

@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc 15.0.4"/>
+    <title>maze_dataset.tokenization.modular.hashing API documentation</title>
+    <link rel="icon" href="../../../resources/favicon.png"/>
+<link rel="stylesheet" href="../../../resources/css/bootstrap-reboot.min.css"><link rel="stylesheet" href="../../../resources/css/syntax-highlighting.css"><link rel="stylesheet" href="../../../resources/css/theme.css"><link rel="stylesheet" href="../../../resources/css/layout.css"><link rel="stylesheet" href="../../../resources/css/content.css"><link rel="stylesheet" href="../../../resources/css/custom.css"><script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+    /* Re-invoke MathJax when DOM content changes, for example during search. */
+    document.addEventListener("DOMContentLoaded", () => {
+        new MutationObserver(() => MathJax.typeset()).observe(
+            document.querySelector("main.pdoc").parentNode,
+            {childList: true}
+        );
+    })
+</script>
+<style>
+    mjx-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+</style><style>
+    .pdoc .mermaid-pre {
+        border: none;
+        background: none;
+    }
+</style>
+<script type="module" defer>
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+    /* Re-invoke Mermaid when DOM content changes, for example during search. */
+    document.addEventListener("DOMContentLoaded", () => {
+        new MutationObserver(() => mermaid.run()).observe(
+            document.querySelector("main.pdoc").parentNode,
+            {childList: true}
+        );
+    })
+</script></head>
+<body>
+<div class="package-version">
+    docs for <a href="https://github.com/understanding-search/maze-dataset">maze-dataset</a> v1.4.0<br>
+</div>
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button">
+            <img src="../../../resources/svg/navtoggle.svg" alt="Toggle navigation"> 
+        </label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div>            <a class="pdoc-button module-list-button" href="../modular.html">
+                <img src="../../../resources/svg/box-arrow-in-left.svg" alt="Back to parent module"/>
+                &nbsp;maze_dataset.tokenization.modular</a>
+
+
+            <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
+                   pattern=".+" required>
+
+
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="variable" href="#AllTokenizersHashBitLength">AllTokenizersHashBitLength</a>
+            </li>
+            <li>
+                    <a class="variable" href="#AllTokenizersHashDtype">AllTokenizersHashDtype</a>
+            </li>
+            <li>
+                    <a class="variable" href="#AllTokenizersHashesArray">AllTokenizersHashesArray</a>
+            </li>
+            <li>
+                    <a class="function" href="#set_tokenizer_hashes_path">set_tokenizer_hashes_path</a>
+            </li>
+            <li>
+                    <a class="function" href="#get_all_tokenizer_hashes">get_all_tokenizer_hashes</a>
+            </li>
+    </ul>
+
+
+    <hr/>
+    
+    <div>
+        <a href="../../../coverage/html/index.html" class="pdoc-button" title="View test coverage report">
+            Coverage
+        </a>
+        <a href="../../../other/todo-inline.html" class="pdoc-button" title="Table of TODOs scraped from source code, with links to create issues from them">
+            TODOs
+        </a>
+        <a href="../../../other/lmcat.txt" class="pdoc-button" title="a view of the repo contents made for LLMs, using https://miv.name/lmcat">
+            lmcat
+        </a>
+    </div>
+
+
+        <a class="attribution" title="pdoc: Python API documentation generator" href="https://pdoc.dev" target="_blank">
+            built with <span class="visually-hidden">pdoc</span>
+            <img src="../../../resources/svg/pdoc-logo.svg" alt="pdoc logo"/>
+        </a>
+</div>
+    </nav>
+    <main class="pdoc">
+            <section class="module-info">
+                        <a class="pdoc-button git-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/hashing.py">View Source on GitHub</a>
+                    <h1 class="modulename">
+<a href="./../../../maze_dataset.html">maze_dataset</a><wbr>.<a href="./../../tokenization.html">tokenization</a><wbr>.<a href="./../modular.html">modular</a><wbr>.hashing    </h1>
+
+                        <div class="docstring"><p>legacy system for checking a <code>ModularMazeTokenizer</code> is valid -- compare its hash to a table of known hashes</p>
+
+<p>this has been superseded by the fst system</p>
+</div>
+
+                        <input id="mod-hashing-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+
+                        <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="mod-hashing-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/hashing.py#L0-L94" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+                <br/>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;legacy system for checking a `ModularMazeTokenizer` is valid -- compare its hash to a table of known hashes</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">this has been superseded by the fst system</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">jaxtyping</span><span class="w"> </span><span class="kn">import</span> <span class="n">UInt32</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="c1"># NOTE: these all need to match!</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="n">AllTokenizersHashBitLength</span> <span class="o">=</span> <span class="mi">32</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="s2">&quot;bit length of the hashes of all tokenizers, must match `AllTokenizersHashDtype` and `AllTokenizersHashesArray`&quot;</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="n">AllTokenizersHashDtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint32</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="s2">&quot;numpy data type of the hashes of all tokenizers, must match `AllTokenizersHashBitLength` and `AllTokenizersHashesArray`&quot;</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="n">AllTokenizersHashesArray</span> <span class="o">=</span> <span class="n">UInt32</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot; n_tokens&quot;</span><span class="p">]</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="s2">&quot;jaxtyping type of the hashes of all tokenizers, must match `AllTokenizersHashBitLength` and `AllTokenizersHashDtype`&quot;</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_hash_tokenizer_name</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>	<span class="n">h64</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>		<span class="n">hashlib</span><span class="o">.</span><span class="n">shake_256</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">digest</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>		<span class="n">byteorder</span><span class="o">=</span><span class="s2">&quot;big&quot;</span><span class="p">,</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>	<span class="p">)</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>	<span class="k">return</span> <span class="p">(</span><span class="n">h64</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">h64</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="n">_ALL_TOKENIZER_HASHES</span><span class="p">:</span> <span class="n">AllTokenizersHashesArray</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="s2">&quot;private array of all tokenizer hashes&quot;</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="n">_TOKENIZER_HASHES_PATH</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;MazeTokenizerModular_hashes.npz&quot;</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="s2">&quot;path to where we expect the hashes file -- in the same dir as this file, by default. change with `set_tokenizer_hashes_path`&quot;</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="k">def</span><span class="w"> </span><span class="nf">set_tokenizer_hashes_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;set path to tokenizer hashes, and reload the hashes if needed</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">	the hashes are expected to be stored in and read from `_TOKENIZER_HASHES_PATH`,</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">	which by default is `Path(__file__).parent / &quot;MazeTokenizerModular_hashes.npz&quot;` or in this file&#39;s directory.</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">	However, this might not always work, so we provide a way to change this.</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>	<span class="k">global</span> <span class="n">_TOKENIZER_HASHES_PATH</span><span class="p">,</span> <span class="n">_ALL_TOKENIZER_HASHES</span>  <span class="c1"># noqa: PLW0603</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>	<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>	<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>		<span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;MazeTokenizerModular_hashes.npz&quot;</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>	<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>		<span class="n">err_msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;could not find maze tokenizer hashes file at: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>		<span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>	<span class="k">if</span> <span class="n">_TOKENIZER_HASHES_PATH</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">!=</span> <span class="n">path</span><span class="o">.</span><span class="n">absolute</span><span class="p">():</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>		<span class="c1"># reload if they aren&#39;t equal</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>		<span class="n">_TOKENIZER_HASHES_PATH</span> <span class="o">=</span> <span class="n">path</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>		<span class="n">_ALL_TOKENIZER_HASHES</span> <span class="o">=</span> <span class="n">_load_tokenizer_hashes</span><span class="p">()</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>	<span class="k">else</span><span class="p">:</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>		<span class="c1"># always set to new path</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>		<span class="n">_TOKENIZER_HASHES_PATH</span> <span class="o">=</span> <span class="n">path</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_load_tokenizer_hashes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AllTokenizersHashesArray</span><span class="p">:</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Loads the sorted list of `all_tokenizers.get_all_tokenizers()` hashes from disk.&quot;&quot;&quot;</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>	<span class="k">global</span> <span class="n">_TOKENIZER_HASHES_PATH</span>  <span class="c1"># noqa: PLW0602</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>	<span class="k">try</span><span class="p">:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>		<span class="n">path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">_TOKENIZER_HASHES_PATH</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="s2">&quot;hashes&quot;</span><span class="p">]</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>	<span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>		<span class="n">err_msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>			<span class="s2">&quot;Tokenizers hashes cannot be loaded. To fix this, run&quot;</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>			<span class="s2">&quot;</span><span class="se">\n</span><span class="s2">`python -m maze-dataset.tokenization.save_hashes` which will save the hashes to&quot;</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>			<span class="s2">&quot;</span><span class="se">\n</span><span class="s2">`data/MazeTokenizerModular_hashes.npz`&quot;</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>			<span class="s2">&quot;</span><span class="se">\n</span><span class="s2">relative to the current working directory -- this is where the code looks for them.&quot;</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>		<span class="p">)</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>		<span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_tokenizer_hashes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AllTokenizersHashesArray</span><span class="p">:</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;returns all the tokenizer hashes in an `AllTokenizersHashesDtype` array, setting global variable if needed&quot;&quot;&quot;</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>	<span class="c1"># naughty use of globals</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>	<span class="k">global</span> <span class="n">_ALL_TOKENIZER_HASHES</span>  <span class="c1"># noqa: PLW0603</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a>	<span class="k">try</span><span class="p">:</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>		<span class="n">got_tokenizers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_ALL_TOKENIZER_HASHES</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>		<span class="k">if</span> <span class="n">got_tokenizers</span><span class="p">:</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos">89</span></a>			<span class="k">return</span> <span class="n">_ALL_TOKENIZER_HASHES</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos">90</span></a>		<span class="k">else</span><span class="p">:</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos">91</span></a>			<span class="n">_ALL_TOKENIZER_HASHES</span> <span class="o">=</span> <span class="n">_load_tokenizer_hashes</span><span class="p">()</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos">92</span></a>	<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos">93</span></a>		<span class="n">_ALL_TOKENIZER_HASHES</span> <span class="o">=</span> <span class="n">_load_tokenizer_hashes</span><span class="p">()</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos">94</span></a>
+</span><span id="L-95"><a href="#L-95"><span class="linenos">95</span></a>	<span class="k">return</span> <span class="n">_ALL_TOKENIZER_HASHES</span>
+</span></pre></div>
+
+
+                <br/>
+            </section>
+                <section id="AllTokenizersHashBitLength">
+                    <div class="attr variable">
+            <span class="name">AllTokenizersHashBitLength</span>        =
+<span class="default_value">32</span>
+
+        
+    </div>
+    <a class="headerlink" href="#AllTokenizersHashBitLength"></a>
+    
+            <div class="docstring"><p>bit length of the hashes of all tokenizers, must match <code><a href="#AllTokenizersHashDtype">AllTokenizersHashDtype</a></code> and <code><a href="#AllTokenizersHashesArray">AllTokenizersHashesArray</a></code></p>
+</div>
+
+
+                </section>
+                <section id="AllTokenizersHashDtype">
+                    <div class="attr variable">
+            <span class="name">AllTokenizersHashDtype</span>        =
+<span class="default_value">&lt;class &#39;numpy.uint32&#39;&gt;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#AllTokenizersHashDtype"></a>
+    
+            <div class="docstring"><p>numpy data type of the hashes of all tokenizers, must match <code><a href="#AllTokenizersHashBitLength">AllTokenizersHashBitLength</a></code> and <code><a href="#AllTokenizersHashesArray">AllTokenizersHashesArray</a></code></p>
+</div>
+
+
+                </section>
+                <section id="AllTokenizersHashesArray">
+                    <div class="attr variable">
+            <span class="name">AllTokenizersHashesArray</span>        =
+<span class="default_value">&lt;class &#39;jaxtyping.UInt32[ndarray, &#39;n_tokens&#39;]&#39;&gt;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#AllTokenizersHashesArray"></a>
+    
+            <div class="docstring"><p>jaxtyping type of the hashes of all tokenizers, must match <code><a href="#AllTokenizersHashBitLength">AllTokenizersHashBitLength</a></code> and <code><a href="#AllTokenizersHashDtype">AllTokenizersHashDtype</a></code></p>
+</div>
+
+
+                </section>
+                <section id="set_tokenizer_hashes_path">
+                            <input id="set_tokenizer_hashes_path-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">set_tokenizer_hashes_path</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="set_tokenizer_hashes_path-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/hashing.py#L39-L63" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#set_tokenizer_hashes_path"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="set_tokenizer_hashes_path-40"><a href="#set_tokenizer_hashes_path-40"><span class="linenos">40</span></a><span class="k">def</span><span class="w"> </span><span class="nf">set_tokenizer_hashes_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="set_tokenizer_hashes_path-41"><a href="#set_tokenizer_hashes_path-41"><span class="linenos">41</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;set path to tokenizer hashes, and reload the hashes if needed</span>
+</span><span id="set_tokenizer_hashes_path-42"><a href="#set_tokenizer_hashes_path-42"><span class="linenos">42</span></a>
+</span><span id="set_tokenizer_hashes_path-43"><a href="#set_tokenizer_hashes_path-43"><span class="linenos">43</span></a><span class="sd">	the hashes are expected to be stored in and read from `_TOKENIZER_HASHES_PATH`,</span>
+</span><span id="set_tokenizer_hashes_path-44"><a href="#set_tokenizer_hashes_path-44"><span class="linenos">44</span></a><span class="sd">	which by default is `Path(__file__).parent / &quot;MazeTokenizerModular_hashes.npz&quot;` or in this file&#39;s directory.</span>
+</span><span id="set_tokenizer_hashes_path-45"><a href="#set_tokenizer_hashes_path-45"><span class="linenos">45</span></a>
+</span><span id="set_tokenizer_hashes_path-46"><a href="#set_tokenizer_hashes_path-46"><span class="linenos">46</span></a><span class="sd">	However, this might not always work, so we provide a way to change this.</span>
+</span><span id="set_tokenizer_hashes_path-47"><a href="#set_tokenizer_hashes_path-47"><span class="linenos">47</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="set_tokenizer_hashes_path-48"><a href="#set_tokenizer_hashes_path-48"><span class="linenos">48</span></a>	<span class="k">global</span> <span class="n">_TOKENIZER_HASHES_PATH</span><span class="p">,</span> <span class="n">_ALL_TOKENIZER_HASHES</span>  <span class="c1"># noqa: PLW0603</span>
+</span><span id="set_tokenizer_hashes_path-49"><a href="#set_tokenizer_hashes_path-49"><span class="linenos">49</span></a>
+</span><span id="set_tokenizer_hashes_path-50"><a href="#set_tokenizer_hashes_path-50"><span class="linenos">50</span></a>	<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span id="set_tokenizer_hashes_path-51"><a href="#set_tokenizer_hashes_path-51"><span class="linenos">51</span></a>	<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+</span><span id="set_tokenizer_hashes_path-52"><a href="#set_tokenizer_hashes_path-52"><span class="linenos">52</span></a>		<span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;MazeTokenizerModular_hashes.npz&quot;</span>
+</span><span id="set_tokenizer_hashes_path-53"><a href="#set_tokenizer_hashes_path-53"><span class="linenos">53</span></a>
+</span><span id="set_tokenizer_hashes_path-54"><a href="#set_tokenizer_hashes_path-54"><span class="linenos">54</span></a>	<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+</span><span id="set_tokenizer_hashes_path-55"><a href="#set_tokenizer_hashes_path-55"><span class="linenos">55</span></a>		<span class="n">err_msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;could not find maze tokenizer hashes file at: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="set_tokenizer_hashes_path-56"><a href="#set_tokenizer_hashes_path-56"><span class="linenos">56</span></a>		<span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+</span><span id="set_tokenizer_hashes_path-57"><a href="#set_tokenizer_hashes_path-57"><span class="linenos">57</span></a>
+</span><span id="set_tokenizer_hashes_path-58"><a href="#set_tokenizer_hashes_path-58"><span class="linenos">58</span></a>	<span class="k">if</span> <span class="n">_TOKENIZER_HASHES_PATH</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">!=</span> <span class="n">path</span><span class="o">.</span><span class="n">absolute</span><span class="p">():</span>
+</span><span id="set_tokenizer_hashes_path-59"><a href="#set_tokenizer_hashes_path-59"><span class="linenos">59</span></a>		<span class="c1"># reload if they aren&#39;t equal</span>
+</span><span id="set_tokenizer_hashes_path-60"><a href="#set_tokenizer_hashes_path-60"><span class="linenos">60</span></a>		<span class="n">_TOKENIZER_HASHES_PATH</span> <span class="o">=</span> <span class="n">path</span>
+</span><span id="set_tokenizer_hashes_path-61"><a href="#set_tokenizer_hashes_path-61"><span class="linenos">61</span></a>		<span class="n">_ALL_TOKENIZER_HASHES</span> <span class="o">=</span> <span class="n">_load_tokenizer_hashes</span><span class="p">()</span>
+</span><span id="set_tokenizer_hashes_path-62"><a href="#set_tokenizer_hashes_path-62"><span class="linenos">62</span></a>	<span class="k">else</span><span class="p">:</span>
+</span><span id="set_tokenizer_hashes_path-63"><a href="#set_tokenizer_hashes_path-63"><span class="linenos">63</span></a>		<span class="c1"># always set to new path</span>
+</span><span id="set_tokenizer_hashes_path-64"><a href="#set_tokenizer_hashes_path-64"><span class="linenos">64</span></a>		<span class="n">_TOKENIZER_HASHES_PATH</span> <span class="o">=</span> <span class="n">path</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>set path to tokenizer hashes, and reload the hashes if needed</p>
+
+<p>the hashes are expected to be stored in and read from <code>_TOKENIZER_HASHES_PATH</code>,
+which by default is <code>Path(__file__).parent / "MazeTokenizerModular_hashes.npz"</code> or in this file's directory.</p>
+
+<p>However, this might not always work, so we provide a way to change this.</p>
+</div>
+
+
+                </section>
+                <section id="get_all_tokenizer_hashes">
+                            <input id="get_all_tokenizer_hashes-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">get_all_tokenizer_hashes</span><span class="signature pdoc-code condensed">(<span class="return-annotation">) -> <span class="n">jaxtyping</span><span class="o">.</span><span class="n">UInt32</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="s1">&#39;n_tokens&#39;</span><span class="p">]</span>:</span></span>
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="get_all_tokenizer_hashes-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/tokenization/modular/hashing.py#L82-L95" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#get_all_tokenizer_hashes"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="get_all_tokenizer_hashes-83"><a href="#get_all_tokenizer_hashes-83"><span class="linenos">83</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_tokenizer_hashes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AllTokenizersHashesArray</span><span class="p">:</span>
+</span><span id="get_all_tokenizer_hashes-84"><a href="#get_all_tokenizer_hashes-84"><span class="linenos">84</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;returns all the tokenizer hashes in an `AllTokenizersHashesDtype` array, setting global variable if needed&quot;&quot;&quot;</span>
+</span><span id="get_all_tokenizer_hashes-85"><a href="#get_all_tokenizer_hashes-85"><span class="linenos">85</span></a>	<span class="c1"># naughty use of globals</span>
+</span><span id="get_all_tokenizer_hashes-86"><a href="#get_all_tokenizer_hashes-86"><span class="linenos">86</span></a>	<span class="k">global</span> <span class="n">_ALL_TOKENIZER_HASHES</span>  <span class="c1"># noqa: PLW0603</span>
+</span><span id="get_all_tokenizer_hashes-87"><a href="#get_all_tokenizer_hashes-87"><span class="linenos">87</span></a>	<span class="k">try</span><span class="p">:</span>
+</span><span id="get_all_tokenizer_hashes-88"><a href="#get_all_tokenizer_hashes-88"><span class="linenos">88</span></a>		<span class="n">got_tokenizers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_ALL_TOKENIZER_HASHES</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</span><span id="get_all_tokenizer_hashes-89"><a href="#get_all_tokenizer_hashes-89"><span class="linenos">89</span></a>		<span class="k">if</span> <span class="n">got_tokenizers</span><span class="p">:</span>
+</span><span id="get_all_tokenizer_hashes-90"><a href="#get_all_tokenizer_hashes-90"><span class="linenos">90</span></a>			<span class="k">return</span> <span class="n">_ALL_TOKENIZER_HASHES</span>
+</span><span id="get_all_tokenizer_hashes-91"><a href="#get_all_tokenizer_hashes-91"><span class="linenos">91</span></a>		<span class="k">else</span><span class="p">:</span>
+</span><span id="get_all_tokenizer_hashes-92"><a href="#get_all_tokenizer_hashes-92"><span class="linenos">92</span></a>			<span class="n">_ALL_TOKENIZER_HASHES</span> <span class="o">=</span> <span class="n">_load_tokenizer_hashes</span><span class="p">()</span>
+</span><span id="get_all_tokenizer_hashes-93"><a href="#get_all_tokenizer_hashes-93"><span class="linenos">93</span></a>	<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+</span><span id="get_all_tokenizer_hashes-94"><a href="#get_all_tokenizer_hashes-94"><span class="linenos">94</span></a>		<span class="n">_ALL_TOKENIZER_HASHES</span> <span class="o">=</span> <span class="n">_load_tokenizer_hashes</span><span class="p">()</span>
+</span><span id="get_all_tokenizer_hashes-95"><a href="#get_all_tokenizer_hashes-95"><span class="linenos">95</span></a>
+</span><span id="get_all_tokenizer_hashes-96"><a href="#get_all_tokenizer_hashes-96"><span class="linenos">96</span></a>	<span class="k">return</span> <span class="n">_ALL_TOKENIZER_HASHES</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>returns all the tokenizer hashes in an <code>AllTokenizersHashesDtype</code> array, setting global variable if needed</p>
+</div>
+
+
+                </section>
+    </main>
+<script>
+    function escapeHTML(html) {
+        return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
+    }
+
+    const originalContent = document.querySelector("main.pdoc");
+    let currentContent = originalContent;
+
+    function setContent(innerHTML) {
+        let elem;
+        if (innerHTML) {
+            elem = document.createElement("main");
+            elem.classList.add("pdoc");
+            elem.innerHTML = innerHTML;
+        } else {
+            elem = originalContent;
+        }
+        if (currentContent !== elem) {
+            currentContent.replaceWith(elem);
+            currentContent = elem;
+        }
+    }
+
+    function getSearchTerm() {
+        return (new URL(window.location)).searchParams.get("search");
+    }
+
+    const searchBox = document.querySelector(".pdoc input[type=search]");
+    searchBox.addEventListener("input", function () {
+        let url = new URL(window.location);
+        if (searchBox.value.trim()) {
+            url.hash = "";
+            url.searchParams.set("search", searchBox.value);
+        } else {
+            url.searchParams.delete("search");
+        }
+        history.replaceState("", "", url.toString());
+        onInput();
+    });
+    window.addEventListener("popstate", onInput);
+
+
+    let search, searchErr;
+
+    async function initialize() {
+        try {
+            search = await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.type = "text/javascript";
+                script.async = true;
+                script.onload = () => resolve(window.pdocSearch);
+                script.onerror = (e) => reject(e);
+                script.src = "../../../search.js";
+                document.getElementsByTagName("head")[0].appendChild(script);
+            });
+        } catch (e) {
+            console.error("Cannot fetch pdoc search index");
+            searchErr = "Cannot fetch search index.";
+        }
+        onInput();
+
+        document.querySelector("nav.pdoc").addEventListener("click", e => {
+            if (e.target.hash) {
+                searchBox.value = "";
+                searchBox.dispatchEvent(new Event("input"));
+            }
+        });
+    }
+
+    function onInput() {
+        setContent((() => {
+            const term = getSearchTerm();
+            if (!term) {
+                return null
+            }
+            if (searchErr) {
+                return `<h3>Error: ${searchErr}</h3>`
+            }
+            if (!search) {
+                return "<h3>Searching...</h3>"
+            }
+
+            window.scrollTo({top: 0, left: 0, behavior: 'auto'});
+
+            const results = search(term);
+
+            let html;
+            if (results.length === 0) {
+                html = `No search results for '${escapeHTML(term)}'.`
+            } else {
+                html = `<h4>${results.length} search result${results.length > 1 ? "s" : ""} for '${escapeHTML(term)}'.</h4>`;
+            }
+            for (let result of results.slice(0, 10)) {
+                let doc = result.doc;
+                let url = `../../../${doc.modulename.replaceAll(".", "/")}.html`;
+                if (doc.qualname) {
+                    url += `#${doc.qualname}`;
+                }
+
+                let heading;
+                switch (result.doc.kind) {
+                    case "function":
+                        if (doc.fullname.endsWith(".__init__")) {
+                            heading = `<span class="name">${doc.fullname.replace(/\.__init__$/, "")}</span>${doc.signature}`;
+                        } else {
+                            heading = `<span class="def">${doc.funcdef}</span> <span class="name">${doc.fullname}</span>${doc.signature}`;
+                        }
+                        break;
+                    case "class":
+                        heading = `<span class="def">class</span> <span class="name">${doc.fullname}</span>`;
+                        if (doc.bases)
+                            heading += `<wbr>(<span class="base">${doc.bases}</span>)`;
+                        heading += `:`;
+                        break;
+                    case "variable":
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        if (doc.annotation)
+                            heading += `<span class="annotation">${doc.annotation}</span>`;
+                        if (doc.default_value)
+                            heading += `<span class="default_value"> = ${doc.default_value}</span>`;
+                        break;
+                    default:
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        break;
+                }
+                html += `
+                        <section class="search-result">
+                        <a href="${url}" class="attr ${doc.kind}">${heading}</a>
+                        <div class="docstring">${doc.doc}</div>
+                        </section>
+                    `;
+
+            }
+            return html;
+        })());
+    }
+
+    if (getSearchTerm()) {
+        initialize();
+        searchBox.value = getSearchTerm();
+        onInput();
+    } else {
+        searchBox.addEventListener("focus", initialize, {once: true});
+    }
+
+    searchBox.addEventListener("keydown", e => {
+        if (["ArrowDown", "ArrowUp", "Enter"].includes(e.key)) {
+            let focused = currentContent.querySelector(".search-result.focused");
+            if (!focused) {
+                currentContent.querySelector(".search-result").classList.add("focused");
+            } else if (
+                e.key === "ArrowDown"
+                && focused.nextElementSibling
+                && focused.nextElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.nextElementSibling.classList.add("focused");
+                focused.nextElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "ArrowUp"
+                && focused.previousElementSibling
+                && focused.previousElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.previousElementSibling.classList.add("focused");
+                focused.previousElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "Enter"
+            ) {
+                focused.querySelector("a").click();
+            }
+        }
+    });
+</script></body>
+</html>

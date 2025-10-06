@@ -1,0 +1,26 @@
+\RequirePackage{xstring}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\tikzset{ % Define a TikZ style for an external hyperlink node.
+  hyperlink node url/.style={
+	alias=sourcenode,
+	append after command={
+	  let \p1 = (sourcenode.north west),
+		  \p2 = (sourcenode.south east),
+		  \n1 = {\x2-\x1},
+		  \n2 = {\y1-\y2} in
+	  node[inner sep=0pt, outer sep=0pt, anchor=north west, at=(\p1)]
+		  {\href{#1}{\XeTeXLinkBox{\phantom{\rule{\n1}{\n2}}}}}
+	}
+  }
+}
+\providecommand{\XeTeXLinkBox}[1]{#1}
+\newcommand{\docslink}[2]{\href{https://understanding-search.github.io/maze-dataset/#1}{#2}}
+% \newcommand{\secref}[1]{\hyperref[#1]{section: \textit{\nameref{#1}}}}
+% \makeatletter
+% \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+% \def\maxheight{\ifdim\Gin@nat@height>0.8\textheight 0.8\textheight\else\Gin@nat@height\fi}
+% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% \makeatother

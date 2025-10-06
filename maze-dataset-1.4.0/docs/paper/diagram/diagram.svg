@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1100" height="640" viewBox="0 0 1100 640" style="background: white" version="1.1" id="svg81"
+   xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+   <defs id="defs5">
+      <!-- Arrow marker definition -->
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+         <path d="M 0 0 L 0 6 L 6 3 z" fill="#333333" id="path2" />
+      </marker>
+      <marker id="arrow-3" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+         <path d="M 0 0 V 6 L 6 3 Z" fill="#333333" id="path2-6" />
+      </marker>
+      <!-- Bidirectional arrow markers -->
+      <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+         <path d="M 6 0 L 6 6 L 0 3 z" fill="#333333" id="path6" />
+      </marker>
+      <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+         <path d="M 0 0 L 0 6 L 6 3 z" fill="#333333" id="path9" />
+      </marker>
+   </defs>
+   <!-- CSS Styles for syntax highlighting and boxes -->
+   <style type="text/css" id="style13">
+      /* Syntax highlighting */
+      .variable {
+         fill: #069f6f;
+      }
+
+      .class {
+         fill: #ff2fff;
+      }
+
+      .function {
+         fill: #f08604;
+      }
+
+      .literal {
+         fill: #0000FF;
+      }
+
+      .keyword {
+         fill: #000000;
+      }
+
+      .comment {
+         fill: #f82a2a;
+         font-style: italic;
+      }
+
+      /* Link hover effect */
+      a:hover {
+         text-decoration: underline;
+      }
+
+      /* Code block styles */
+      .code-block {
+         fill: #e6e6e6;
+         stroke: #6f6f6f;
+         stroke-width: 2;
+      }
+
+      /* Box radius */
+      .rounded-box {
+         rx: 20;
+         ry: 20;
+      }
+   </style>
+   <!-- Config box (top) -->
+      <rect x="10" y="14" width="395" height="221" class="code-block rounded-box" id="rect7" />
+      <!-- Config content (Top box) -->
+      <text x="25" y="44" font-family="monospace" font-size="24px" id="text13"><a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDatasetConfig" id="a15">
+            <tspan class="variable" id="tspan18">cfg</tspan>
+         </a> =
+         <a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDatasetConfig" id="a18">
+            <tspan class="class" id="tspan20">MazeDatasetConfig</tspan></a>(
+      </text>
+      <text x="45" y="74" font-family="monospace" font-size="24px" id="text15">
+         <tspan class="keyword" id="tspan21">name</tspan> = <tspan class="literal" id="tspan23">&quot;test&quot;</tspan>,
+      </text>
+      <text x="45" y="104" font-family="monospace" font-size="24px" id="text23">
+         <tspan class="keyword" id="tspan26">grid_n</tspan> = <tspan class="literal" id="tspan28">5</tspan>,
+      </text>
+      <text x="45" y="134" font-family="monospace" font-size="24px" id="text31">
+         <tspan class="keyword" id="tspan31">n_mazes</tspan> = <tspan class="literal" id="tspan33">1</tspan>,
+      </text>
+      <text x="45" y="164" font-family="monospace" font-size="24px" id="text39">
+         <tspan class="keyword" id="tspan36">maze_ctor</tspan> =
+         <a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMazeGenerators.gen_dfs"
+            id="a40">
+            <tspan class="function" id="tspan38">gen_dfs</tspan></a>,
+      </text>
+      <text x="45" y="194" font-family="monospace" font-size="24px" id="text-options"> ... <tspan class="comment"
+            id="tspan43"># many,
+            many options</tspan></text>
+      <text x="25" y="214" font-family="monospace" font-size="24px" id="text47">)</text>
+   <!-- Dataset box (middle) -->
+      <rect x="6" y="282" width="506" height="64" class="code-block rounded-box" id="rect9" />
+      <!-- Dataset box text (Middle box) -->
+      <text x="25" y="321" font-family="monospace" font-size="24px" id="text49"><a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDataset" id="a49">
+            <tspan class="variable" id="tspan40">ds</tspan>
+         </a> = <a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDataset" id="a52">
+            <tspan class="class" id="tspan42">MazeDataset</tspan></a>.<a xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#MazeDataset.from_config"
+            id="a55"><tspan class="function" id="tspan44">from_config</tspan></a>(<tspan class="variable" id="tspan46">cfg</tspan>)
+      </text>
+   <!-- SolvedMaze box (right) -->
+      <rect x="418.98935" y="147.98935" width="310.1731" height="59.021297" class="code-block rounded-box" id="rect11" />
+      <!-- SolvedMaze box text (Right box) -->
+      <text x="424.61621" y="185.35892" font-family="monospace" font-size="24px" id="text51">
+         <tspan class="variable" id="tspan49">m</tspan>: <a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#SolvedMaze" id="a62">
+            <tspan class="class" id="tspan51">SolvedMaze</tspan>
+         </a> = <tspan class="variable" id="tspan53">ds</tspan>[<tspan class="literal" id="tspan55">0</tspan>]
+      </text>
+   <!-- Arrows between code boxes -->
+      <path d="m 193.6957,234.4825 0.22054,48.242" fill="none" stroke="#333333" stroke-width="3" marker-end="url(#arrow)"
+         id="path53" />
+      <path d="m 513,315 c 72,2 50.29562,-16.79679 54.29562,-108.79679" fill="none" stroke="#333333" stroke-width="3"
+         marker-end="url(#arrow-3)" id="path53-7" style="marker-end:url(#arrow-3)" />
+   <!-- Right-Aligned raster formats -->
+      <!-- MazePlot - bottom right -->
+      <!-- we put this one first because it has a lot of whitespace around it, and this causes problems -->
+      <!-- <image x="900" y="440" width="200" height="200" href="./mazeplot.svg" id="image61" /> -->
+      <g transform="translate(827, 410)  scale(0.73)">
+         <defs>
+         <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+         </defs>
+         <g id="figure_1">
+         <g id="patch_1">
+            <path d="M 0 345.6 
+         L 460.8 345.6 
+         L 460.8 0 
+         L 0 0 
+         z
+         " style="fill: #ffffff"/>
+         </g>
+         <g id="axes_1">
+            <g clip-path="url(#pb18c59003c)">
+            <image xlink:href="data:image/png;base64,
+         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" id="image5e1f8f3443" transform="scale(1 -1) translate(0 -266.4)" x="103.104" y="-41.184" width="266.4" height="266.4"/>
+            </g>
+            <g id="line2d_1">
+            <path d="M 288.632789 122.055211 
+         L 288.632789 69.582423 
+         L 236.16 69.582423 
+         L 236.16 122.055211 
+         L 236.16 174.528 
+         L 183.687211 174.528 
+         L 131.214423 174.528 
+         L 131.214423 227.000789 
+         L 131.214423 279.473577 
+         L 183.687211 279.473577 
+         L 236.16 279.473577 
+         L 288.632789 279.473577 
+         L 341.105577 279.473577 
+         L 341.105577 227.000789 
+         L 341.105577 174.528 
+         L 288.632789 174.528 
+         " clip-path="url(#pb18c59003c)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #ff0000; stroke-width: 2.5"/>
+            </g>
+            <g id="line2d_2">
+            <defs>
+            <path id="md2406f807c" d="M 0 5 
+         C 1.326016 5 2.597899 4.473168 3.535534 3.535534 
+         C 4.473168 2.597899 5 1.326016 5 0 
+         C 5 -1.326016 4.473168 -2.597899 3.535534 -3.535534 
+         C 2.597899 -4.473168 1.326016 -5 0 -5 
+         C -1.326016 -5 -2.597899 -4.473168 -3.535534 -3.535534 
+         C -4.473168 -2.597899 -5 -1.326016 -5 0 
+         C -5 1.326016 -4.473168 2.597899 -3.535534 3.535534 
+         C -2.597899 4.473168 -1.326016 5 0 5 
+         z
+         " style="stroke: #ff0000"/>
+            </defs>
+            <g clip-path="url(#pb18c59003c)">
+            <use xlink:href="#md2406f807c" x="288.632789" y="122.055211" style="fill: #ff0000; stroke: #ff0000"/>
+            </g>
+            </g>
+            <g id="line2d_3">
+            <defs>
+            <path id="mb35135be29" d="M -5 5 
+         L 5 -5 
+         M -5 -5 
+         L 5 5 
+         " style="stroke: #ff0000"/>
+            </defs>
+            <g clip-path="url(#pb18c59003c)">
+            <use xlink:href="#mb35135be29" x="288.632789" y="174.528" style="fill: #ff0000; stroke: #ff0000"/>
+            </g>
+            </g>
+         </g>
+         </g>
+         <defs>
+         <clipPath id="pb18c59003c">
+            <rect x="103.104" y="41.472" width="266.112" height="266.112"/>
+         </clipPath>
+         </defs>
+      </g>
+      <!-- ASCII Maze - top right -->
+      <!-- <image x="900" y="0" width="200" height="200" href="./ascii.svg" id="image57" /> -->
+      <g id="maze-ascii" transform="translate(900,0) scale(0.9)">
+         <style>
+            text { font-family: monospace;}
+            .w { fill: black; font-size: 16px; } /* wall */
+            .p { fill: blue; font-size: 16px; }  /* path */
+            .s { fill: green; font-size: 16px; } /* start */
+            .e { fill: red; font-size: 16px; }   /* end */
+            
+            /* Add span styling for individual characters */
+            .row text { dominant-baseline: central; }
+            .row text tspan { text-anchor: middle; }
+         </style>
+         
+         <!-- Row 1 -->
+         <g class="row">
+            <text y="10"><tspan x="10" class="w">#</tspan><tspan x="30" class="w">#</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w">#</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w">#</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 2 -->
+         <g class="row">
+            <text y="30"><tspan x="10" class="w">#</tspan><tspan x="30" class="w"> </tspan><tspan x="50" class="w"> </tspan><tspan x="70" class="w"> </tspan><tspan x="90" class="w"> </tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="p">X</tspan><tspan x="150" class="p">X</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w"> </tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 3 -->
+         <g class="row">
+            <text y="50"><tspan x="10" class="w">#</tspan><tspan x="30" class="w"> </tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="p">X</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w"> </tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 4 -->
+         <g class="row">
+            <text y="70"><tspan x="10" class="w">#</tspan><tspan x="30" class="w"> </tspan><tspan x="50" class="w"> </tspan><tspan x="70" class="w"> </tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="s">S</tspan><tspan x="170" class="w"> </tspan><tspan x="190" class="w"> </tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 5 -->
+         <g class="row">
+            <text y="90"><tspan x="10" class="w">#</tspan><tspan x="30" class="w">#</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w">#</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 6 -->
+         <g class="row">
+            <text y="110"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="p">X</tspan><tspan x="70" class="p">X</tspan><tspan x="90" class="p">X</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="e">E</tspan><tspan x="170" class="p">X</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 7 -->
+         <g class="row">
+            <text y="130"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w"> </tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 8 -->
+         <g class="row">
+            <text y="150"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w"> </tspan><tspan x="90" class="w"> </tspan><tspan x="110" class="w"> </tspan><tspan x="130" class="w"> </tspan><tspan x="150" class="w"> </tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 9 -->
+         <g class="row">
+            <text y="170"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w">#</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 10 -->
+         <g class="row">
+            <text y="190"><tspan x="10" class="w">#</tspan><tspan x="30" class="p">X</tspan><tspan x="50" class="p">X</tspan><tspan x="70" class="p">X</tspan><tspan x="90" class="p">X</tspan><tspan x="110" class="p">X</tspan><tspan x="130" class="p">X</tspan><tspan x="150" class="p">X</tspan><tspan x="170" class="p">X</tspan><tspan x="190" class="p">X</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+         
+         <!-- Row 11 -->
+         <g class="row">
+            <text y="210"><tspan x="10" class="w">#</tspan><tspan x="30" class="w">#</tspan><tspan x="50" class="w">#</tspan><tspan x="70" class="w">#</tspan><tspan x="90" class="w">#</tspan><tspan x="110" class="w">#</tspan><tspan x="130" class="w">#</tspan><tspan x="150" class="w">#</tspan><tspan x="170" class="w">#</tspan><tspan x="190" class="w">#</tspan><tspan x="210" class="w">#</tspan></text>
+         </g>
+      </g>
+      <!-- Pixel Grid - middle right -->
+      <!-- <image x="900" y="220" width="200" height="200" href="./pixels.svg" id="image59" /> -->
+      <g transform="translate(900, 220)  scale(0.45)">
+         <rect x="0" y="0" width="440" height="440" fill="#222" rx="20.0" ry="20.0"/>
+         <path d="M 48.0,40 L 80,40 L 80,80 L 40,80 L 40,48.0 A 8.0 8.0 0 0 1 48.0,40 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 80,40 L 120,40 L 120,80 L 80,80 L 80,40 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 120,40 L 160,40 L 160,80 L 120,80 L 120,40 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 160,40 L 200,40 L 200,80 L 160,80 L 160,40 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 200,40 L 240,40 L 240,80 L 200,80 L 200,40 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 240,40 L 280,40 L 280,80 L 240,80 L 240,40 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 280,40 L 312.0,40 A 8.0 8.0 0 0 1 320,48.0 L 320,80 L 280,80 L 280,40 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 368.0,40 L 392.0,40 A 8.0 8.0 0 0 1 400,48.0 L 400,80 L 360,80 L 360,48.0 A 8.0 8.0 0 0 1 368.0,40 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 40,80 L 80,80 L 80,120 L 40,120 L 40,80 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 200,80 L 240,80 L 240,120 L 200,120 L 200,80 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 280,80 L 320,80 L 320,120 L 280,120 L 280,80 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 360,80 L 400,80 L 400,120 L 360,120 L 360,80 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 40,120 L 80,120 L 80,160 L 48.0,160 A 8.0 8.0 0 0 1 40,152.0 L 40,120 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 80,120 L 120,120 L 120,160 L 80,160 L 80,120 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 120,120 L 152.0,120 A 8.0 8.0 0 0 1 160,128.0 L 160,152.0 A 8.0 8.0 0 0 1 152.0,160 L 120,160 L 120,120 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 200,120 L 240,120 L 240,160 L 200,160 L 200,120 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 280,120 L 320,120 L 320,160 L 288.0,160 A 8.0 8.0 0 0 1 280,152.0 L 280,120 Z" fill="#4caf50" stroke="none"/>
+         <path d="M 320,120 L 360,120 L 360,160 L 320,160 L 320,120 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 360,120 L 400,120 L 400,152.0 A 8.0 8.0 0 0 1 392.0,160 L 360,160 L 360,120 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 200,160 L 240,160 L 240,200 L 200,200 L 200,160 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 48.0,200 L 80,200 L 80,240 L 40,240 L 40,208.0 A 8.0 8.0 0 0 1 48.0,200 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 80,200 L 120,200 L 120,240 L 80,240 L 80,200 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 120,200 L 160,200 L 160,240 L 120,240 L 120,200 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 160,200 L 200,200 L 200,240 L 160,240 L 160,200 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 200,200 L 240,200 L 240,240 L 200,240 L 200,200 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 288.0,200 L 320,200 L 320,240 L 288.0,240 A 8.0 8.0 0 0 1 280,232.0 L 280,208.0 A 8.0 8.0 0 0 1 288.0,200 Z" fill="#f44336" stroke="none"/>
+         <path d="M 320,200 L 360,200 L 360,240 L 320,240 L 320,200 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 360,200 L 392.0,200 A 8.0 8.0 0 0 1 400,208.0 L 400,240 L 360,240 L 360,200 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 40,240 L 80,240 L 80,280 L 40,280 L 40,240 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 200,240 L 240,240 L 240,280 L 200,280 L 200,240 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 360,240 L 400,240 L 400,280 L 360,280 L 360,240 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 40,280 L 80,280 L 80,320 L 40,320 L 40,280 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 128.0,280 L 160,280 L 160,320 L 128.0,320 A 8.0 8.0 0 0 1 120,312.0 L 120,288.0 A 8.0 8.0 0 0 1 128.0,280 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 160,280 L 200,280 L 200,320 L 160,320 L 160,280 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 200,280 L 240,280 L 240,320 L 200,320 L 200,280 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 240,280 L 280,280 L 280,320 L 240,320 L 240,280 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 280,280 L 312.0,280 A 8.0 8.0 0 0 1 320,288.0 L 320,312.0 A 8.0 8.0 0 0 1 312.0,320 L 280,320 L 280,280 Z" fill="#f0f0f0" stroke="none"/>
+         <path d="M 360,280 L 400,280 L 400,320 L 360,320 L 360,280 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 40,320 L 80,320 L 80,360 L 40,360 L 40,320 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 360,320 L 400,320 L 400,360 L 360,360 L 360,320 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 40,360 L 80,360 L 80,400 L 48.0,400 A 8.0 8.0 0 0 1 40,392.0 L 40,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 80,360 L 120,360 L 120,400 L 80,400 L 80,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 120,360 L 160,360 L 160,400 L 120,400 L 120,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 160,360 L 200,360 L 200,400 L 160,400 L 160,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 200,360 L 240,360 L 240,400 L 200,400 L 200,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 240,360 L 280,360 L 280,400 L 240,400 L 240,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 280,360 L 320,360 L 320,400 L 280,400 L 280,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 320,360 L 360,360 L 360,400 L 320,400 L 320,360 Z" fill="#2196f3" stroke="none"/>
+         <path d="M 360,360 L 400,360 L 400,392.0 A 8.0 8.0 0 0 1 392.0,400 L 360,400 L 360,360 Z" fill="#2196f3" stroke="none"/>
+      </g>
+   <!-- Arrows from SolvedMaze box to formats -->
+      <!-- bidirectional for as_ascii -->
+      <path d="M 729.51947,164.2179 C 756.81043,156.39983 772.3542,131.2753 901,132" fill="none" stroke="#333333"
+         stroke-width="2" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" id="path63"
+         />
+      <text x="837.41815" y="110" font-family="monospace" font-size="16px" text-anchor="middle" id="text65">
+         <tspan class="variable" id="tspan64">m</tspan>.<a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMaze.as_ascii"
+            id="a75"><tspan class="function" id="tspan66">as_ascii</tspan></a>()
+      </text>
+      <!-- Bidirectional arrow for as_pixels -->
+      <path d="m 728.03997,176.72525 c 96,-5 87.60883,120.07235 173.96003,122.27475" fill="none" stroke="#333333"
+         stroke-width="2" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" id="path67"
+         />
+      <text x="836.12598" y="320" font-family="monospace" font-size="16px" text-anchor="middle" id="text69">
+         <tspan class="variable" id="tspan70">m</tspan>.<a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMaze.as_pixels"
+            id="a81"><tspan class="function" id="tspan72">as_pixels</tspan></a>()
+      </text>
+      <!-- To MazePlot - single direction -->
+      <path d="M 698.31935,206.78258 C 777.04836,303.14005 689.68044,510.73745 901,509" fill="none" stroke="#333333"
+         stroke-width="2" marker-end="url(#arrow)" id="path71" />
+      <text x="846.75305" y="540" font-family="monospace" font-size="16px" text-anchor="middle" id="text73"><a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset/plotting.html#MazePlot" id="a86">
+            <tspan class="class" id="tspan76">MazePlot</tspan></a>(<tspan class="variable" id="tspan78">m</tspan>)</text>
+      <!-- Bidirectional arrow from SolvedMaze box to Token representation -->
+      <path d="m 649.4163,207 1.50486,202.95295" fill="none" stroke="#333333" stroke-width="2"
+         marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" id="path77" />
+      <text x="571.10529" y="386.16418" font-family="monospace" font-size="16px" text-anchor="middle" id="text79">
+         <tspan class="variable" id="tspan83">m</tspan>.<a
+            xlink:href="https://understanding-search.github.io/maze-dataset/maze_dataset.html#LatticeMaze.as_tokens"
+            id="a94"><tspan class="function" id="tspan85">as_tokens</tspan></a>(...)
+      </text>
+   <!-- Text Representation Box (Bottom) -->
+   <rect x="2" y="408" width="680" height="230" fill="white" stroke="#666666" stroke-width="2" rx="20" ry="20" />
+
+   <!-- ADJLIST section (purple) -->
+      <rect x="15" y="419" width="650" height="140" fill="rgb(176,152,232)" rx="3" ry="3" />
+      <text x="20" y="433" font-family="monospace" font-size="14px" fill="black">
+      &lt;ADJLIST_START&gt; (2,4) &lt;--&gt; (3,4) ; (1,3) &lt;--&gt; (1,4) ; (2,4) &lt;--&gt; (2,3) ;
+      </text>
+      <text x="20" y="453" font-family="monospace" font-size="14px" fill="black">
+      (1,4) &lt;--&gt; (0,4) ; (2,0) &lt;--&gt; (3,0) ; (4,4) &lt;--&gt; (4,3) ; (4,2) &lt;--&gt; (4,3) ;
+      </text>
+      <text x="20" y="473" font-family="monospace" font-size="14px" fill="black">
+      (3,1) &lt;--&gt; (3,2) ; (3,0) &lt;--&gt; (4,0) ; (4,1) &lt;--&gt; (4,2) ; (0,1) &lt;--&gt; (0,0) ;
+      </text>
+      <text x="20" y="493" font-family="monospace" font-size="14px" fill="black">
+      (0,2) &lt;--&gt; (0,3) ; (2,2) &lt;--&gt; (1,2) ; (0,2) &lt;--&gt; (0,1) ; (1,1) &lt;--&gt; (1,0) ;
+      </text>
+      <text x="20" y="513" font-family="monospace" font-size="14px" fill="black">
+      (3,3) &lt;--&gt; (3,2) ; (1,0) &lt;--&gt; (0,0) ; (0,2) &lt;--&gt; (1,2) ; (2,1) &lt;--&gt; (2,2) ;
+      </text>
+      <text x="20" y="533" font-family="monospace" font-size="14px" fill="black">
+       (4,0) &lt;--&gt; (4,1) ; (2,1) &lt;--&gt; (2,0) ; (3,2) &lt;--&gt; (2,2) ; (1,3) &lt;--&gt; (0,3) ;
+      </text>
+      <text x="20" y="553" font-family="monospace" font-size="14px" fill="black">
+      (3,4) &lt;--&gt; (4,4) ; &lt;ADJLIST_END&gt;
+      </text>
+
+   <!-- ORIGIN section (green) and TARGET section (red) on the same line -->
+      <rect x="15" y="563" width="289" height="20" fill="rgb(154,239,123)" rx="3" ry="3" />
+      <text x="20" y="578" font-family="monospace" font-size="14px" fill="black">
+      &lt;ORIGIN_START&gt; (1,3) &lt;ORIGIN_END&gt;
+      </text>
+
+      <rect x="304" y="563" width="293" height="20" fill="rgb(246,136,136)" rx="3" ry="3" />
+      <text x="309" y="578" font-family="monospace" font-size="14px" fill="black">
+      &lt;TARGET_START&gt; (2,3) &lt;TARGET_END&gt;
+      </text>
+
+   <!-- PATH section (blue) -->
+      <rect x="15" y="588" width="620" height="40" fill="rgb(111,187,254)" rx="3" ry="3" />
+      <text x="20" y="602" font-family="monospace" font-size="14px" fill="black">
+      &lt;PATH_START&gt; (1,3) (0,3) (0,2) (1,2) (2,2) (2,1) (2,0) (3,0) (4,0) (4,1)
+      </text>
+      <text x="20" y="622" font-family="monospace" font-size="14px" fill="black">
+      (4,2) (4,3) (4,4) (3,4) (2,4) (2,3) &lt;PATH_END&gt;
+      </text>
+</svg>

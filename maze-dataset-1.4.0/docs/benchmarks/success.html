@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generation Success Benchmarks</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .tab { border-bottom: 1px solid #ccc; }
+        .tab button { border: none; background: none; padding: 10px 15px; cursor: pointer; margin-right: 5px; }
+        .tab button:hover { background: #eee; }
+        .tab button.active { border-bottom: 3px solid #0066cc; font-weight: bold; }
+        .tabcontent { display: none; padding: 20px 0; }
+        img { max-width: 100%; display: block; margin: 0 auto; }
+        h3 { color: #555; margin-top: 40px; }
+        .path { color: #666; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Generation Success Benchmarks</h1>
+
+    <div class="tab" id="tabButtons">
+        <!-- Tabs will be created by JavaScript -->
+    </div>
+
+    <div id="tabContents">
+        <!-- Tab contents will be created by JavaScript -->
+    </div>
+
+    <script>
+        // Configuration
+        const svgFiles = [
+            { id: 'all', displayName: 'All Figures', fileName: null },
+            { id: 'any', displayName: 'no endpoint restrictions', fileName: 'ep_any.svg' },
+            { id: 'deadends', displayName: 'Dead Ends', fileName: 'ep_deadends.svg' },
+            { id: 'unique', displayName: 'Unique Dead Ends', fileName: 'ep_deadends_unique.svg' }
+        ];
+		const svgPath = 'percolation_fractions/medium/';
+
+        // Create tabs
+        const tabButtons = document.getElementById('tabButtons');
+        const tabContents = document.getElementById('tabContents');
+        
+        svgFiles.forEach(file => {
+            // Create tab button
+            const button = document.createElement('button');
+            button.textContent = file.displayName;
+            button.className = 'tablink';
+            button.onclick = () => openTab(file.id);
+            tabButtons.appendChild(button);
+            
+            // Create content div
+            const content = document.createElement('div');
+            content.id = file.id;
+            content.className = 'tabcontent';
+            
+            if (file.id === 'all') {
+                // Create container for all SVGs
+                svgFiles.forEach(f => {
+                    if (f.id !== 'all' && f.fileName) {
+                        const container = document.createElement('div');
+                        const title = document.createElement('h3');
+                        title.textContent = f.displayName;
+                        const img = document.createElement('img');
+                        img.src = svgPath + f.fileName;
+                        img.alt = f.displayName;
+                        
+                        container.appendChild(title);
+                        container.appendChild(img);
+                        content.appendChild(container);
+                    }
+                });
+            } else if (file.fileName) {
+                // Create single SVG display
+                const img = document.createElement('img');
+                img.src = svgPath + file.fileName;
+                img.alt = file.displayName;
+                content.appendChild(img);
+            }
+            
+            tabContents.appendChild(content);
+        });
+
+        function openTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tabcontent').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tablink').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show the selected tab
+            document.getElementById(tabId).style.display = 'block';
+            
+            // Find and activate the button
+            document.querySelectorAll('.tablink').forEach(button => {
+                if (button.textContent === svgFiles.find(f => f.id === tabId).displayName) {
+                    button.classList.add('active');
+                }
+            });
+        }
+
+        // Open first tab by default
+        openTab('all');
+    </script>
+</body>
+</html>

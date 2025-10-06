@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc 15.0.4"/>
+    <title>maze_dataset.plotting.plot_svg_fancy API documentation</title>
+    <link rel="icon" href="../../resources/favicon.png"/>
+<link rel="stylesheet" href="../../resources/css/bootstrap-reboot.min.css"><link rel="stylesheet" href="../../resources/css/syntax-highlighting.css"><link rel="stylesheet" href="../../resources/css/theme.css"><link rel="stylesheet" href="../../resources/css/layout.css"><link rel="stylesheet" href="../../resources/css/content.css"><link rel="stylesheet" href="../../resources/css/custom.css"><script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+    /* Re-invoke MathJax when DOM content changes, for example during search. */
+    document.addEventListener("DOMContentLoaded", () => {
+        new MutationObserver(() => MathJax.typeset()).observe(
+            document.querySelector("main.pdoc").parentNode,
+            {childList: true}
+        );
+    })
+</script>
+<style>
+    mjx-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+</style><style>
+    .pdoc .mermaid-pre {
+        border: none;
+        background: none;
+    }
+</style>
+<script type="module" defer>
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+    /* Re-invoke Mermaid when DOM content changes, for example during search. */
+    document.addEventListener("DOMContentLoaded", () => {
+        new MutationObserver(() => mermaid.run()).observe(
+            document.querySelector("main.pdoc").parentNode,
+            {childList: true}
+        );
+    })
+</script></head>
+<body>
+<div class="package-version">
+    docs for <a href="https://github.com/understanding-search/maze-dataset">maze-dataset</a> v1.4.0<br>
+</div>
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button">
+            <img src="../../resources/svg/navtoggle.svg" alt="Toggle navigation"> 
+        </label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div>            <a class="pdoc-button module-list-button" href="../plotting.html">
+                <img src="../../resources/svg/box-arrow-in-left.svg" alt="Back to parent module"/>
+                &nbsp;maze_dataset.plotting</a>
+
+
+            <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
+                   pattern=".+" required>
+
+
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="variable" href="#COLOR_MAP">COLOR_MAP</a>
+            </li>
+            <li>
+                    <a class="variable" href="#WALL_COLOR_HEX">WALL_COLOR_HEX</a>
+            </li>
+            <li>
+                    <a class="variable" href="#WALL_RGB">WALL_RGB</a>
+            </li>
+            <li>
+                    <a class="function" href="#is_wall">is_wall</a>
+            </li>
+            <li>
+                    <a class="function" href="#create_tile_path">create_tile_path</a>
+            </li>
+            <li>
+                    <a class="function" href="#plot_svg_fancy">plot_svg_fancy</a>
+            </li>
+    </ul>
+
+
+    <hr/>
+    
+    <div>
+        <a href="../../coverage/html/index.html" class="pdoc-button" title="View test coverage report">
+            Coverage
+        </a>
+        <a href="../../other/todo-inline.html" class="pdoc-button" title="Table of TODOs scraped from source code, with links to create issues from them">
+            TODOs
+        </a>
+        <a href="../../other/lmcat.txt" class="pdoc-button" title="a view of the repo contents made for LLMs, using https://miv.name/lmcat">
+            lmcat
+        </a>
+    </div>
+
+
+        <a class="attribution" title="pdoc: Python API documentation generator" href="https://pdoc.dev" target="_blank">
+            built with <span class="visually-hidden">pdoc</span>
+            <img src="../../resources/svg/pdoc-logo.svg" alt="pdoc logo"/>
+        </a>
+</div>
+    </nav>
+    <main class="pdoc">
+            <section class="module-info">
+                        <a class="pdoc-button git-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/plotting/plot_svg_fancy.py">View Source on GitHub</a>
+                    <h1 class="modulename">
+<a href="./../../maze_dataset.html">maze_dataset</a><wbr>.<a href="./../plotting.html">plotting</a><wbr>.plot_svg_fancy    </h1>
+
+                        <div class="docstring"><p>Plot a maze as SVG with rounded corners.</p>
+</div>
+
+                        <input id="mod-plot_svg_fancy-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+
+                        <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="mod-plot_svg_fancy-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/plotting/plot_svg_fancy.py#L0-L198" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+                <br/>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="sd">&quot;&quot;&quot;Plot a maze as SVG with rounded corners.&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">xml.dom.minidom</span><span class="w"> </span><span class="kn">import</span> <span class="n">parseString</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="kn">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">SubElement</span><span class="p">,</span> <span class="n">tostring</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="c1"># Known color map (excluding walls).</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="n">COLOR_MAP</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>	<span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">):</span> <span class="s2">&quot;#f0f0f0&quot;</span><span class="p">,</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>	<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">&quot;#4caf50&quot;</span><span class="p">,</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>	<span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">&quot;#f44336&quot;</span><span class="p">,</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>	<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">):</span> <span class="s2">&quot;#2196f3&quot;</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="p">}</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="n">WALL_COLOR_HEX</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#222&quot;</span>  <span class="c1"># (0,0,0) in hex</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a><span class="n">WALL_RGB</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="c1"># Offsets in the order [top, right, bottom, left]</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="n">_NEIGHBORS</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>	<span class="p">[</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>		<span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># top</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>		<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># right</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>		<span class="p">[</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># bottom</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>		<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># left</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>	<span class="p">],</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>	<span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="p">)</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="k">def</span><span class="w"> </span><span class="nf">is_wall</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;True if (y, x) is out of bounds or has the wall color.&quot;&quot;&quot;</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>	<span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">shape</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>	<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">h</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">w</span><span class="p">):</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>		<span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>	<span class="k">return</span> <span class="nb">bool</span><span class="p">((</span><span class="n">grid</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">WALL_RGB</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="k">def</span><span class="w"> </span><span class="nf">create_tile_path</span><span class="p">(</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>	<span class="n">origin</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>	<span class="n">tile_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>	<span class="n">corner_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>	<span class="n">edges</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Generate an SVG path for a tile at `origin` with side length `tile_size`.</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">	`edges` is (top, right, bottom, left) booleans, where True means that edge</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">	borders a wall/outside. If both edges meeting at a corner are True and</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">	corner_radius&gt;0, we draw a rounded corner; else it&#39;s a sharp corner.</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">	Corner order (clockwise):</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">		c0 = top-left</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">		c1 = top-right</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">		c2 = bottom-right</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">		c3 = bottom-left</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">	edges = (top, right, bottom, left).</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">		corner c0 is formed by edges top + left =&gt; edges[0] &amp; edges[3]</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">		corner c1 =&gt; top + right =&gt; edges[0] &amp; edges[1]</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">		corner c2 =&gt; right + bottom =&gt; edges[1] &amp; edges[2]</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">		corner c3 =&gt; bottom + left =&gt; edges[2] &amp; edges[3]</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>	<span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">origin</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>	<span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">left</span> <span class="o">=</span> <span class="n">edges</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>	<span class="c1"># A corner is &quot;exposed&quot; if both adjoining edges are True</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>	<span class="n">c0_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">top</span> <span class="ow">and</span> <span class="n">left</span>  <span class="c1"># top-left</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>	<span class="n">c1_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">top</span> <span class="ow">and</span> <span class="n">right</span>  <span class="c1"># top-right</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>	<span class="n">c2_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">bottom</span>  <span class="c1"># bottom-right</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>	<span class="n">c3_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">bottom</span> <span class="ow">and</span> <span class="n">left</span>  <span class="c1"># bottom-left</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>	<span class="c1"># If corner_radius=0, arcs become straight lines.</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>	<span class="n">r</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">corner_radius</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>	<span class="c1"># We&#39;ll construct the path in a standard top-left -&gt; top-right -&gt; bottom-right -&gt; bottom-left order.</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>	<span class="n">path_cmds</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>	<span class="c1"># Move to top-left corner, possibly offset if c0 is exposed</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>	<span class="c1"># (meaning both top and left edges are external).</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>	<span class="n">start_x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="k">if</span> <span class="n">c0_exposed</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>	<span class="n">start_y</span> <span class="o">=</span> <span class="n">y0</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;M </span><span class="si">{</span><span class="n">start_x</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">start_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>	<span class="c1"># === TOP edge to top-right corner</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>	<span class="n">end_x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">tile_size</span> <span class="o">-</span> <span class="p">(</span><span class="n">r</span> <span class="k">if</span> <span class="n">c1_exposed</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>	<span class="n">end_y</span> <span class="o">=</span> <span class="n">y0</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">end_x</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">end_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>	<span class="c1"># Arc if c1_exposed</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>	<span class="k">if</span> <span class="n">c1_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>	<span class="c1"># === RIGHT edge to bottom-right corner</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">c2_exposed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>	<span class="k">if</span> <span class="n">c2_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>	<span class="c1"># === BOTTOM edge to bottom-left corner</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">c3_exposed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>	<span class="k">if</span> <span class="n">c3_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>	<span class="c1"># === LEFT edge back up to top-left corner</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">c0_exposed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>	<span class="k">if</span> <span class="n">c0_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>	<span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_cmds</span><span class="p">)</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="k">def</span><span class="w"> </span><span class="nf">plot_svg_fancy</span><span class="p">(</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>	<span class="n">pixel_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>	<span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>	<span class="n">corner_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">,</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>	<span class="n">bounding_corner_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span><span class="p">,</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;plot the output of SolvedMaze(...).as_pixels() as a nice svg</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">	Create an SVG with:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">	- A single rounded-square background (walls).</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">	- Each non-wall cell is drawn via create_tile_path, with corner_radius controlling</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">		whether corners are rounded. (Set corner_radius=0 for squares.)</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="sd">	# Parameters:</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">	- `pixel_grid : np.ndarray`</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">		3D array of shape (h, w, 3) with RGB values</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">	- `size : int`</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">		Size (in px) of each grid cell</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">	- `corner_radius : float`</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">		Radius for rounding corners of each tile (0 =&gt; squares)</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">	- `bounding_corner_radius : float`</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">		Radius for rounding the outer bounding rectangle</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">	# Returns:</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="sd">	`str`: A pretty-printed SVG string</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>	<span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pixel_grid</span><span class="o">.</span><span class="n">shape</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>	<span class="c1"># Create the root &lt;svg&gt;</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>	<span class="n">svg</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>		<span class="s2">&quot;svg&quot;</span><span class="p">,</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>		<span class="n">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/2000/svg&quot;</span><span class="p">,</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>		<span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>		<span class="n">height</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>		<span class="n">viewBox</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;0 0 </span><span class="si">{</span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">size</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">h</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>	<span class="p">)</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>	<span class="c1"># Single rounded-square background for the walls</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>	<span class="n">SubElement</span><span class="p">(</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>		<span class="n">svg</span><span class="p">,</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>		<span class="s2">&quot;rect&quot;</span><span class="p">,</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>		<span class="p">{</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>			<span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>			<span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>			<span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a>			<span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a>			<span class="s2">&quot;fill&quot;</span><span class="p">:</span> <span class="n">WALL_COLOR_HEX</span><span class="p">,</span>
+</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a>			<span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">bounding_corner_radius</span><span class="p">),</span>
+</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a>			<span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">bounding_corner_radius</span><span class="p">),</span>
+</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a>		<span class="p">},</span>
+</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>	<span class="p">)</span>
+</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>
+</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>	<span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a>		<span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>			<span class="n">rgb_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">pixel_grid</span><span class="p">[</span><span class="n">yy</span><span class="p">,</span> <span class="n">xx</span><span class="p">])</span>
+</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>			<span class="k">if</span> <span class="n">rgb_tuple</span> <span class="o">==</span> <span class="n">WALL_RGB</span><span class="p">:</span>
+</span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a>				<span class="c1"># It&#39;s a wall =&gt; skip (already covered by background)</span>
+</span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a>				<span class="k">continue</span>
+</span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a>
+</span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a>			<span class="n">fill_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">COLOR_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rgb_tuple</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># noqa: SIM910</span>
+</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a>			<span class="k">if</span> <span class="n">fill_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a>				<span class="c1"># Unknown color =&gt; skip or handle differently</span>
+</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a>				<span class="k">continue</span>
+</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a>
+</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a>			<span class="c1"># Check which edges are &quot;external&quot; =&gt; next cell is wall</span>
+</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>			<span class="c1"># edges in the order (top, right, bottom, left)</span>
+</span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a>			<span class="n">edges_bool</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a>				<span class="n">is_wall</span><span class="p">(</span><span class="n">yy</span> <span class="o">+</span> <span class="n">dy</span><span class="p">,</span> <span class="n">xx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="n">pixel_grid</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_NEIGHBORS</span>
+</span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a>			<span class="p">]</span>
+</span><span id="L-179"><a href="#L-179"><span class="linenos">179</span></a>
+</span><span id="L-180"><a href="#L-180"><span class="linenos">180</span></a>			<span class="n">d_path</span> <span class="o">=</span> <span class="n">create_tile_path</span><span class="p">(</span>
+</span><span id="L-181"><a href="#L-181"><span class="linenos">181</span></a>				<span class="n">origin</span><span class="o">=</span><span class="p">(</span><span class="n">xx</span> <span class="o">*</span> <span class="n">size</span><span class="p">,</span> <span class="n">yy</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="L-182"><a href="#L-182"><span class="linenos">182</span></a>				<span class="n">tile_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+</span><span id="L-183"><a href="#L-183"><span class="linenos">183</span></a>				<span class="n">corner_radius</span><span class="o">=</span><span class="n">corner_radius</span><span class="p">,</span>
+</span><span id="L-184"><a href="#L-184"><span class="linenos">184</span></a>				<span class="n">edges</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">edges_bool</span><span class="p">),</span>  <span class="c1"># type: ignore[arg-type]</span>
+</span><span id="L-185"><a href="#L-185"><span class="linenos">185</span></a>			<span class="p">)</span>
+</span><span id="L-186"><a href="#L-186"><span class="linenos">186</span></a>
+</span><span id="L-187"><a href="#L-187"><span class="linenos">187</span></a>			<span class="n">SubElement</span><span class="p">(</span>
+</span><span id="L-188"><a href="#L-188"><span class="linenos">188</span></a>				<span class="n">svg</span><span class="p">,</span>
+</span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a>				<span class="s2">&quot;path&quot;</span><span class="p">,</span>
+</span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a>				<span class="p">{</span>
+</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a>					<span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="n">d_path</span><span class="p">,</span>
+</span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a>					<span class="s2">&quot;fill&quot;</span><span class="p">:</span> <span class="n">fill_color</span><span class="p">,</span>
+</span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a>					<span class="s2">&quot;stroke&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+</span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a>				<span class="p">},</span>
+</span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a>			<span class="p">)</span>
+</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a>
+</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a>	<span class="n">raw_svg</span> <span class="o">=</span> <span class="n">tostring</span><span class="p">(</span><span class="n">svg</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;unicode&quot;</span><span class="p">)</span>
+</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a>	<span class="c1"># we are in charge of the svg so it&#39;s safe to decode</span>
+</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a>	<span class="k">return</span> <span class="n">parseString</span><span class="p">(</span><span class="n">raw_svg</span><span class="p">)</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>  <span class="c1"># noqa: S318</span>
+</span></pre></div>
+
+
+                <br/>
+            </section>
+                <section id="COLOR_MAP">
+                    <div class="attr variable">
+            <span class="name">COLOR_MAP</span><span class="annotation">: dict[tuple[int, int, int], str]</span>        =
+<span class="default_value">{(255, 255, 255): &#39;#f0f0f0&#39;, (0, 255, 0): &#39;#4caf50&#39;, (255, 0, 0): &#39;#f44336&#39;, (0, 0, 255): &#39;#2196f3&#39;}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#COLOR_MAP"></a>
+    
+    
+
+                </section>
+                <section id="WALL_COLOR_HEX">
+                    <div class="attr variable">
+            <span class="name">WALL_COLOR_HEX</span><span class="annotation">: str</span>        =
+<span class="default_value">&#39;#222&#39;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#WALL_COLOR_HEX"></a>
+    
+    
+
+                </section>
+                <section id="WALL_RGB">
+                    <div class="attr variable">
+            <span class="name">WALL_RGB</span><span class="annotation">: tuple[int, int, int]</span>        =
+<span class="default_value">(0, 0, 0)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#WALL_RGB"></a>
+    
+    
+
+                </section>
+                <section id="is_wall">
+                            <input id="is_wall-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">is_wall</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">y</span><span class="p">:</span> <span class="nb">int</span>, </span><span class="param"><span class="n">x</span><span class="p">:</span> <span class="nb">int</span>, </span><span class="param"><span class="n">grid</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span></span><span class="return-annotation">) -> <span class="nb">bool</span>:</span></span>
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="is_wall-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/plotting/plot_svg_fancy.py#L31-L36" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#is_wall"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="is_wall-32"><a href="#is_wall-32"><span class="linenos">32</span></a><span class="k">def</span><span class="w"> </span><span class="nf">is_wall</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="is_wall-33"><a href="#is_wall-33"><span class="linenos">33</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;True if (y, x) is out of bounds or has the wall color.&quot;&quot;&quot;</span>
+</span><span id="is_wall-34"><a href="#is_wall-34"><span class="linenos">34</span></a>	<span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">shape</span>
+</span><span id="is_wall-35"><a href="#is_wall-35"><span class="linenos">35</span></a>	<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">h</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">w</span><span class="p">):</span>
+</span><span id="is_wall-36"><a href="#is_wall-36"><span class="linenos">36</span></a>		<span class="k">return</span> <span class="kc">True</span>
+</span><span id="is_wall-37"><a href="#is_wall-37"><span class="linenos">37</span></a>	<span class="k">return</span> <span class="nb">bool</span><span class="p">((</span><span class="n">grid</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">WALL_RGB</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>True if (y, x) is out of bounds or has the wall color.</p>
+</div>
+
+
+                </section>
+                <section id="create_tile_path">
+                            <input id="create_tile_path-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">create_tile_path</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">origin</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>,</span><span class="param">	<span class="n">tile_size</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">corner_radius</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">edges</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="create_tile_path-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/plotting/plot_svg_fancy.py#L39-L107" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#create_tile_path"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="create_tile_path-40"><a href="#create_tile_path-40"><span class="linenos"> 40</span></a><span class="k">def</span><span class="w"> </span><span class="nf">create_tile_path</span><span class="p">(</span>
+</span><span id="create_tile_path-41"><a href="#create_tile_path-41"><span class="linenos"> 41</span></a>	<span class="n">origin</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+</span><span id="create_tile_path-42"><a href="#create_tile_path-42"><span class="linenos"> 42</span></a>	<span class="n">tile_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+</span><span id="create_tile_path-43"><a href="#create_tile_path-43"><span class="linenos"> 43</span></a>	<span class="n">corner_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+</span><span id="create_tile_path-44"><a href="#create_tile_path-44"><span class="linenos"> 44</span></a>	<span class="n">edges</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span>
+</span><span id="create_tile_path-45"><a href="#create_tile_path-45"><span class="linenos"> 45</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="create_tile_path-46"><a href="#create_tile_path-46"><span class="linenos"> 46</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;Generate an SVG path for a tile at `origin` with side length `tile_size`.</span>
+</span><span id="create_tile_path-47"><a href="#create_tile_path-47"><span class="linenos"> 47</span></a>
+</span><span id="create_tile_path-48"><a href="#create_tile_path-48"><span class="linenos"> 48</span></a><span class="sd">	`edges` is (top, right, bottom, left) booleans, where True means that edge</span>
+</span><span id="create_tile_path-49"><a href="#create_tile_path-49"><span class="linenos"> 49</span></a><span class="sd">	borders a wall/outside. If both edges meeting at a corner are True and</span>
+</span><span id="create_tile_path-50"><a href="#create_tile_path-50"><span class="linenos"> 50</span></a><span class="sd">	corner_radius&gt;0, we draw a rounded corner; else it&#39;s a sharp corner.</span>
+</span><span id="create_tile_path-51"><a href="#create_tile_path-51"><span class="linenos"> 51</span></a>
+</span><span id="create_tile_path-52"><a href="#create_tile_path-52"><span class="linenos"> 52</span></a><span class="sd">	Corner order (clockwise):</span>
+</span><span id="create_tile_path-53"><a href="#create_tile_path-53"><span class="linenos"> 53</span></a><span class="sd">		c0 = top-left</span>
+</span><span id="create_tile_path-54"><a href="#create_tile_path-54"><span class="linenos"> 54</span></a><span class="sd">		c1 = top-right</span>
+</span><span id="create_tile_path-55"><a href="#create_tile_path-55"><span class="linenos"> 55</span></a><span class="sd">		c2 = bottom-right</span>
+</span><span id="create_tile_path-56"><a href="#create_tile_path-56"><span class="linenos"> 56</span></a><span class="sd">		c3 = bottom-left</span>
+</span><span id="create_tile_path-57"><a href="#create_tile_path-57"><span class="linenos"> 57</span></a>
+</span><span id="create_tile_path-58"><a href="#create_tile_path-58"><span class="linenos"> 58</span></a><span class="sd">	edges = (top, right, bottom, left).</span>
+</span><span id="create_tile_path-59"><a href="#create_tile_path-59"><span class="linenos"> 59</span></a><span class="sd">		corner c0 is formed by edges top + left =&gt; edges[0] &amp; edges[3]</span>
+</span><span id="create_tile_path-60"><a href="#create_tile_path-60"><span class="linenos"> 60</span></a><span class="sd">		corner c1 =&gt; top + right =&gt; edges[0] &amp; edges[1]</span>
+</span><span id="create_tile_path-61"><a href="#create_tile_path-61"><span class="linenos"> 61</span></a><span class="sd">		corner c2 =&gt; right + bottom =&gt; edges[1] &amp; edges[2]</span>
+</span><span id="create_tile_path-62"><a href="#create_tile_path-62"><span class="linenos"> 62</span></a><span class="sd">		corner c3 =&gt; bottom + left =&gt; edges[2] &amp; edges[3]</span>
+</span><span id="create_tile_path-63"><a href="#create_tile_path-63"><span class="linenos"> 63</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="create_tile_path-64"><a href="#create_tile_path-64"><span class="linenos"> 64</span></a>	<span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">origin</span>
+</span><span id="create_tile_path-65"><a href="#create_tile_path-65"><span class="linenos"> 65</span></a>	<span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">left</span> <span class="o">=</span> <span class="n">edges</span>
+</span><span id="create_tile_path-66"><a href="#create_tile_path-66"><span class="linenos"> 66</span></a>
+</span><span id="create_tile_path-67"><a href="#create_tile_path-67"><span class="linenos"> 67</span></a>	<span class="c1"># A corner is &quot;exposed&quot; if both adjoining edges are True</span>
+</span><span id="create_tile_path-68"><a href="#create_tile_path-68"><span class="linenos"> 68</span></a>	<span class="n">c0_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">top</span> <span class="ow">and</span> <span class="n">left</span>  <span class="c1"># top-left</span>
+</span><span id="create_tile_path-69"><a href="#create_tile_path-69"><span class="linenos"> 69</span></a>	<span class="n">c1_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">top</span> <span class="ow">and</span> <span class="n">right</span>  <span class="c1"># top-right</span>
+</span><span id="create_tile_path-70"><a href="#create_tile_path-70"><span class="linenos"> 70</span></a>	<span class="n">c2_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">bottom</span>  <span class="c1"># bottom-right</span>
+</span><span id="create_tile_path-71"><a href="#create_tile_path-71"><span class="linenos"> 71</span></a>	<span class="n">c3_exposed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">bottom</span> <span class="ow">and</span> <span class="n">left</span>  <span class="c1"># bottom-left</span>
+</span><span id="create_tile_path-72"><a href="#create_tile_path-72"><span class="linenos"> 72</span></a>
+</span><span id="create_tile_path-73"><a href="#create_tile_path-73"><span class="linenos"> 73</span></a>	<span class="c1"># If corner_radius=0, arcs become straight lines.</span>
+</span><span id="create_tile_path-74"><a href="#create_tile_path-74"><span class="linenos"> 74</span></a>	<span class="n">r</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">corner_radius</span>
+</span><span id="create_tile_path-75"><a href="#create_tile_path-75"><span class="linenos"> 75</span></a>
+</span><span id="create_tile_path-76"><a href="#create_tile_path-76"><span class="linenos"> 76</span></a>	<span class="c1"># We&#39;ll construct the path in a standard top-left -&gt; top-right -&gt; bottom-right -&gt; bottom-left order.</span>
+</span><span id="create_tile_path-77"><a href="#create_tile_path-77"><span class="linenos"> 77</span></a>	<span class="n">path_cmds</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="create_tile_path-78"><a href="#create_tile_path-78"><span class="linenos"> 78</span></a>	<span class="c1"># Move to top-left corner, possibly offset if c0 is exposed</span>
+</span><span id="create_tile_path-79"><a href="#create_tile_path-79"><span class="linenos"> 79</span></a>	<span class="c1"># (meaning both top and left edges are external).</span>
+</span><span id="create_tile_path-80"><a href="#create_tile_path-80"><span class="linenos"> 80</span></a>	<span class="n">start_x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="k">if</span> <span class="n">c0_exposed</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="create_tile_path-81"><a href="#create_tile_path-81"><span class="linenos"> 81</span></a>	<span class="n">start_y</span> <span class="o">=</span> <span class="n">y0</span>
+</span><span id="create_tile_path-82"><a href="#create_tile_path-82"><span class="linenos"> 82</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;M </span><span class="si">{</span><span class="n">start_x</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">start_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-83"><a href="#create_tile_path-83"><span class="linenos"> 83</span></a>
+</span><span id="create_tile_path-84"><a href="#create_tile_path-84"><span class="linenos"> 84</span></a>	<span class="c1"># === TOP edge to top-right corner</span>
+</span><span id="create_tile_path-85"><a href="#create_tile_path-85"><span class="linenos"> 85</span></a>	<span class="n">end_x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">tile_size</span> <span class="o">-</span> <span class="p">(</span><span class="n">r</span> <span class="k">if</span> <span class="n">c1_exposed</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="create_tile_path-86"><a href="#create_tile_path-86"><span class="linenos"> 86</span></a>	<span class="n">end_y</span> <span class="o">=</span> <span class="n">y0</span>
+</span><span id="create_tile_path-87"><a href="#create_tile_path-87"><span class="linenos"> 87</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">end_x</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">end_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-88"><a href="#create_tile_path-88"><span class="linenos"> 88</span></a>	<span class="c1"># Arc if c1_exposed</span>
+</span><span id="create_tile_path-89"><a href="#create_tile_path-89"><span class="linenos"> 89</span></a>	<span class="k">if</span> <span class="n">c1_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="create_tile_path-90"><a href="#create_tile_path-90"><span class="linenos"> 90</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-91"><a href="#create_tile_path-91"><span class="linenos"> 91</span></a>
+</span><span id="create_tile_path-92"><a href="#create_tile_path-92"><span class="linenos"> 92</span></a>	<span class="c1"># === RIGHT edge to bottom-right corner</span>
+</span><span id="create_tile_path-93"><a href="#create_tile_path-93"><span class="linenos"> 93</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">c2_exposed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-94"><a href="#create_tile_path-94"><span class="linenos"> 94</span></a>	<span class="k">if</span> <span class="n">c2_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="create_tile_path-95"><a href="#create_tile_path-95"><span class="linenos"> 95</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-96"><a href="#create_tile_path-96"><span class="linenos"> 96</span></a>
+</span><span id="create_tile_path-97"><a href="#create_tile_path-97"><span class="linenos"> 97</span></a>	<span class="c1"># === BOTTOM edge to bottom-left corner</span>
+</span><span id="create_tile_path-98"><a href="#create_tile_path-98"><span class="linenos"> 98</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">c3_exposed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-99"><a href="#create_tile_path-99"><span class="linenos"> 99</span></a>	<span class="k">if</span> <span class="n">c3_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="create_tile_path-100"><a href="#create_tile_path-100"><span class="linenos">100</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tile_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-101"><a href="#create_tile_path-101"><span class="linenos">101</span></a>
+</span><span id="create_tile_path-102"><a href="#create_tile_path-102"><span class="linenos">102</span></a>	<span class="c1"># === LEFT edge back up to top-left corner</span>
+</span><span id="create_tile_path-103"><a href="#create_tile_path-103"><span class="linenos">103</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">c0_exposed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-104"><a href="#create_tile_path-104"><span class="linenos">104</span></a>	<span class="k">if</span> <span class="n">c0_exposed</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="create_tile_path-105"><a href="#create_tile_path-105"><span class="linenos">105</span></a>		<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> 0 0 1 </span><span class="si">{</span><span class="n">x0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">y0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-106"><a href="#create_tile_path-106"><span class="linenos">106</span></a>
+</span><span id="create_tile_path-107"><a href="#create_tile_path-107"><span class="linenos">107</span></a>	<span class="n">path_cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+</span><span id="create_tile_path-108"><a href="#create_tile_path-108"><span class="linenos">108</span></a>	<span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_cmds</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Generate an SVG path for a tile at <code>origin</code> with side length <code>tile_size</code>.</p>
+
+<p><code>edges</code> is (top, right, bottom, left) booleans, where True means that edge
+borders a wall/outside. If both edges meeting at a corner are True and
+corner_radius>0, we draw a rounded corner; else it's a sharp corner.</p>
+
+<p>Corner order (clockwise):
+        c0 = top-left
+        c1 = top-right
+        c2 = bottom-right
+        c3 = bottom-left</p>
+
+<p>edges = (top, right, bottom, left).
+        corner c0 is formed by edges top + left =&gt; edges[0] &amp; edges[3]
+        corner c1 =&gt; top + right =&gt; edges[0] &amp; edges[1]
+        corner c2 =&gt; right + bottom =&gt; edges[1] &amp; edges[2]
+        corner c3 =&gt; bottom + left =&gt; edges[2] &amp; edges[3]</p>
+</div>
+
+
+                </section>
+                <section id="plot_svg_fancy">
+                            <input id="plot_svg_fancy-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">plot_svg_fancy</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">pixel_grid</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span>,</span><span class="param">	<span class="n">corner_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">8.0</span>,</span><span class="param">	<span class="n">bounding_corner_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+                <div class="source-button-container">
+            <label class="pdoc-button view-source-button" for="plot_svg_fancy-view-source"><span>View Source</span></label>
+            <div class="github-button-wrapper">
+                <a class="pdoc-button github-link-button" href="https://github.com/understanding-search/maze-dataset/blob/1.4.0maze_dataset/plotting/plot_svg_fancy.py#L110-L199" target="_blank">
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <a class="headerlink" href="#plot_svg_fancy"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="plot_svg_fancy-111"><a href="#plot_svg_fancy-111"><span class="linenos">111</span></a><span class="k">def</span><span class="w"> </span><span class="nf">plot_svg_fancy</span><span class="p">(</span>
+</span><span id="plot_svg_fancy-112"><a href="#plot_svg_fancy-112"><span class="linenos">112</span></a>	<span class="n">pixel_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-113"><a href="#plot_svg_fancy-113"><span class="linenos">113</span></a>	<span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-114"><a href="#plot_svg_fancy-114"><span class="linenos">114</span></a>	<span class="n">corner_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-115"><a href="#plot_svg_fancy-115"><span class="linenos">115</span></a>	<span class="n">bounding_corner_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-116"><a href="#plot_svg_fancy-116"><span class="linenos">116</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="plot_svg_fancy-117"><a href="#plot_svg_fancy-117"><span class="linenos">117</span></a><span class="w">	</span><span class="sd">&quot;&quot;&quot;plot the output of SolvedMaze(...).as_pixels() as a nice svg</span>
+</span><span id="plot_svg_fancy-118"><a href="#plot_svg_fancy-118"><span class="linenos">118</span></a>
+</span><span id="plot_svg_fancy-119"><a href="#plot_svg_fancy-119"><span class="linenos">119</span></a><span class="sd">	Create an SVG with:</span>
+</span><span id="plot_svg_fancy-120"><a href="#plot_svg_fancy-120"><span class="linenos">120</span></a><span class="sd">	- A single rounded-square background (walls).</span>
+</span><span id="plot_svg_fancy-121"><a href="#plot_svg_fancy-121"><span class="linenos">121</span></a><span class="sd">	- Each non-wall cell is drawn via create_tile_path, with corner_radius controlling</span>
+</span><span id="plot_svg_fancy-122"><a href="#plot_svg_fancy-122"><span class="linenos">122</span></a><span class="sd">		whether corners are rounded. (Set corner_radius=0 for squares.)</span>
+</span><span id="plot_svg_fancy-123"><a href="#plot_svg_fancy-123"><span class="linenos">123</span></a>
+</span><span id="plot_svg_fancy-124"><a href="#plot_svg_fancy-124"><span class="linenos">124</span></a><span class="sd">	# Parameters:</span>
+</span><span id="plot_svg_fancy-125"><a href="#plot_svg_fancy-125"><span class="linenos">125</span></a><span class="sd">	- `pixel_grid : np.ndarray`</span>
+</span><span id="plot_svg_fancy-126"><a href="#plot_svg_fancy-126"><span class="linenos">126</span></a><span class="sd">		3D array of shape (h, w, 3) with RGB values</span>
+</span><span id="plot_svg_fancy-127"><a href="#plot_svg_fancy-127"><span class="linenos">127</span></a><span class="sd">	- `size : int`</span>
+</span><span id="plot_svg_fancy-128"><a href="#plot_svg_fancy-128"><span class="linenos">128</span></a><span class="sd">		Size (in px) of each grid cell</span>
+</span><span id="plot_svg_fancy-129"><a href="#plot_svg_fancy-129"><span class="linenos">129</span></a><span class="sd">	- `corner_radius : float`</span>
+</span><span id="plot_svg_fancy-130"><a href="#plot_svg_fancy-130"><span class="linenos">130</span></a><span class="sd">		Radius for rounding corners of each tile (0 =&gt; squares)</span>
+</span><span id="plot_svg_fancy-131"><a href="#plot_svg_fancy-131"><span class="linenos">131</span></a><span class="sd">	- `bounding_corner_radius : float`</span>
+</span><span id="plot_svg_fancy-132"><a href="#plot_svg_fancy-132"><span class="linenos">132</span></a><span class="sd">		Radius for rounding the outer bounding rectangle</span>
+</span><span id="plot_svg_fancy-133"><a href="#plot_svg_fancy-133"><span class="linenos">133</span></a>
+</span><span id="plot_svg_fancy-134"><a href="#plot_svg_fancy-134"><span class="linenos">134</span></a><span class="sd">	# Returns:</span>
+</span><span id="plot_svg_fancy-135"><a href="#plot_svg_fancy-135"><span class="linenos">135</span></a><span class="sd">	`str`: A pretty-printed SVG string</span>
+</span><span id="plot_svg_fancy-136"><a href="#plot_svg_fancy-136"><span class="linenos">136</span></a><span class="sd">	&quot;&quot;&quot;</span>
+</span><span id="plot_svg_fancy-137"><a href="#plot_svg_fancy-137"><span class="linenos">137</span></a>	<span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pixel_grid</span><span class="o">.</span><span class="n">shape</span>
+</span><span id="plot_svg_fancy-138"><a href="#plot_svg_fancy-138"><span class="linenos">138</span></a>
+</span><span id="plot_svg_fancy-139"><a href="#plot_svg_fancy-139"><span class="linenos">139</span></a>	<span class="c1"># Create the root &lt;svg&gt;</span>
+</span><span id="plot_svg_fancy-140"><a href="#plot_svg_fancy-140"><span class="linenos">140</span></a>	<span class="n">svg</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+</span><span id="plot_svg_fancy-141"><a href="#plot_svg_fancy-141"><span class="linenos">141</span></a>		<span class="s2">&quot;svg&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-142"><a href="#plot_svg_fancy-142"><span class="linenos">142</span></a>		<span class="n">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/2000/svg&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-143"><a href="#plot_svg_fancy-143"><span class="linenos">143</span></a>		<span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="plot_svg_fancy-144"><a href="#plot_svg_fancy-144"><span class="linenos">144</span></a>		<span class="n">height</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="plot_svg_fancy-145"><a href="#plot_svg_fancy-145"><span class="linenos">145</span></a>		<span class="n">viewBox</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;0 0 </span><span class="si">{</span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">size</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">h</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-146"><a href="#plot_svg_fancy-146"><span class="linenos">146</span></a>	<span class="p">)</span>
+</span><span id="plot_svg_fancy-147"><a href="#plot_svg_fancy-147"><span class="linenos">147</span></a>
+</span><span id="plot_svg_fancy-148"><a href="#plot_svg_fancy-148"><span class="linenos">148</span></a>	<span class="c1"># Single rounded-square background for the walls</span>
+</span><span id="plot_svg_fancy-149"><a href="#plot_svg_fancy-149"><span class="linenos">149</span></a>	<span class="n">SubElement</span><span class="p">(</span>
+</span><span id="plot_svg_fancy-150"><a href="#plot_svg_fancy-150"><span class="linenos">150</span></a>		<span class="n">svg</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-151"><a href="#plot_svg_fancy-151"><span class="linenos">151</span></a>		<span class="s2">&quot;rect&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-152"><a href="#plot_svg_fancy-152"><span class="linenos">152</span></a>		<span class="p">{</span>
+</span><span id="plot_svg_fancy-153"><a href="#plot_svg_fancy-153"><span class="linenos">153</span></a>			<span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-154"><a href="#plot_svg_fancy-154"><span class="linenos">154</span></a>			<span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-155"><a href="#plot_svg_fancy-155"><span class="linenos">155</span></a>			<span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="plot_svg_fancy-156"><a href="#plot_svg_fancy-156"><span class="linenos">156</span></a>			<span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="plot_svg_fancy-157"><a href="#plot_svg_fancy-157"><span class="linenos">157</span></a>			<span class="s2">&quot;fill&quot;</span><span class="p">:</span> <span class="n">WALL_COLOR_HEX</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-158"><a href="#plot_svg_fancy-158"><span class="linenos">158</span></a>			<span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">bounding_corner_radius</span><span class="p">),</span>
+</span><span id="plot_svg_fancy-159"><a href="#plot_svg_fancy-159"><span class="linenos">159</span></a>			<span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">bounding_corner_radius</span><span class="p">),</span>
+</span><span id="plot_svg_fancy-160"><a href="#plot_svg_fancy-160"><span class="linenos">160</span></a>		<span class="p">},</span>
+</span><span id="plot_svg_fancy-161"><a href="#plot_svg_fancy-161"><span class="linenos">161</span></a>	<span class="p">)</span>
+</span><span id="plot_svg_fancy-162"><a href="#plot_svg_fancy-162"><span class="linenos">162</span></a>
+</span><span id="plot_svg_fancy-163"><a href="#plot_svg_fancy-163"><span class="linenos">163</span></a>	<span class="k">for</span> <span class="n">yy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+</span><span id="plot_svg_fancy-164"><a href="#plot_svg_fancy-164"><span class="linenos">164</span></a>		<span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+</span><span id="plot_svg_fancy-165"><a href="#plot_svg_fancy-165"><span class="linenos">165</span></a>			<span class="n">rgb_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">pixel_grid</span><span class="p">[</span><span class="n">yy</span><span class="p">,</span> <span class="n">xx</span><span class="p">])</span>
+</span><span id="plot_svg_fancy-166"><a href="#plot_svg_fancy-166"><span class="linenos">166</span></a>			<span class="k">if</span> <span class="n">rgb_tuple</span> <span class="o">==</span> <span class="n">WALL_RGB</span><span class="p">:</span>
+</span><span id="plot_svg_fancy-167"><a href="#plot_svg_fancy-167"><span class="linenos">167</span></a>				<span class="c1"># It&#39;s a wall =&gt; skip (already covered by background)</span>
+</span><span id="plot_svg_fancy-168"><a href="#plot_svg_fancy-168"><span class="linenos">168</span></a>				<span class="k">continue</span>
+</span><span id="plot_svg_fancy-169"><a href="#plot_svg_fancy-169"><span class="linenos">169</span></a>
+</span><span id="plot_svg_fancy-170"><a href="#plot_svg_fancy-170"><span class="linenos">170</span></a>			<span class="n">fill_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">COLOR_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rgb_tuple</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># noqa: SIM910</span>
+</span><span id="plot_svg_fancy-171"><a href="#plot_svg_fancy-171"><span class="linenos">171</span></a>			<span class="k">if</span> <span class="n">fill_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="plot_svg_fancy-172"><a href="#plot_svg_fancy-172"><span class="linenos">172</span></a>				<span class="c1"># Unknown color =&gt; skip or handle differently</span>
+</span><span id="plot_svg_fancy-173"><a href="#plot_svg_fancy-173"><span class="linenos">173</span></a>				<span class="k">continue</span>
+</span><span id="plot_svg_fancy-174"><a href="#plot_svg_fancy-174"><span class="linenos">174</span></a>
+</span><span id="plot_svg_fancy-175"><a href="#plot_svg_fancy-175"><span class="linenos">175</span></a>			<span class="c1"># Check which edges are &quot;external&quot; =&gt; next cell is wall</span>
+</span><span id="plot_svg_fancy-176"><a href="#plot_svg_fancy-176"><span class="linenos">176</span></a>			<span class="c1"># edges in the order (top, right, bottom, left)</span>
+</span><span id="plot_svg_fancy-177"><a href="#plot_svg_fancy-177"><span class="linenos">177</span></a>			<span class="n">edges_bool</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="plot_svg_fancy-178"><a href="#plot_svg_fancy-178"><span class="linenos">178</span></a>				<span class="n">is_wall</span><span class="p">(</span><span class="n">yy</span> <span class="o">+</span> <span class="n">dy</span><span class="p">,</span> <span class="n">xx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="n">pixel_grid</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_NEIGHBORS</span>
+</span><span id="plot_svg_fancy-179"><a href="#plot_svg_fancy-179"><span class="linenos">179</span></a>			<span class="p">]</span>
+</span><span id="plot_svg_fancy-180"><a href="#plot_svg_fancy-180"><span class="linenos">180</span></a>
+</span><span id="plot_svg_fancy-181"><a href="#plot_svg_fancy-181"><span class="linenos">181</span></a>			<span class="n">d_path</span> <span class="o">=</span> <span class="n">create_tile_path</span><span class="p">(</span>
+</span><span id="plot_svg_fancy-182"><a href="#plot_svg_fancy-182"><span class="linenos">182</span></a>				<span class="n">origin</span><span class="o">=</span><span class="p">(</span><span class="n">xx</span> <span class="o">*</span> <span class="n">size</span><span class="p">,</span> <span class="n">yy</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+</span><span id="plot_svg_fancy-183"><a href="#plot_svg_fancy-183"><span class="linenos">183</span></a>				<span class="n">tile_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-184"><a href="#plot_svg_fancy-184"><span class="linenos">184</span></a>				<span class="n">corner_radius</span><span class="o">=</span><span class="n">corner_radius</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-185"><a href="#plot_svg_fancy-185"><span class="linenos">185</span></a>				<span class="n">edges</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">edges_bool</span><span class="p">),</span>  <span class="c1"># type: ignore[arg-type]</span>
+</span><span id="plot_svg_fancy-186"><a href="#plot_svg_fancy-186"><span class="linenos">186</span></a>			<span class="p">)</span>
+</span><span id="plot_svg_fancy-187"><a href="#plot_svg_fancy-187"><span class="linenos">187</span></a>
+</span><span id="plot_svg_fancy-188"><a href="#plot_svg_fancy-188"><span class="linenos">188</span></a>			<span class="n">SubElement</span><span class="p">(</span>
+</span><span id="plot_svg_fancy-189"><a href="#plot_svg_fancy-189"><span class="linenos">189</span></a>				<span class="n">svg</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-190"><a href="#plot_svg_fancy-190"><span class="linenos">190</span></a>				<span class="s2">&quot;path&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-191"><a href="#plot_svg_fancy-191"><span class="linenos">191</span></a>				<span class="p">{</span>
+</span><span id="plot_svg_fancy-192"><a href="#plot_svg_fancy-192"><span class="linenos">192</span></a>					<span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="n">d_path</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-193"><a href="#plot_svg_fancy-193"><span class="linenos">193</span></a>					<span class="s2">&quot;fill&quot;</span><span class="p">:</span> <span class="n">fill_color</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-194"><a href="#plot_svg_fancy-194"><span class="linenos">194</span></a>					<span class="s2">&quot;stroke&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+</span><span id="plot_svg_fancy-195"><a href="#plot_svg_fancy-195"><span class="linenos">195</span></a>				<span class="p">},</span>
+</span><span id="plot_svg_fancy-196"><a href="#plot_svg_fancy-196"><span class="linenos">196</span></a>			<span class="p">)</span>
+</span><span id="plot_svg_fancy-197"><a href="#plot_svg_fancy-197"><span class="linenos">197</span></a>
+</span><span id="plot_svg_fancy-198"><a href="#plot_svg_fancy-198"><span class="linenos">198</span></a>	<span class="n">raw_svg</span> <span class="o">=</span> <span class="n">tostring</span><span class="p">(</span><span class="n">svg</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;unicode&quot;</span><span class="p">)</span>
+</span><span id="plot_svg_fancy-199"><a href="#plot_svg_fancy-199"><span class="linenos">199</span></a>	<span class="c1"># we are in charge of the svg so it&#39;s safe to decode</span>
+</span><span id="plot_svg_fancy-200"><a href="#plot_svg_fancy-200"><span class="linenos">200</span></a>	<span class="k">return</span> <span class="n">parseString</span><span class="p">(</span><span class="n">raw_svg</span><span class="p">)</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>  <span class="c1"># noqa: S318</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>plot the output of SolvedMaze(...).as_pixels() as a nice svg</p>
+
+<p>Create an SVG with:</p>
+
+<ul>
+<li>A single rounded-square background (walls).</li>
+<li>Each non-wall cell is drawn via create_tile_path, with corner_radius controlling
+whether corners are rounded. (Set corner_radius=0 for squares.)</li>
+</ul>
+
+<h1 id="parameters">Parameters:</h1>
+
+<ul>
+<li><code>pixel_grid : np.ndarray</code>
+3D array of shape (h, w, 3) with RGB values</li>
+<li><code>size : int</code>
+Size (in px) of each grid cell</li>
+<li><code>corner_radius : float</code>
+Radius for rounding corners of each tile (0 =&gt; squares)</li>
+<li><code>bounding_corner_radius : float</code>
+Radius for rounding the outer bounding rectangle</li>
+</ul>
+
+<h1 id="returns">Returns:</h1>
+
+<p><code>str</code>: A pretty-printed SVG string</p>
+</div>
+
+
+                </section>
+    </main>
+<script>
+    function escapeHTML(html) {
+        return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
+    }
+
+    const originalContent = document.querySelector("main.pdoc");
+    let currentContent = originalContent;
+
+    function setContent(innerHTML) {
+        let elem;
+        if (innerHTML) {
+            elem = document.createElement("main");
+            elem.classList.add("pdoc");
+            elem.innerHTML = innerHTML;
+        } else {
+            elem = originalContent;
+        }
+        if (currentContent !== elem) {
+            currentContent.replaceWith(elem);
+            currentContent = elem;
+        }
+    }
+
+    function getSearchTerm() {
+        return (new URL(window.location)).searchParams.get("search");
+    }
+
+    const searchBox = document.querySelector(".pdoc input[type=search]");
+    searchBox.addEventListener("input", function () {
+        let url = new URL(window.location);
+        if (searchBox.value.trim()) {
+            url.hash = "";
+            url.searchParams.set("search", searchBox.value);
+        } else {
+            url.searchParams.delete("search");
+        }
+        history.replaceState("", "", url.toString());
+        onInput();
+    });
+    window.addEventListener("popstate", onInput);
+
+
+    let search, searchErr;
+
+    async function initialize() {
+        try {
+            search = await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.type = "text/javascript";
+                script.async = true;
+                script.onload = () => resolve(window.pdocSearch);
+                script.onerror = (e) => reject(e);
+                script.src = "../../search.js";
+                document.getElementsByTagName("head")[0].appendChild(script);
+            });
+        } catch (e) {
+            console.error("Cannot fetch pdoc search index");
+            searchErr = "Cannot fetch search index.";
+        }
+        onInput();
+
+        document.querySelector("nav.pdoc").addEventListener("click", e => {
+            if (e.target.hash) {
+                searchBox.value = "";
+                searchBox.dispatchEvent(new Event("input"));
+            }
+        });
+    }
+
+    function onInput() {
+        setContent((() => {
+            const term = getSearchTerm();
+            if (!term) {
+                return null
+            }
+            if (searchErr) {
+                return `<h3>Error: ${searchErr}</h3>`
+            }
+            if (!search) {
+                return "<h3>Searching...</h3>"
+            }
+
+            window.scrollTo({top: 0, left: 0, behavior: 'auto'});
+
+            const results = search(term);
+
+            let html;
+            if (results.length === 0) {
+                html = `No search results for '${escapeHTML(term)}'.`
+            } else {
+                html = `<h4>${results.length} search result${results.length > 1 ? "s" : ""} for '${escapeHTML(term)}'.</h4>`;
+            }
+            for (let result of results.slice(0, 10)) {
+                let doc = result.doc;
+                let url = `../../${doc.modulename.replaceAll(".", "/")}.html`;
+                if (doc.qualname) {
+                    url += `#${doc.qualname}`;
+                }
+
+                let heading;
+                switch (result.doc.kind) {
+                    case "function":
+                        if (doc.fullname.endsWith(".__init__")) {
+                            heading = `<span class="name">${doc.fullname.replace(/\.__init__$/, "")}</span>${doc.signature}`;
+                        } else {
+                            heading = `<span class="def">${doc.funcdef}</span> <span class="name">${doc.fullname}</span>${doc.signature}`;
+                        }
+                        break;
+                    case "class":
+                        heading = `<span class="def">class</span> <span class="name">${doc.fullname}</span>`;
+                        if (doc.bases)
+                            heading += `<wbr>(<span class="base">${doc.bases}</span>)`;
+                        heading += `:`;
+                        break;
+                    case "variable":
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        if (doc.annotation)
+                            heading += `<span class="annotation">${doc.annotation}</span>`;
+                        if (doc.default_value)
+                            heading += `<span class="default_value"> = ${doc.default_value}</span>`;
+                        break;
+                    default:
+                        heading = `<span class="name">${doc.fullname}</span>`;
+                        break;
+                }
+                html += `
+                        <section class="search-result">
+                        <a href="${url}" class="attr ${doc.kind}">${heading}</a>
+                        <div class="docstring">${doc.doc}</div>
+                        </section>
+                    `;
+
+            }
+            return html;
+        })());
+    }
+
+    if (getSearchTerm()) {
+        initialize();
+        searchBox.value = getSearchTerm();
+        onInput();
+    } else {
+        searchBox.addEventListener("focus", initialize, {once: true});
+    }
+
+    searchBox.addEventListener("keydown", e => {
+        if (["ArrowDown", "ArrowUp", "Enter"].includes(e.key)) {
+            let focused = currentContent.querySelector(".search-result.focused");
+            if (!focused) {
+                currentContent.querySelector(".search-result").classList.add("focused");
+            } else if (
+                e.key === "ArrowDown"
+                && focused.nextElementSibling
+                && focused.nextElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.nextElementSibling.classList.add("focused");
+                focused.nextElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "ArrowUp"
+                && focused.previousElementSibling
+                && focused.previousElementSibling.classList.contains("search-result")
+            ) {
+                focused.classList.remove("focused");
+                focused.previousElementSibling.classList.add("focused");
+                focused.previousElementSibling.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "nearest"
+                });
+            } else if (
+                e.key === "Enter"
+            ) {
+                focused.querySelector("a").click();
+            }
+        }
+    });
+</script></body>
+</html>

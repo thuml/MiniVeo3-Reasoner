@@ -1,0 +1,40 @@
+\begin{table}[H]
+\centering
+\begin{tabular}{|ll|r|rrr|}
+	\hline
+	maze\_ctor
+			& keyword args           & all sizes 
+												& \shortstack{small \\ $g \leq 10$} 
+															& \shortstack{medium \\ $g \in (10, 32]$} 
+																	& \shortstack{large \\ $g > 32$} \\
+	\hline\hline
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_dfs}{dfs}
+			&                        &   28.0   &    2.8   &   20.3   &  131.8   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_dfs}{dfs}
+			& accessible\_cells=20   &    2.3   &    2.2   &    2.4   &    2.2   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_dfs}{dfs}
+			& do\_forks=False        &    2.7   &    2.2   &    3.1   &    3.5   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_dfs}{dfs}
+			& max\_tree\_depth=0.5   &    2.5   &    2.0   &    2.7   &    4.0   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_dfs_percolation}{dfs\_percolation}
+			& p=0.1                  &   43.9   &    2.8   &   33.9   &  208.0   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_dfs_percolation}{dfs\_percolation}
+			& p=0.4                  &   48.7   &    3.0   &   36.5   &  233.5   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_kruskal}{kruskal}
+			&                        &   12.8   &    1.9   &   10.3   &   55.8   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_percolation}{percolation}
+			& p=1.0                  &   50.2   &    2.6   &   37.2   &  242.5   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_recursive_division}{recursive\_div}
+			&                        &   10.2   &    1.7   &    8.9   &   42.1   \\
+	\docslink{maze_dataset.html\#LatticeMazeGenerators.gen_wilson}{wilson}
+			&                        &  676.5   &    7.8   &  188.6   & 3992.6   \\
+	\hline\hline
+	mean
+			&                        &  559.9   &   13.0   &  223.5   & 3146.9   \\
+	median
+			&                        &   11.1   &    6.5   &   32.9   &  302.7   \\
+	\hline
+\end{tabular}
+\caption{Generation times in milliseconds for various algorithms and maze sizes. More information can be found on the \docslink{benchmarks}{benchmarks page}.}
+\label{tab:benchmarks}
+\end{table}

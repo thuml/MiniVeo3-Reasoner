@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="440" viewBox="0 0 440 440">
+  <rect x="0" y="0" width="440" height="440" fill="#222" rx="20.0" ry="20.0"/>
+  <path d="M 48.0,40 L 80,40 L 80,80 L 40,80 L 40,48.0 A 8.0 8.0 0 0 1 48.0,40 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 80,40 L 120,40 L 120,80 L 80,80 L 80,40 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 120,40 L 160,40 L 160,80 L 120,80 L 120,40 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 160,40 L 200,40 L 200,80 L 160,80 L 160,40 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 200,40 L 240,40 L 240,80 L 200,80 L 200,40 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 240,40 L 280,40 L 280,80 L 240,80 L 240,40 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 280,40 L 312.0,40 A 8.0 8.0 0 0 1 320,48.0 L 320,80 L 280,80 L 280,40 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 368.0,40 L 392.0,40 A 8.0 8.0 0 0 1 400,48.0 L 400,80 L 360,80 L 360,48.0 A 8.0 8.0 0 0 1 368.0,40 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 40,80 L 80,80 L 80,120 L 40,120 L 40,80 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 200,80 L 240,80 L 240,120 L 200,120 L 200,80 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 280,80 L 320,80 L 320,120 L 280,120 L 280,80 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 360,80 L 400,80 L 400,120 L 360,120 L 360,80 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 40,120 L 80,120 L 80,160 L 48.0,160 A 8.0 8.0 0 0 1 40,152.0 L 40,120 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 80,120 L 120,120 L 120,160 L 80,160 L 80,120 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 120,120 L 152.0,120 A 8.0 8.0 0 0 1 160,128.0 L 160,152.0 A 8.0 8.0 0 0 1 152.0,160 L 120,160 L 120,120 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 200,120 L 240,120 L 240,160 L 200,160 L 200,120 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 280,120 L 320,120 L 320,160 L 288.0,160 A 8.0 8.0 0 0 1 280,152.0 L 280,120 Z" fill="#4caf50" stroke="none"/>
+  <path d="M 320,120 L 360,120 L 360,160 L 320,160 L 320,120 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 360,120 L 400,120 L 400,152.0 A 8.0 8.0 0 0 1 392.0,160 L 360,160 L 360,120 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 200,160 L 240,160 L 240,200 L 200,200 L 200,160 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 48.0,200 L 80,200 L 80,240 L 40,240 L 40,208.0 A 8.0 8.0 0 0 1 48.0,200 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 80,200 L 120,200 L 120,240 L 80,240 L 80,200 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 120,200 L 160,200 L 160,240 L 120,240 L 120,200 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 160,200 L 200,200 L 200,240 L 160,240 L 160,200 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 200,200 L 240,200 L 240,240 L 200,240 L 200,200 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 288.0,200 L 320,200 L 320,240 L 288.0,240 A 8.0 8.0 0 0 1 280,232.0 L 280,208.0 A 8.0 8.0 0 0 1 288.0,200 Z" fill="#f44336" stroke="none"/>
+  <path d="M 320,200 L 360,200 L 360,240 L 320,240 L 320,200 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 360,200 L 392.0,200 A 8.0 8.0 0 0 1 400,208.0 L 400,240 L 360,240 L 360,200 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 40,240 L 80,240 L 80,280 L 40,280 L 40,240 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 200,240 L 240,240 L 240,280 L 200,280 L 200,240 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 360,240 L 400,240 L 400,280 L 360,280 L 360,240 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 40,280 L 80,280 L 80,320 L 40,320 L 40,280 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 128.0,280 L 160,280 L 160,320 L 128.0,320 A 8.0 8.0 0 0 1 120,312.0 L 120,288.0 A 8.0 8.0 0 0 1 128.0,280 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 160,280 L 200,280 L 200,320 L 160,320 L 160,280 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 200,280 L 240,280 L 240,320 L 200,320 L 200,280 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 240,280 L 280,280 L 280,320 L 240,320 L 240,280 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 280,280 L 312.0,280 A 8.0 8.0 0 0 1 320,288.0 L 320,312.0 A 8.0 8.0 0 0 1 312.0,320 L 280,320 L 280,280 Z" fill="#f0f0f0" stroke="none"/>
+  <path d="M 360,280 L 400,280 L 400,320 L 360,320 L 360,280 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 40,320 L 80,320 L 80,360 L 40,360 L 40,320 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 360,320 L 400,320 L 400,360 L 360,360 L 360,320 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 40,360 L 80,360 L 80,400 L 48.0,400 A 8.0 8.0 0 0 1 40,392.0 L 40,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 80,360 L 120,360 L 120,400 L 80,400 L 80,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 120,360 L 160,360 L 160,400 L 120,400 L 120,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 160,360 L 200,360 L 200,400 L 160,400 L 160,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 200,360 L 240,360 L 240,400 L 200,400 L 200,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 240,360 L 280,360 L 280,400 L 240,400 L 240,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 280,360 L 320,360 L 320,400 L 280,400 L 280,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 320,360 L 360,360 L 360,400 L 320,400 L 320,360 Z" fill="#2196f3" stroke="none"/>
+  <path d="M 360,360 L 400,360 L 400,392.0 A 8.0 8.0 0 0 1 392.0,400 L 360,400 L 360,360 Z" fill="#2196f3" stroke="none"/>
+</svg>

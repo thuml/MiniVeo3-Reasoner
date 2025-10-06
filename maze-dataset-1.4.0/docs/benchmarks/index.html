@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark Results</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .columns {
+            display: flex;
+            gap: 30px;
+        }
+        .column {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .column-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        .column-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .view-details {
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .view-details:hover {
+            background-color: #004c99;
+        }
+        .figure {
+            margin-bottom: 40px;
+        }
+        .figure h3 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .figure img {
+            max-width: 100%;
+            /* border: 1px solid #eee; */
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Benchmark Results</h1>
+        <p>Overview of speed and success benchmarks</p>
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <div class="column-header">
+                <h2 class="column-title">Speed</h2>
+                <a href="speed.html" class="view-details">View Details</a>
+            </div>
+            
+            <div class="figure">
+                <h3>Grid Size vs Generation Time</h3>
+                <img src="figures/gridsize-vs-gentime.svg" alt="Grid Size vs Generation Time">
+            </div>
+            
+            <div class="figure">
+                <h3>Number of Mazes vs Generation Time</h3>
+                <img src="figures/n_mazes-vs-gentime.svg" alt="Number of Mazes vs Generation Time">
+            </div>
+        </div>
+        
+        <div class="column">
+            <div class="column-header">
+                <h2 class="column-title">Success</h2>
+                <a href="success.html" class="view-details">View Details</a>
+            </div>
+            
+            <div class="figure">
+                <h3>No Endpoint Restrictions</h3>
+                <img src="percolation_fractions/medium/ep_any.svg" alt="No Endpoint Restrictions">
+            </div>
+            
+            <div class="figure">
+                <h3>Dead Ends</h3>
+                <img src="percolation_fractions/medium/ep_deadends.svg" alt="Dead Ends">
+            </div>
+            
+            <div class="figure">
+                <h3>Unique Dead Ends</h3>
+                <img src="percolation_fractions/medium/ep_deadends_unique.svg" alt="Unique Dead Ends">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
