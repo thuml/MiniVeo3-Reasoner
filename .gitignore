@@ -3,6 +3,4 @@ __pycache__
 default_dataset
 dataset
 eval_result
-metadata.csv
-debug.mp4
 models
