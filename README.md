@@ -193,7 +193,12 @@ The result will be in `dataset/maze_train` and `dataset/maze_test` respectively.
 
 ### Inference
 
-Download our [LoRA weights](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) and save it to `./model/`.
+Download our [LoRA weights](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) and save it to `model`.
+
+```bash
+pip install "huggingface_hub[cli]"
+huggingface-cli download thuml/MiniVeo3-Reasoner-Maze-5B --local-dir model
+```
 
 To run inference on a single file or directory, use:
 
@@ -211,7 +216,7 @@ bash scripts/inference_maze_testset.sh
 
 ### Success Evaluation
 
-Our evaluator compares the predicted trajectory with the ground truth, reporting the distance between the two paths.
+Our evaluator compares the predicted trajectory with the ground truth, computing the distance between the two paths.
 
 We implement our own versions of Exact Match (EM) and Progress Rate (PR) metrics (see [Visual Planning](https://github.com/yix8/VisualPlanning)) for video-based evaluation.
 
