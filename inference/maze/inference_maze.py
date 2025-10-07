@@ -4,7 +4,8 @@ import torch
 from PIL import Image
 from diffsynth import save_video
 from diffsynth.pipelines.wan_video_new import WanVideoPipeline, ModelConfig
-from modelscope import dataset_snapshot_download
+
+from prompts import MAZE_PROMPT as prompt
 
 import sys
 pipe = WanVideoPipeline.from_pretrained(
@@ -16,27 +17,6 @@ pipe = WanVideoPipeline.from_pretrained(
         ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="Wan2.2_VAE.pth", offload_device="cpu"),
     ],
 )
-
-
-prompt="Create a 2D animation based on the provided image of a maze.\
-    The blue star slides smoothly along the white path, stopping perfectly on the red flag and then acquiring a trophy.\
-    The blue star never slides or crosses into the black segments of the maze.\
-    The camera is a static, top-down view showing the entire maze.\
-    Maze:\
-    * The maze paths are white, the walls are black.\
-    * The blue star depart from origin, represented by a green circle.\
-    * The blue star slides smoothly along the white path.\
-    * The blue star never slides or crosses into the black segments of the maze.\
-    * The blue star stops perfectly on the red flag, acquiring a trophy thereafter.\
-    Scene:\
-    * No change in scene composition.\
-    * No change in the layout of the maze.\
-    * The blue star travels along the path without speeding up or slowing down.\
-    Camera:\
-    * Static camera.\
-    * No zoom.\
-    * No pan.\
-    * No glitches, noise, or artifacts."
 
 pipe.load_lora(pipe.dit, f"model/miniveo3_reasoner_maze.safetensors", alpha=1)
 

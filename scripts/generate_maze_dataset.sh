@@ -14,3 +14,38 @@ python data/maze/maze_generator.py --grid-n 6 --n-mazes 1250 --min-path-length 2
 python data/maze/maze_generator.py --grid-n 7 --n-mazes 250 --min-path-length 2 --max-path-length 14 --output-dir ./dataset/maze7x7 --file-prefix "maze7" -q
 python data/maze/maze_generator.py --grid-n 8 --n-mazes 250 --min-path-length 2 --max-path-length 16 --output-dir ./dataset/maze8x8 --file-prefix "maze8" -q
 python data/maze/maze_generator.py --grid-n 6 --n-mazes 250 --min-path-length 13 --max-path-length 18 --output-dir ./dataset/maze6x6_ood --file-prefix "maze6ood" -q
+
+# Split train and test datasets
+
+# Create train dataset at dataset/maze_train
+for ((i=3; i<=6; i++)); do
+    source_dir="dataset/maze${i}x${i}"
+    target_dir="dataset/maze_train"
+
+    mkdir -p "$target_dir"
+
+    for ((x=1; x<=1000; x++)); do
+        num=$(printf "%04d" $x)
+
+        mp4_file="maze${i}_${num}.mp4"
+
+        if [ -f "$source_dir/$mp4_file" ]; then
+            mv "$source_dir/$mp4_file" "$target_dir/"
+        fi
+        
+        png_file="maze${i}_${num}_00.png"
+        if [ -f "$source_dir/$png_file" ]; then
+            mv "$source_dir/$png_file" "$target_dir/"
+        fi
+    done
+done
+
+python data/maze/metadata_gen.py
+
+echo "Train dataset created at dataset/maze_train"
+
+# Create test dataset at dataset/test
+mkdir -p dataset/maze_test
+mv dataset/{maze3x3,maze4x4,maze5x5,maze6x6,maze7x7,maze8x8,maze6x6_ood} dataset/maze_test
+
+echo "Test dataset created at dataset/maze_test"
