@@ -11,15 +11,11 @@ pipe = WanVideoPipeline.from_pretrained(
     torch_dtype=torch.bfloat16,
     device="cuda",
     model_configs=[
-        ModelConfig(path="model/models_t5_umt5-xxl-enc-bf16.pth", offload_device="cpu"),
-        ModelConfig(path="model/diffusion_pytorch_model-00001-of-00003-bf16.safetensors", offload_device="cpu"),
-        ModelConfig(path="model/diffusion_pytorch_model-00002-of-00003-bf16.safetensors", offload_device="cpu"),
-        ModelConfig(path="model/diffusion_pytorch_model-00003-of-00003-bf16.safetensors", offload_device="cpu"),
-        ModelConfig(path="model/Wan2.2_VAE.pth", offload_device="cpu"),
+        ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="models_t5_umt5-xxl-enc-bf16.pth", offload_device="cpu"),
+        ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="diffusion_pytorch_model*.safetensors", offload_device="cpu"),
+        ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="Wan2.2_VAE.pth", offload_device="cpu"),
     ],
 )
-
-
 
 
 prompt="Create a 2D animation based on the provided image of a maze.\
