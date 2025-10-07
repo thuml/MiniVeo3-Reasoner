@@ -230,7 +230,7 @@ Make sure your inference results are in `dataset/test` and your result files nam
 
 We train [Wan](https://github.com/Wan-Video/Wan2.2) model Wan-AI/Wan2.2-TI2V-5B with LoRA, which is well-instructed. You can easily fine-tune your own models.
 
-For your convenience if you follow ours, you can copy our split test dataset`./dataset/train/.` directly into `DiffSynth-Studio/data/example_video_dataset`.
+For your convenience if you follow ours, you can copy our split train dataset`./dataset/train/.` directly into `DiffSynth-Studio/data/example_video_dataset`.
 
 ## 🤝 Contributors
 
