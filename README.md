@@ -16,6 +16,8 @@ In the maze domain, the fine-tuned models—dubbed **MiniVeo3-Reasoner**—exhib
 
 Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms baseline approaches** that reason in other modalities such as text or images.
 
+We further envision that this visual reasoning capability can be **enhanced through reinforcement learning of video models**.
+
 ![method overview](assets/overview.png)
 
 ## 🔥 News
