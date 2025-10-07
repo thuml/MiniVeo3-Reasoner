@@ -9,7 +9,7 @@ root_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
 sys.path.append(root_dir)
 from prompts import MAZE_PROMPT as prompt
 
-with open("metadata.csv", "w") as f:
+with open("dataset/maze_train/metadata.csv", "w") as f:
     f.write("video,prompt,input_image\n")
 
 for grid_n in [3, 4, 5, 6]:
