@@ -191,7 +191,7 @@ def main():
     args = parser.parse_args()
     dir_path = args.input_dir
     output_dir = args.output_dir
-    epoch_name ="miniveo3-reasoner-maze"# args.epoch_name
+    epoch_name ="miniveo3-reasoner-maze"  # args.epoch_name
     div = list(map(int, args.div.split(','))) if args.div else default_div
     threshold = args.threshold
     omit = args.quiet
