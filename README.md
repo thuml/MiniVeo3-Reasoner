@@ -233,9 +233,9 @@ bash scripts/evaluate_maze.sh
 
 ### Training Models
 
-We train Wan2.2-TI2V-5B with LoRA, following the instruction provided in DiffSynth-Studio. You can easily fine-tune your own models using the same framework.
+We train Wan2.2-TI2V-5B with LoRA, following the instructions provided in DiffSynth-Studio. You can easily fine-tune your own models using the same framework.
 
-For your convenience if you follow ours, you can copy the train dataset `dataset/maze_train` directly into `DiffSynth-Studio/data/example_video_dataset`.
+For your convenience, if you follow ours, you can copy the train dataset `dataset/maze_train` directly into `DiffSynth-Studio/data/example_video_dataset`.
 
 ## 🤝 Contributors
 
