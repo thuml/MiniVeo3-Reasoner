@@ -212,7 +212,7 @@ python inference/maze/inference_maze.py [-r] filename/directory
 
 We use serveral metrics to evaluate the result.
 
-Our evaluator compares the inferenced version and the answer version of one single output, then give the max distance of these two trajectories.
+Our evaluator compares the inferred version and the answer version of one single output, then give the max distance of these two trajectories.
 
 The results are divided into several categories based on the distances, and then determine whether it's correct, or it's imperfect.
 
