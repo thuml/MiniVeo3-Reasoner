@@ -4,7 +4,7 @@
 # If you don't provide an epoch name (use our model), your results should be named as mazeN_IIII_inference.mp4
 # If you provide an epoch name (use your own model), your results should be named as mazeN_IIII_{epochname}_inference.mp4
 
-input_rt="dataset/test"
+input_rt="dataset/maze_test"
 
 epochname=$1
 
