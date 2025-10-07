@@ -202,7 +202,7 @@ bash scripts/inference_maze_testset.sh
 
 It may take time to download model files of Wan2.2-TI2V-5B the first time you run.
 
-You can also use `inference/maze/inference_maze.py` to inference single file or directory. Run:
+You can also use `inference/maze/inference_maze.py` to perform inference on single file or directory. Run:
 
 ```bash
 python inference/maze/inference_maze.py [-r] filename/directory
@@ -212,7 +212,7 @@ python inference/maze/inference_maze.py [-r] filename/directory
 
 We use serveral metrics to evaluate the result.
 
-Our evaluator compares the inferred version and the answer version of one single output, then give the max distance of these two trajectories.
+Our evaluator compares the inference version and the answer version of one single output, then give the max distance of these two trajectories.
 
 The results are divided into several categories based on the distances, and then determine whether it's correct, or it's imperfect.
 
@@ -230,7 +230,7 @@ Make sure your inference results are in `dataset/test` and your result files nam
 
 We train [Wan](https://github.com/Wan-Video/Wan2.2) model Wan-AI/Wan2.2-TI2V-5B with LoRA, which is well-instructed. You can easily fine-tune your own models.
 
-For your convenience if you follow ours, you can copy our split test dataset`./dataset/test/.` directly into `DiffSynth-Studio/data/example_video_dataset`.
+For your convenience if you follow ours, you can copy our split test dataset`./dataset/train/.` directly into `DiffSynth-Studio/data/example_video_dataset`.
 
 ## 🤝 Contributors
 
