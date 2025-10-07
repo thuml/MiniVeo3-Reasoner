@@ -183,7 +183,7 @@ def main():
     parser = argparse.ArgumentParser(description='Evaluate video reasoning results.')
     parser.add_argument('--input-dir', '-i', type=str, default=default_dir, help='Evaluation data input directory.')
     parser.add_argument('--output-dir', '-o', type=str, default=default_output_dir, help='Evaluation result output directory')
-    # parser.add_argument('--epoch-name', '-e', type=str, default=default_epoch_name, help='Epoch name in filename. Your output should be like xxx_{epoch_name}_inference.mp4')
+    parser.add_argument('--epoch-name', '-e', type=str, default=default_epoch_name, help='Epoch name in filename. Your output should be like xxx_{epoch_name}_inference.mp4')
     parser.add_argument('--div', '-d', type=str, default=','.join(map(str, default_div)), help='Division points for categories, e.g., "10,20,30"')
     parser.add_argument('--quiet', '-q', action='store_true', help='Quiet mode, suppress output')
     parser.add_argument('--threshold', '-t', type=int, default=default_threshold, help='The threshold pixel distance to determined to be wrong, default=20.')
