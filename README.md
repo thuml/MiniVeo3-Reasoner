@@ -193,11 +193,11 @@ The result will be in `dataset/maze_train` and `dataset/maze_test` respectively.
 
 ### Inference
 
-Download our [LoRA weights](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) and save it to `model`.
+Download our [LoRA weights](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B):
 
 ```bash
 pip install "huggingface_hub[cli]"
-huggingface-cli download thuml/MiniVeo3-Reasoner-Maze-5B --local-dir model
+huggingface-cli download thuml/MiniVeo3-Reasoner-Maze-5B --local-dir models/thuml/MiniVeo3-Reasoner-Maze-5B
 ```
 
 To run inference on a single file or directory, use:

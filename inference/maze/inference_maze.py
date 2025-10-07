@@ -1,69 +1,39 @@
-# We provide a simple fast inference script. You need to download the model to ./model and install diffsynth first.
+import sys
+import argparse
+import os
+from tqdm import tqdm
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
+sys.path.append(root_dir)
+from prompts import MAZE_PROMPT as prompt
 
 import torch
 from PIL import Image
 from diffsynth import save_video
 from diffsynth.pipelines.wan_video_new import WanVideoPipeline, ModelConfig
 
-from prompts import MAZE_PROMPT as prompt
 
-import sys
-pipe = WanVideoPipeline.from_pretrained(
-    torch_dtype=torch.bfloat16,
-    device="cuda",
-    model_configs=[
-        ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="models_t5_umt5-xxl-enc-bf16.pth", offload_device="cpu"),
-        ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="diffusion_pytorch_model*.safetensors", offload_device="cpu"),
-        ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="Wan2.2_VAE.pth", offload_device="cpu"),
-    ],
-)
+def get_pipe():
+    pipe = WanVideoPipeline.from_pretrained(
+        torch_dtype=torch.bfloat16,
+        device="cuda",
+        model_configs=[
+            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B",
+                        origin_file_pattern="models_t5_umt5-xxl-enc-bf16.pth", offload_device="cpu"),
+            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B",
+                        origin_file_pattern="diffusion_pytorch_model*.safetensors", offload_device="cpu"),
+            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="Wan2.2_VAE.pth", offload_device="cpu"),
+        ],
+    )
 
-pipe.load_lora(pipe.dit, f"model/miniveo3_reasoner_maze.safetensors", alpha=1)
+    pipe.load_lora(pipe.dit, f"models/thuml/MiniVeo3-Reasoner-Maze-5B/miniveo3_reasoner_maze_wan22_5b_lora.safetensors", alpha=1)
 
-pipe.enable_vram_management()
+    pipe.enable_vram_management()
+    return pipe
 
-import argparse
-import os
-import sys
-from tqdm import tqdm
 
-def main():
-    parser = argparse.ArgumentParser(description='Inference')
-    
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('file', nargs='?', help='Input data file (PNG)')
-    group.add_argument('-r', metavar='DIR', dest='dir', help='Process all PNG files in the directory')
-    
-    parser.add_argument('--quiet','-q', action='store_true', help='Suppress output messages')
-    
-    args = parser.parse_args()
-    
-    if args.file:
-        if not args.file.endswith('.png'):
-            print(f"Error: {args.file} is not a PNG file.")
-            sys.exit(1)
-        if not os.path.isfile(args.file):
-            print(f"Error: {args.file} does not exist.")
-            sys.exit(1)
-        run(args.file)
-    
-    elif args.dir:
-        if not os.path.isdir(args.dir):
-            print(f"Error: {args.dir} does not exist.")
-            sys.exit(1)
-        
-        data=[]
-        for item in os.listdir(args.dir):
-            if item.endswith('.png'):
-                file_path = os.path.join(args.dir, item)
-                if os.path.isfile(file_path):
-                    data.append(file_path)
-        
-        data.sort()
-        for item in tqdm(data, desc=f"Processing {args.dir}", unit="file", disable=args.quiet):
-            run(item)
-
-def run(file_path):
+def run(pipe, file_path, quiet):
     input_image = Image.open(file_path)
     video = pipe(
         prompt=prompt,
@@ -73,9 +43,45 @@ def run(file_path):
     )
     output_path = file_path[:-4] + "_inference.mp4"
     save_video(video, output_path, fps=15, quality=5)
-    if not args.quiet:
+    if not quiet:
         tqdm.write(f"Saved: {output_path}")
-    
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Inference')
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('file', nargs='?', help='Input data file (PNG)')
+    group.add_argument('-r', metavar='DIR', dest='dir', help='Process all PNG files in the directory')
+    parser.add_argument('--quiet', '-q', action='store_true', help='Suppress output messages')
+    args = parser.parse_args()
+
+    pipe = get_pipe()
+
+    if args.file:
+        if not args.file.endswith('.png'):
+            print(f"Error: {args.file} is not a PNG file.")
+            sys.exit(1)
+        if not os.path.isfile(args.file):
+            print(f"Error: {args.file} does not exist.")
+            sys.exit(1)
+        run(pipe, args.file, args.quiet)
+
+    elif args.dir:
+        if not os.path.isdir(args.dir):
+            print(f"Error: {args.dir} does not exist.")
+            sys.exit(1)
+
+        data = []
+        for item in os.listdir(args.dir):
+            if item.endswith('.png'):
+                file_path = os.path.join(args.dir, item)
+                if os.path.isfile(file_path):
+                    data.append(file_path)
+
+        data.sort()
+        for item in tqdm(data, desc=f"Processing {args.dir}", unit="file", disable=args.quiet):
+            run(pipe, item, args.quiet)
+
 
 if __name__ == '__main__':
     main()
