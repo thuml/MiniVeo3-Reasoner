@@ -270,3 +270,7 @@ If you find MiniVeo3-Reasoner useful, we would appreciate it if you could cite o
     howpublished = {\url{https://github.com/thuml/MiniVeo3-Reasoner}},
 }
 ```
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=thuml/MiniVeo3-Reasoner&type=Date)](https://www.star-history.com/#thuml/MiniVeo3-Reasoner&Date)
