@@ -1,8 +1,6 @@
 from compare_traj import compare
 from identify_traj import gen_traj
 import os
-#dir = '/data/NAS/rl_data/video_reasoner/huangtianhao_data/DiffSynth-Studio/inferenced_20251004/'
-#dir = '/data/NAS/rl_data/video_reasoner/huangtianhao_data/inference_only/generality/map-change/6by6_1.0/'
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,10 +8,10 @@ import numpy as np
 def plot_density(data, filename='density_plot.png', save_path='./', div=[10,20,30], title='Density Plot'):
     plt.figure(figsize=(10, 6))
     
-    # 定义分界点和颜色
+    # define boundaries
     boundaries = div
     
-    # 绘制整个密度图作为背景
+    # plot the density plot as background
     sns.histplot(data, kde=True, stat="density", alpha=0.7)
     
     ranges = [(-np.inf, boundaries[0]), 
@@ -26,17 +24,16 @@ def plot_density(data, filename='density_plot.png', save_path='./', div=[10,20,3
     plt.title(title)
     plt.grid(alpha=0.3)
     
-    # 添加分界线
+    # add division lines
     for boundary in boundaries:
         plt.axvline(x=boundary, color='black', linestyle='--', alpha=0.7, linewidth=1)
         
     
     data=np.array(data)
-    # 计算累计比例并添加图例
+    # calculate proportions and add text box
     cumulative_proportions = []
     proportions_text = f"Proportions: (total={len(data)})\n"
     
-    # 计算每个区间的累计比例
     for i, (start, end) in enumerate(ranges):
         if start == -np.inf:
             count = np.sum(data <= end)
@@ -48,7 +45,6 @@ def plot_density(data, filename='density_plot.png', save_path='./', div=[10,20,3
         proportion = count / len(data)
         cumulative_proportions.append(proportion)
         
-        # 构建区间描述
         if start == -np.inf:
             range_desc = f"≤{end}"
         elif end == np.inf:
@@ -58,7 +54,7 @@ def plot_density(data, filename='density_plot.png', save_path='./', div=[10,20,3
         
         proportions_text += f"{range_desc}: {proportion:.1%}\n"
     
-    # 在图上添加文本框
+    # add text box
     plt.text(0.95, 0.95, proportions_text, transform=plt.gca().transAxes,
              verticalalignment='top', horizontalalignment='right',
              bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8),
@@ -97,7 +93,8 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
         if os.path.isfile(item_path) and item.lower().endswith('.png'):
             parts = item.split('_00.png')
             name = parts[0]
-            if os.path.isfile(os.path.join(dir, f"{name}_{epoch_name}_inference.mp4")):
+            # if os.path.isfile(os.path.join(dir, f"{name}_{epoch_name}_inference.mp4")) and os.path.isfile(os.path.join(dir, f"{name}.mp4")):
+            if os.path.isfile(os.path.join(dir, f"{name}_inference.mp4")) and os.path.isfile(os.path.join(dir, f"{name}.mp4")):
                 png_items.append(item)
     
     total_num=len(png_items)
@@ -106,12 +103,12 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
         return
     from tqdm import tqdm
     
-    # 创建彩色输出函数
+    # colored output function
     def colored_similarity_output(filename, similarity_type):
         colors = {
-            'Moderately Similar': '\033[92m',  # 绿色
-            'Slightly Similar': '\033[93m',     # 黄色
-            'Significantly Different': '\033[91m'  # 红色
+            'Moderately Similar': '\033[92m',  # green
+            'Slightly Similar': '\033[93m',     # yellow
+            'Significantly Different': '\033[91m'  # red
         }
         color_code = colors.get(similarity_type, '')
         reset_code = '\033[0m'
@@ -120,13 +117,15 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
             return f"{color_code}{filename}: {similarity_type}{reset_code}"
         return None
 
-    # 使用tqdm处理循环
+    # tqdm loop
     for item in tqdm(png_items, desc=f"Processing {dir}", total=total_num, 
                     bar_format="{l_bar}%s{bar}%s{r_bar}" % ('\033[94m', '\033[0m')):
         parts = item.split('_00.png')
         name = parts[0]
         file1 = f"{name}.mp4"
-        file2 = f"{name}_{epoch_name}_inference.mp4"
+        # file2 = f"{name}_{epoch_name}_inference.mp4"
+        file2 = f"{name}_inference.mp4"
+        
 
         expert, student = gen_traj(f"{dir}/{file1}", f"{dir}/{file2}")
         max_index, max_distance, dis, _1, _2 = compare(expert, student)
@@ -144,7 +143,7 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
         max_distances.append(max_distance)
         similarity_groups[metrics['similarity_evaluation']].append((file2, metrics))
         
-        # 输出结果（省略Highly Similar）
+        # output results (omit Highly Similar)
         colored_output = colored_similarity_output(file2, metrics['similarity_evaluation'])
         if colored_output:
             tqdm.write(colored_output)
@@ -160,31 +159,31 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
             os.makedirs(directory, exist_ok=True)
         
         with open(filename, 'w', encoding='utf-8') as f:
-            f.write(f"{evaluation} 文件列表\n")
+            f.write(f"{evaluation} Files\n")
             f.write("=" * 50 + "\n")
-            f.write(f"总计: {len(files)} 个文件\n\n")
+            f.write(f"Total: {len(files)} files.\n\n")
             
             for file in files:
-                f.write(f"{file[0]}: dist={file[1]["max_distance"]}, PR={file[1]["PR"]}\n")
+                f.write(f"{file[0]}: dist={file[1]['max_distance']}, PR={file[1]['PR']}\n")
         if not omit:
-            print(f"已生成文件: {filename}")
+            print(f"Generated file: {filename}")
     
 import sys
 import argparse
 
 def main():
-    # 设置默认值
+    # default parameters
     default_dir = "./"
     default_output_dir = "./result"
-    default_epoch_name = "epoch-0"
+    # default_epoch_name = "epoch-0"
     default_div = [10, 20, 30]
     default_threshold = 20
     
-    # 使用 argparse 处理命令行参数
+    # argparse settings
     parser = argparse.ArgumentParser(description='Evaluate video reasoning results.')
     parser.add_argument('--input-dir', '-i', type=str, default=default_dir, help='Evaluation data input directory.')
     parser.add_argument('--output-dir', '-o', type=str, default=default_output_dir, help='Evaluation result output directory')
-    parser.add_argument('--epoch-name', '-e', type=str, default=default_epoch_name, help='Epoch name in filename. Your output should be like xxx_{epoch_name}_inference.mp4')
+    # parser.add_argument('--epoch-name', '-e', type=str, default=default_epoch_name, help='Epoch name in filename. Your output should be like xxx_{epoch_name}_inference.mp4')
     parser.add_argument('--div', '-d', type=str, default=','.join(map(str, default_div)), help='Division points for categories, e.g., "10,20,30"')
     parser.add_argument('--quiet', '-q', action='store_true', help='Quiet mode, suppress output')
     parser.add_argument('--threshold', '-t', type=int, default=default_threshold, help='The threshold pixel distance to determined to be wrong, default=20.')
@@ -192,7 +191,7 @@ def main():
     args = parser.parse_args()
     dir_path = args.input_dir
     output_dir = args.output_dir
-    epoch_name = args.epoch_name
+    epoch_name ="miniveo3-reasoner-maze"# args.epoch_name
     div = list(map(int, args.div.split(','))) if args.div else default_div
     threshold = args.threshold
     omit = args.quiet
@@ -200,7 +199,7 @@ def main():
     if not omit:
         print(f"Evaluation data input directory: {dir_path}")
         print(f"Evaluation result output directory: {output_dir}")
-        print(f"Epoch name: {epoch_name}")
+        # print(f"Epoch name: {epoch_name}")
         print(f"Division points: {div}")
         print(f"Threshold: {threshold}")
 

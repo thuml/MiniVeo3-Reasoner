@@ -1,6 +1,5 @@
-# 生成metadata.csv
-# 每个视频对应一行，包含视频文件名、prompt、输入图像文件名
-
+# Generate metadata.csv
+# Each video corresponds to one line, including video filename, prompt, input image filename
 
 
 prompt="Create a 2D animation based on the provided image of a maze.\
@@ -30,5 +29,5 @@ for grid_n in [3,4,5,6]:
     for i in range(1,1001):
         filename=f"maze{grid_n}_{i:04d}.mp4"
         framename=f"maze{grid_n}_{i:04d}_00.png"
-        with open("data/example_video_dataset/metadata.csv","a") as f:
+        with open("./dataset/train/metadata.csv","a") as f:
             f.write(f"{filename},\"{prompt}\",{framename}\n")

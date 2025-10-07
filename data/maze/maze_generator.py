@@ -34,6 +34,7 @@ parser.add_argument("--n-mazes", "-n", type=int, default=default_n_mazes,
                     help="Number of mazes to generate, default=10")
 parser.add_argument("--min-path-length", "-l", type=int, help="(Optional) Minimum path length")
 parser.add_argument("--max-path-length", "-r", type=int, help="(Optional) Maximum path length")
+parser.add_argument("--file-prefix", "-p", type=str, default="maze", help="(Optional) File prefix for output files")
 parser.add_argument("--create-algo", "-c", type=str, default=default_maze_ctor,
                     help="(Optional) Maze generation algorithm, default='gen_kruskal'")
 parser.add_argument("--quiet", "-q", help="Quiet mode, no output", action="store_true")
@@ -44,6 +45,7 @@ grid_n = args.grid_n
 n_mazes = args.n_mazes
 min_path_length = args.min_path_length if args.min_path_length else 2
 max_path_length = args.max_path_length if args.max_path_length else 2 * grid_n
+file_prefix = args.file_prefix if args.file_prefix else f"maze{grid_n}"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
@@ -115,8 +117,8 @@ def export_mp4(m, output_file, fps=15):
 if not args.quiet:
     print(f"Making {n_mazes} {grid_n} by {grid_n} mazes to {output_dir}/ ...")
     for i, maze in enumerate(dataset):
-        export_mp4(maze, f'maze{grid_n}_{i + 1:04d}', fps=15)
+        export_mp4(maze, f'{file_prefix}_{i + 1:04d}', fps=15)
 else:
     from tqdm import tqdm
     for i, maze in enumerate(tqdm(dataset, desc=f"Generating mazes {grid_n}x{grid_n}")):
-        export_mp4(maze, f'maze{grid_n}_{i + 1:04d}', fps=15)
+        export_mp4(maze, f'{file_prefix}_{i + 1:04d}', fps=15)

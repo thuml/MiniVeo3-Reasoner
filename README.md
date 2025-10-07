@@ -180,11 +180,31 @@ To reproduce the same data distribution used in our experiments, simply run:
 bash scripts/generate_maze_dataset.sh
 ```
 
+Furthermore, if you want to split the train and test datasets, simply run:
+
+```bash
+# make sure you have run scripts/generate_maze_dataset.sh first
+
+bash scripts/split_maze_train_test.sh
+```
+
+The result will be in `dataset/train` and `dataset/test` respectively.
+
 ### Inference
 
-Our inference is based on [Wan](https://github.com/Wan-Video/Wan2.2) model. By the time of writing this MD, the provided `inference5b.py` works for our inferencing. We will soon provide a generalized version.
+Our inference is based on [Wan](https://github.com/Wan-Video/Wan2.2) model. See Training Models for further usage.
 
-You can check `./inference/inference5b.py`.
+If you want to try a simple fast inference, download our model on <a href="https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B"><img src="https://img.shields.io/badge/🤗_HuggingFace-fcd022?style=for-the-badge" alt="HuggingFace"></a> and save it to `./model/`. Then run:
+
+```bash
+bash scripts/inference_maze_testset.sh
+```
+
+You can also use `inference/maze/inference_maze.py` to inference single file or directory. Run:
+
+```bash
+python inference/maze/inference_maze.py [-r] filename/directory
+```
 
 ### Success Evaluation
 
@@ -199,16 +219,16 @@ We provide max-distance and PR (see [Visual Planning](https://github.com/yix8/Vi
 If you follow the same dataset setting as ours, we provide you a shell script to easily evaluate.
 
 ```bash
-bash scripts/evaluate_script.sh
+bash scripts/evaluate_maze.sh
 ```
+
+Make sure your inference results are in `dataset/test` and your result files named properly.
 
 ### Training Models
 
-We train [Wan](https://github.com/Wan-Video/Wan2.2) model, which is well-instructed. You can easily fine-tune your own models.
+We train [Wan](https://github.com/Wan-Video/Wan2.2) model Wan-AI/Wan2.2-TI2V-5B with LoRA, which is well-instructed. You can easily fine-tune your own models.
 
-For your convenience if you follow ours, we provide you a metadata generator, `./train/metadata_gen.py`, which generates the metadata for our training. You can easily read it and modify it.
-
-Notice that the prompt in `metadata_gen.py` is actually the prompt we use in our training.
+For your convenience if you follow ours, you can copy our split test dataset`./dataset/test/.` directly into `DiffSynth-Studio/data/example_video_dataset`.
 
 ## 🤝 Contributors
 
