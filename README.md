@@ -119,34 +119,38 @@ OOD Maze Sizes:
       </td>
   </tr>
 </table>
-
 ## 📊 Performance
 
-| Success Rate                   | MiniVeo3-Reasoner-Maze-5B |
-| ------------------------------ | ------------------------- |
-| Maze 3x3                       | 100                       |
-| Maze 4x4                       | 100                       |
-| Maze 5x5                       | 100                       |
-| Maze 6x6                       | 98.4                      |
-| Maze 6x6 (OOD solution length) | 53.6                      |
-| Maze 7x7 (OOD size)            | 86.8                      |
-| Maze 8x8 (OOD size)            | 59.6                      |
+Following [Visual Planning: Let's Think Only with Images](https://arxiv.org/abs/2505.11409), we report two metrics:
+
+- **Exact Match (EM)** measures whether the model **successfully generates the complete and correct trajectory** that aligns with the shortest optimal valid path.
+- **Progress Rate (PR)** measures the **number of consecutively correct steps** (valid forward moves) from the start to the number of steps in the optimal path.
+
+| MiniVeo3-Reasoner-Maze-5B      | EM (%) | PR (%) |
+| ------------------------------ | ------ | ------ |
+| Maze 3x3                       | 100    | 100    |
+| Maze 4x4                       | 100    | 100    |
+| Maze 5x5                       | 100    | 100    |
+| Maze 6x6                       | 98.4   | 98.7   |
+| Maze 6x6 (OOD solution length) | 53.6   | 59.7   |
+| Maze 7x7 (OOD size)            | 86.8   | 90.1   |
+| Maze 8x8 (OOD size)            | 60.4   | 67.8   |
 
 ### Comparisons
 
-Under the same amount of training data, we include performance metrics reported in [Visual Planning: Let's Think Only with Images](https://arxiv.org/abs/2505.11409) for reference and comparison.
+Under the same amount of training data, we include performance metrics reported in [Visual Planning](https://arxiv.org/abs/2505.11409) for reference and comparison.
 
-| Model                            | Thinking Modality | Maze Success Rate |
-| -------------------------------- | ----------------- | ----------------- |
-| Gemini 2.0 Flash - Direct        | Text              | 8.3               |
-| Gemini 2.0 Flash - CoT           | Text              | 6.9               |
-| Gemini 2.0 Pro (think)           | Text              | 21.5              |
-| Qwen 2.5-VL-Instruct-3B - Direct | Text              | 0.5               |
-| Qwen 2.5-VL-Instruct-3B - CoT    | Text              | 0.8               |
-| Qwen 2.5-VL-Instruct-3B - SFT    | Text              | 33.3              |
-| LVM-3B - VPFT                    | Image             | 59.0              |
-| LVM-3B - VPRL                    | Image             | 74.5              |
-| MiniVeo3-Reasoner-Maze-5B        | Video             | **99.6**          |
+| Model                            | Thinking Modality | Maze EM (%) | Maze PR (%) |
+| -------------------------------- | ----------------- | ----------- | ----------- |
+| Gemini 2.0 Flash - Direct        | Text              | 8.3         | 31.4        |
+| Gemini 2.0 Flash - CoT           | Text              | 6.9         | 29.8        |
+| Gemini 2.0 Pro (think)           | Text              | 21.5        | 35.5        |
+| Qwen 2.5-VL-Instruct-3B - Direct | Text              | 0.5         | 13.6        |
+| Qwen 2.5-VL-Instruct-3B - CoT    | Text              | 0.8         | 8.2         |
+| Qwen 2.5-VL-Instruct-3B - SFT    | Text              | 33.3        | 52.7        |
+| LVM-3B - VPFT                    | Image             | 59.0        | 64.0        |
+| LVM-3B - VPRL                    | Image             | 74.5        | 77.6        |
+| MiniVeo3-Reasoner-Maze-5B        | Video             | **99.6**    | **99.7**    |
 
 ## 🚀 Get Started
 
@@ -218,7 +222,7 @@ bash scripts/inference_maze_testset.sh
 
 Our evaluator compares the predicted trajectory with the ground truth, computing the distance between the two paths.
 
-We implement our own versions of Exact Match (EM) and Progress Rate (PR) metrics (see [Visual Planning](https://github.com/yix8/VisualPlanning)) for video-based evaluation.
+We implement our own versions of Exact Match (EM) and Progress Rate (PR) metrics for video-based evaluation.
 
 If your generated results are stored in `dataset/maze_test` and named properly, you can evaluate all test samples by running:
 
