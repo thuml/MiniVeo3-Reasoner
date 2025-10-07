@@ -4,7 +4,6 @@ imageio
 imageio-ffmpeg
 opencv-python
 tqdm
-opencv-python
 scipy
 fastdtw
 seaborn

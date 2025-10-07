@@ -26,7 +26,7 @@ Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms base
 
 | Models                    | Download Links                                                           | Description                                                                                                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MiniVeo3-Reasoner-Maze-5B | 🤗 [HuggingFace](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) | Fine-tuned for [Maze](https://github.com/understanding-search/maze-dataset) tasks (3x3 to 6x6 sizes) from the base model [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) |
+| MiniVeo3-Reasoner-Maze-5B | 🤗 [HuggingFace](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) | Fine-tuned LoRA for [Maze](https://github.com/understanding-search/maze-dataset) tasks (3x3 to 6x6 sizes) from the base model [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) |
 
 ## ✨ Examples
 
@@ -158,6 +158,15 @@ conda activate miniveo3_reasoner
 pip install -r requirements.txt
 ```
 
+We use [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio/tree/ed256ef8be195d5deae2846a7e9f025670d99db3) for diffusion model training and inference. You need also install it:
+
+```bash
+git clone https://github.com/modelscope/DiffSynth-Studio.git
+cd DiffSynth-Studio
+git checkout ed256ef8be195d5deae2846a7e9f025670d99db3
+pip install -e .
+```
+
 ### Data Preparation
 
 Our data generator produces a series of mazes with configurable size, path length and amount, outputting a `.mp4` video file and a `.png` image (the first frame of the video).
@@ -180,57 +189,43 @@ To reproduce the same data distribution used in our experiments, simply run:
 bash scripts/generate_maze_dataset.sh
 ```
 
-Furthermore, if you want to split the train and test datasets, simply run:
-
-```bash
-# make sure you have run scripts/generate_maze_dataset.sh first
-
-bash scripts/split_maze_train_test.sh
-```
-
-The result will be in `dataset/train` and `dataset/test` respectively.
+The result will be in `dataset/maze_train` and `dataset/maze_test` respectively.
 
 ### Inference
 
-Our inference is based on [Wan](https://github.com/Wan-Video/Wan2.2) model. See Training Models for further usage.
+Download our [LoRA weights](https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B) and save it to `./model/`.
 
-If you want to try a simple fast inference, download our LoRA weight model on <a href="https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B">huggingface</a> and save it to `./model/`. Then run:
+To run inference on a single file or directory, use:
+
+```bash
+python inference/maze/inference_maze.py [-r] filename_or_directory
+```
+
+> 💡 The first run may take additional time to automatically download the base model files.
+
+To perform inference on all test samples, simply run:
 
 ```bash
 bash scripts/inference_maze_testset.sh
 ```
 
-It may take time to download model files of Wan2.2-TI2V-5B the first time you run.
-
-You can also use `inference/maze/inference_maze.py` to inference single file or directory. Run:
-
-```bash
-python inference/maze/inference_maze.py [-r] filename/directory
-```
-
 ### Success Evaluation
 
-We use serveral metrics to evaluate the result.
+Our evaluator compares the predicted trajectory with the ground truth, reporting the distance between the two paths.
 
-Our evaluator compares the inferred version and the answer version of one single output, then give the max distance of these two trajectories.
+We implement our own versions of Exact Match (EM) and Progress Rate (PR) metrics (see [Visual Planning](https://github.com/yix8/VisualPlanning)) for video-based evaluation.
 
-The results are divided into several categories based on the distances, and then determine whether it's correct, or it's imperfect.
-
-We provide max-distance and PR (see [Visual Planning](https://github.com/yix8/VisualPlanning)) metrics output. You can add your own metrics at will.
-
-If you follow the same dataset setting as ours, we provide you a shell script to easily evaluate.
+If your generated results are stored in `dataset/maze_test` and named properly, you can evaluate all test samples by running:
 
 ```bash
 bash scripts/evaluate_maze.sh
 ```
 
-Make sure your inference results are in `dataset/test` and your result files named properly.
-
 ### Training Models
 
-We train [Wan](https://github.com/Wan-Video/Wan2.2) model Wan-AI/Wan2.2-TI2V-5B with LoRA, which is well-instructed. You can easily fine-tune your own models.
+We train Wan2.2-TI2V-5B with LoRA, following the instruction provided in DiffSynth-Studio. You can easily fine-tune your own models using the same framework.
 
-For your convenience if you follow ours, you can copy our split test dataset`./dataset/test/.` directly into `DiffSynth-Studio/data/example_video_dataset`.
+For your convenience if you follow ours, you can copy the train dataset `dataset/maze_train` directly into `DiffSynth-Studio/data/example_video_dataset`.
 
 ## 🤝 Contributors
 
