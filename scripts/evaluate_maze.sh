@@ -6,8 +6,7 @@
 
 input_rt="dataset/test"
 
-
-output_rt="eval_result/${epoch}"
+output_rt="eval_result"
 
 for sub in "maze3x3" "maze4x4" "maze5x5" "maze6x6" "maze7x7" "maze8x8" "maze6x6_ood"; do
     dir="${input_rt}/${sub}/"
