@@ -119,6 +119,7 @@ OOD Maze Sizes:
       </td>
   </tr>
 </table>
+
 ## 📊 Performance
 
 Following [Visual Planning: Let's Think Only with Images](https://arxiv.org/abs/2505.11409), we report two metrics:
