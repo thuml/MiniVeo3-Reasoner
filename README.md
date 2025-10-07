@@ -194,7 +194,7 @@ The result will be in `dataset/train` and `dataset/test` respectively.
 
 Our inference is based on [Wan](https://github.com/Wan-Video/Wan2.2) model. See Training Models for further usage.
 
-If you want to try a simple fast inference, download our model on <a href="https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B"><img src="https://img.shields.io/badge/🤗_HuggingFace-fcd022?style=for-the-badge" alt="HuggingFace"></a> and save it to `./model/`. Then run:
+If you want to try a simple fast inference, download our model on <a href="https://huggingface.co/thuml/MiniVeo3-Reasoner-Maze-5B">huggingface</a> and save it to `./model/`. Then run:
 
 ```bash
 bash scripts/inference_maze_testset.sh
