@@ -74,10 +74,9 @@ def interpolate_trajectory(traj, m):
     return new_traj
 
 
-def compare_traj(traj1, traj2):
-    M = 5000
-    interpolated1 = interpolate_trajectory(traj1, M)
-    interpolated2 = interpolate_trajectory(traj2, M)
+def compare_traj(traj1, traj2, traj_len=5000):
+    interpolated1 = interpolate_trajectory(traj1, traj_len)
+    interpolated2 = interpolate_trajectory(traj2, traj_len)
 
     all_distances = np.linalg.norm(interpolated1 - interpolated2, axis=1)
     max_index = np.argmax(all_distances)

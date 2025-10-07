@@ -88,6 +88,7 @@ def eval(
     epoch_name,
     div,
     threshold,
+    inter_traj_len=5000,
     omit=False
 ):
     items = os.listdir(dir)
@@ -144,8 +145,8 @@ def eval(
             file2 = f"{name}_inference.mp4"
 
         expert, student = get_traj(f"{dir}/{file1}", f"{dir}/{file2}")
-        max_index, max_distance, dis, _, __ = compare_traj(expert, student)
-        first_diff = 1e10
+        max_index, max_distance, dis, _, __ = compare_traj(expert, student, inter_traj_len)
+        first_diff = inter_traj_len
         for i in range(len(dis)):
             if dis[i] > threshold:
                 first_diff = i
