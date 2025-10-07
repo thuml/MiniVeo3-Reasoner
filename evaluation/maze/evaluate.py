@@ -5,6 +5,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
+base_name = "miniveo-3-reasoner-maze"
+
+
 def plot_density(data, filename='density_plot.png', save_path='./', div=[10,20,30], title='Density Plot'):
     plt.figure(figsize=(10, 6))
     
@@ -85,7 +88,7 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
         'Significantly Different': []
     }
     max_distances = []
-    
+    PRs = []
     png_items=[]
     
     for item in items:
@@ -93,10 +96,13 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
         if os.path.isfile(item_path) and item.lower().endswith('.png'):
             parts = item.split('_00.png')
             name = parts[0]
-            # if os.path.isfile(os.path.join(dir, f"{name}_{epoch_name}_inference.mp4")) and os.path.isfile(os.path.join(dir, f"{name}.mp4")):
-            if os.path.isfile(os.path.join(dir, f"{name}_inference.mp4")) and os.path.isfile(os.path.join(dir, f"{name}.mp4")):
-                png_items.append(item)
-    
+            if epoch_name!="":
+                if os.path.isfile(os.path.join(dir, f"{name}_{epoch_name}_inference.mp4")) and os.path.isfile(os.path.join(dir, f"{name}.mp4")):
+                    png_items.append(item)
+            else:
+                if os.path.isfile(os.path.join(dir, f"{name}_inference.mp4")) and os.path.isfile(os.path.join(dir, f"{name}.mp4")):
+                    png_items.append(item)
+
     total_num=len(png_items)
     
     if total_num==0:
@@ -123,9 +129,10 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
         parts = item.split('_00.png')
         name = parts[0]
         file1 = f"{name}.mp4"
-        # file2 = f"{name}_{epoch_name}_inference.mp4"
-        file2 = f"{name}_inference.mp4"
-        
+        if epoch_name:
+            file2 = f"{name}_{epoch_name}_inference.mp4"
+        else:
+            file2 = f"{name}_inference.mp4"
 
         expert, student = gen_traj(f"{dir}/{file1}", f"{dir}/{file2}")
         max_index, max_distance, dis, _1, _2 = compare(expert, student)
@@ -140,6 +147,7 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
             "PR": first_diff/len(dis),
             "similarity_evaluation": eval_dis(max_distance, div)
         }
+        PRs.append(metrics['PR'])
         max_distances.append(max_distance)
         similarity_groups[metrics['similarity_evaluation']].append((file2, metrics))
         
@@ -148,7 +156,7 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
         if colored_output:
             tqdm.write(colored_output)
 
-    plot_density(max_distances,"distances_plot",output_dir,div,title=f"{dir} {epoch_name}")
+    plot_density(max_distances,"distances_plot",output_dir,div,title=f"{dir} {epoch_name if epoch_name else base_name}")
     
     for evaluation, files in similarity_groups.items():
         filename = f"{evaluation.replace(' ', '_').lower()}_files.txt"
@@ -167,6 +175,14 @@ def eval(dir, output_dir, epoch_name, div, threshold, omit=False):
                 f.write(f"{file[0]}: dist={file[1]['max_distance']}, PR={file[1]['PR']}\n")
         if not omit:
             print(f"Generated file: {filename}")
+            
+    with open(f"{output_dir}/summary.txt", 'w', encoding='utf-8') as f:
+        pr=sum(PRs)/len(PRs)
+        em=PRs.count(1)/len(PRs)
+        f.write(f"PR: {pr}\n")
+        f.write(f"EM: {em}\n")
+    if not omit:
+        print(f"Generated file: {filename}")
     
 import sys
 import argparse
@@ -175,7 +191,7 @@ def main():
     # default parameters
     default_dir = "./"
     default_output_dir = "./result"
-    # default_epoch_name = "epoch-0"
+    default_epoch_name = ""
     default_div = [10, 20, 30]
     default_threshold = 20
     
@@ -183,7 +199,7 @@ def main():
     parser = argparse.ArgumentParser(description='Evaluate video reasoning results.')
     parser.add_argument('--input-dir', '-i', type=str, default=default_dir, help='Evaluation data input directory.')
     parser.add_argument('--output-dir', '-o', type=str, default=default_output_dir, help='Evaluation result output directory')
-    # parser.add_argument('--epoch-name', '-e', type=str, default=default_epoch_name, help='Epoch name in filename. Your output should be like xxx_{epoch_name}_inference.mp4')
+    parser.add_argument('--epoch-name', '-e', type=str, default=default_epoch_name, help='Epoch name in filename. Your output should be like xxx_{epoch_name}_inference.mp4')
     parser.add_argument('--div', '-d', type=str, default=','.join(map(str, default_div)), help='Division points for categories, e.g., "10,20,30"')
     parser.add_argument('--quiet', '-q', action='store_true', help='Quiet mode, suppress output')
     parser.add_argument('--threshold', '-t', type=int, default=default_threshold, help='The threshold pixel distance to determined to be wrong, default=20.')
@@ -191,7 +207,7 @@ def main():
     args = parser.parse_args()
     dir_path = args.input_dir
     output_dir = args.output_dir
-    epoch_name ="miniveo3-reasoner-maze"  # args.epoch_name
+    epoch_name = args.epoch_name if args.epoch_name else ""
     div = list(map(int, args.div.split(','))) if args.div else default_div
     threshold = args.threshold
     omit = args.quiet
@@ -199,7 +215,7 @@ def main():
     if not omit:
         print(f"Evaluation data input directory: {dir_path}")
         print(f"Evaluation result output directory: {output_dir}")
-        # print(f"Epoch name: {epoch_name}")
+        print(f"Epoch name: {epoch_name}")
         print(f"Division points: {div}")
         print(f"Threshold: {threshold}")
 
