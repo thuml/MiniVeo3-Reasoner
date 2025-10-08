@@ -16,6 +16,8 @@ In the maze domain, the fine-tuned models—dubbed **MiniVeo3-Reasoner**—exhib
 
 Under controlled comparisons, MiniVeo3-Reasoner **significantly outperforms baseline approaches** that reason in other modalities such as text or images.
 
+We further envision that this visual reasoning capability can be **enhanced through reinforcement learning of video models**.
+
 ![method overview](assets/overview.png)
 
 ## 🔥 News
@@ -119,6 +121,7 @@ OOD Maze Sizes:
       </td>
   </tr>
 </table>
+
 ## 📊 Performance
 
 Following [Visual Planning: Let's Think Only with Images](https://arxiv.org/abs/2505.11409), we report two metrics:
@@ -232,9 +235,9 @@ bash scripts/evaluate_maze.sh
 
 ### Training Models
 
-We train Wan2.2-TI2V-5B with LoRA, following the instruction provided in DiffSynth-Studio. You can easily fine-tune your own models using the same framework.
+We train Wan2.2-TI2V-5B with LoRA, following the instructions provided in DiffSynth-Studio. You can easily fine-tune your own models using the same framework.
 
-For your convenience if you follow ours, you can copy the train dataset `dataset/maze_train` directly into `DiffSynth-Studio/data/example_video_dataset`.
+For your convenience, if you follow ours, you can copy the train dataset `dataset/maze_train` directly into `DiffSynth-Studio/data/example_video_dataset`.
 
 ## 🤝 Contributors
 
@@ -267,3 +270,7 @@ If you find MiniVeo3-Reasoner useful, we would appreciate it if you could cite o
     howpublished = {\url{https://github.com/thuml/MiniVeo3-Reasoner}},
 }
 ```
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=thuml/MiniVeo3-Reasoner&type=Date)](https://www.star-history.com/#thuml/MiniVeo3-Reasoner&Date)
