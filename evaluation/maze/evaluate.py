@@ -34,6 +34,7 @@ def plot_density(data, filename='density_plot.png', save_path='./', div=[10, 20,
         plt.axvline(x=boundary, color='black', linestyle='--', alpha=0.7, linewidth=1)
 
     data = np.array(data)
+    data = np.sort(data)
     # calculate proportions and add text box
     cumulative_proportions = []
     proportions_text = f"Proportions: (total={len(data)})\n"
@@ -86,7 +87,7 @@ def eval(
     dir,
     output_dir,
     epoch_name,
-    div,
+    div : list,
     threshold,
     inter_traj_len=5000,
     omit=False
@@ -180,10 +181,11 @@ def eval(
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(f"{evaluation} Files\n")
             f.write("=" * 50 + "\n")
+            files_sorted=sorted(files, key=lambda x: x[0])
             f.write(f"Total: {len(files)} files.\n\n")
 
-            for file in files:
-                f.write(f"{file[0]}: dist={file[1]['max_distance']}, PR={file[1]['PR']}\n")
+            for file in files_sorted:
+                f.write(f"{file[0]}: dist={file[1]['max_distance']:.2f}, PR={file[1]['PR']:.2f}\n")
         if not omit:
             print(f"Generated file: {filename}")
 
@@ -193,7 +195,7 @@ def eval(
         f.write(f"PR: {pr}\n")
         f.write(f"EM: {em}\n")
     if not omit:
-        print(f"Generated file: {filename}")
+        print(f"Generated file: {output_dir}/summary.txt")
 
 
 if __name__ == "__main__":
@@ -232,4 +234,4 @@ if __name__ == "__main__":
         print(f"Division points: {div}")
         print(f"Threshold: {threshold}")
 
-    eval(dir_path, output_dir, epoch_name, div, threshold, omit)
+    eval(dir_path, output_dir, epoch_name, div, omit=omit, threshold=threshold)
