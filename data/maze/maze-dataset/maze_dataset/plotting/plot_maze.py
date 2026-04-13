@@ -299,8 +299,8 @@ class MazePlot:
 	# Add a continuous route plot
 	def plot_continuous(
 		self,
-		frames_num=81,
-		fig_size_pixel=(832,480),
+		frames_num=16,
+		fig_size_pixel=(128,128),
   		dpi: int = 100,
 		title: str = "",
 		fig_ax: tuple | None = None,
@@ -349,12 +349,13 @@ class MazePlot:
 
 			# Plot labels
 			if not plain:
-				tick_arr = np.arange(self.maze.grid_shape[0])
-				self.ax.set_xticks(self.unit_length * (tick_arr + 0.5), tick_arr)
-				self.ax.set_yticks(self.unit_length * (tick_arr + 0.5), tick_arr)
-				self.ax.set_xlabel("col")
-				self.ax.set_ylabel("row")
-				self.ax.set_title(title)
+				# tick_arr = np.arange(self.maze.grid_shape[0])
+				# self.ax.set_xticks(self.unit_length * (tick_arr + 0.5), tick_arr)
+				# self.ax.set_yticks(self.unit_length * (tick_arr + 0.5), tick_arr)
+				# self.ax.set_xlabel("col")
+				# self.ax.set_ylabel("row")
+				# self.ax.set_title(title)
+				self.ax.axis("off")
 			else:
 				self.ax.set_xticks([])
 				self.ax.set_yticks([])
@@ -374,6 +375,81 @@ class MazePlot:
    
 		return frames
 
+	def plot_continuous_const_speed(
+		self,
+		step_size: float = 0.1,  # 新增：每帧移动的固定距离（值越小，速度越慢，总帧数越多）
+		fig_size_pixel=(128,128),
+		dpi: int = 100,
+		title: str = "",
+		fig_ax: tuple | None = None,
+		plain: bool = False,
+	):
+		plot_len = len(self.true_path.path)
+		frames = []
+		path_continuous = []
+
+		import math
+
+		# 遍历所有路径点，按恒定步长插入中间帧
+		for i in range(plot_len - 1):
+			p1 = self.true_path.path[i]
+			p2 = self.true_path.path[i+1]
+			path_continuous.append(p1)
+
+			# 计算两点之间的欧式距离
+			dist = math.hypot(p2[0] - p1[0], p2[1] - p1[1])
+
+			# 根据恒定步长计算需要切分成多少段 (保证至少为1段)
+			parts = max(1, int(round(dist / step_size)))
+			intersects = parts - 1  # 插入的中间点数量
+
+			for j in range(intersects):
+				# 线性插值
+				inter_x = p1[0] + (p2[0] - p1[0]) / parts * (j + 1)
+				inter_y = p1[1] + (p2[1] - p1[1]) / parts * (j + 1)
+				path_continuous.append((inter_x, inter_y))
+
+		if plot_len > 0:
+			path_continuous.append(self.true_path.path[-1])
+
+		# 下方绘图逻辑保持不变
+		for i in range(len(path_continuous)):
+			
+			# set up figure
+			if fig_ax is None:
+				self.frame = plt.figure(figsize=(fig_size_pixel[0]/dpi,fig_size_pixel[1]/dpi), dpi=dpi)
+				self.ax = self.frame.add_subplot(1, 1, 1)
+			else:
+				self.frame, self.ax = fig_ax
+
+			# plot maze
+			self._plot_maze()
+
+			# Plot labels
+			if not plain:
+				self.ax.axis("off")
+			else:
+				self.ax.set_xticks([])
+				self.ax.set_yticks([])
+				self.ax.set_xlabel("")
+				self.ax.set_ylabel("")
+				self.ax.axis("off")
+			
+			adapt_path = StyledPath(path=np.array(path_continuous[:i+1]))
+			adapt_path = adapt_path.combine(DEFAULT_FORMATS["true"])
+
+			if len(adapt_path.path) > 0:
+				self._plot_path(adapt_path, path_continuous[-1], self.unit_length * 0.8)
+
+			for coord, kwargs in self.marked_coords:
+				self._place_marked_coords([coord], **kwargs)
+
+			frames.append(self.frame)
+			plt.close(self.frame)
+		
+		return frames
+ 
+ 
 	def plot(
 		self,
 		dpi: int = 100,

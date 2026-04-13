@@ -8,11 +8,11 @@
 # Make sure maze-dataset of our customized version is installed.
 
 python data/maze/maze_generator.py --grid-n 3 --n-mazes 1250 --min-path-length 2 --max-path-length 6 --output-dir ./dataset/maze3x3 --file-prefix "maze3" -q
-python data/maze/maze_generator.py --grid-n 4 --n-mazes 1250 --min-path-length 2 --max-path-length 8 --output-dir ./dataset/maze4x4 --file-prefix "maze4" -q
+python data/maze/maze_generator.py --grid-n 4 --n-mazes 1250 --min-path-length 2 --max-path-length 8 --output-dir ./dataset/maze4x4 --file-prefix "maze4" -q --fig-size-pixel 128
 python data/maze/maze_generator.py --grid-n 5 --n-mazes 1250 --min-path-length 2 --max-path-length 10 --output-dir ./dataset/maze5x5 --file-prefix "maze5" -q 
 python data/maze/maze_generator.py --grid-n 6 --n-mazes 1250 --min-path-length 2 --max-path-length 12 --output-dir ./dataset/maze6x6 --file-prefix "maze6" -q
 python data/maze/maze_generator.py --grid-n 7 --n-mazes 250 --min-path-length 2 --max-path-length 14 --output-dir ./dataset/maze7x7 --file-prefix "maze7" -q
-python data/maze/maze_generator.py --grid-n 8 --n-mazes 250 --min-path-length 2 --max-path-length 16 --output-dir ./dataset/maze8x8 --file-prefix "maze8" -q
+python data/maze/maze_generator.py --grid-n 8 --n-mazes 250 --min-path-length 2 --max-path-length 16 --output-dir ./dataset/maze8x8 --file-prefix "maze8" -q --fig-size-pixel 256
 python data/maze/maze_generator.py --grid-n 6 --n-mazes 250 --min-path-length 13 --max-path-length 18 --output-dir ./dataset/maze6x6_ood --file-prefix "maze6ood" -q
 
 # Split train and test datasets

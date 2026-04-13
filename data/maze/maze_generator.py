@@ -38,6 +38,11 @@ parser.add_argument("--file-prefix", "-p", type=str, default="maze", help="(Opti
 parser.add_argument("--create-algo", "-c", type=str, default=default_maze_ctor,
                     help="(Optional) Maze generation algorithm, default='gen_kruskal'")
 parser.add_argument("--quiet", "-q", help="Quiet mode, no output", action="store_true")
+parser.add_argument("--const-speed", help="Use constant speed for animation", action="store_true")
+parser.add_argument("--fig-size-pixel", type=int, default=None,
+                    help="(Optional) Output image/video size in pixels; defaults by grid size (4x4->128, 8x8->256)")
+
+
 args = parser.parse_args()
 
 output_dir = args.output_dir
@@ -46,6 +51,9 @@ n_mazes = args.n_mazes
 min_path_length = args.min_path_length if args.min_path_length else 2
 max_path_length = args.max_path_length if args.max_path_length else 2 * grid_n
 file_prefix = args.file_prefix if args.file_prefix else f"maze{grid_n}"
+
+default_fig_size_by_grid = {4: 128, 8: 256}
+fig_size_pixel = args.fig_size_pixel if args.fig_size_pixel else default_fig_size_by_grid.get(grid_n, 256)
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
@@ -73,7 +81,8 @@ np.random.seed(0)
 while mazes_got < n_mazes:
     newmaze = get_maze_with_solution(maze_ctor, (grid_n, grid_n))
     now_length = len(newmaze.solution)
-    if now_length > max_path_length:
+    # Skip samples outside the requested path-length range.
+    if now_length < min_path_length or now_length > max_path_length:
         continue
     if len(mazes_with_length[now_length]) < need_lengths[now_length]:
         mazes_with_length[now_length].append(newmaze)
@@ -88,8 +97,34 @@ for i in range(n_mazes):
     count_lengths[target] += 1
 
 
-def export_mp4(m, output_file, fps=15):
-    frames = MazePlot(m).plot_continuous()
+
+def export_mp4_const_speed(m, output_file, fps=15, fig_size_pixel=(256,256)):
+    frames = MazePlot(m).plot_continuous_const_speed(fig_size_pixel=fig_size_pixel, plain=True)
+
+    if not args.quiet:
+        print(f"Exporting {output_file} ...")
+
+    frames[0].canvas.draw()
+    img = np.array(frames[0].canvas.renderer.buffer_rgba())[:, :, :3]  # take RGB
+    img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    cv2.imwrite(f'{output_dir}/{output_file}_00.png', img_bgr)
+
+    plt.close(frames[0])
+
+    def create_video(frames, output_file='output.mp4', fps=15):
+        images = []
+        for fig in frames:
+            fig.canvas.draw()
+            img = np.array(fig.canvas.renderer.buffer_rgba())[:, :, :3]  # take RGB
+            images.append(img)
+            plt.close(fig)
+
+        imageio.mimsave(output_file, images, fps=fps)
+
+    create_video(frames, f'{output_dir}/{output_file}.mp4', fps=fps)
+
+def export_mp4(m, output_file, fps=15, fig_size_pixel=(256,256)):
+    frames = MazePlot(m).plot_continuous(fig_size_pixel=fig_size_pixel, frames_num=16, plain=True)
 
     if not args.quiet:
         print(f"Exporting {output_file} ...")
@@ -117,8 +152,14 @@ def export_mp4(m, output_file, fps=15):
 if not args.quiet:
     print(f"Making {n_mazes} {grid_n} by {grid_n} mazes to {output_dir}/ ...")
     for i, maze in enumerate(dataset):
-        export_mp4(maze, f'{file_prefix}_{i + 1:04d}', fps=15)
+        if args.const_speed:
+            export_mp4_const_speed(maze, f'{file_prefix}_{i + 1:04d}', fps=15, fig_size_pixel=(fig_size_pixel, fig_size_pixel))
+        else:
+            export_mp4(maze, f'{file_prefix}_{i + 1:04d}', fps=15, fig_size_pixel=(fig_size_pixel, fig_size_pixel))
 else:
     from tqdm import tqdm
     for i, maze in enumerate(tqdm(dataset, desc=f"Generating mazes {grid_n}x{grid_n}")):
-        export_mp4(maze, f'{file_prefix}_{i + 1:04d}', fps=15)
+        if args.const_speed:
+            export_mp4_const_speed(maze, f'{file_prefix}_{i + 1:04d}', fps=15, fig_size_pixel=(fig_size_pixel, fig_size_pixel))
+        else:
+            export_mp4(maze, f'{file_prefix}_{i + 1:04d}', fps=15, fig_size_pixel=(fig_size_pixel, fig_size_pixel))
