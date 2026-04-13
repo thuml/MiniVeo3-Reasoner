@@ -4,3 +4,4 @@ default_dataset
 dataset
 eval_result
 models
+scripts/ad_hoc/

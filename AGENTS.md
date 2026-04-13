@@ -29,6 +29,8 @@ This repository uses the following conventions for maze dataset generation. Foll
     - `generate4.sh`: standard 4x4 generation
     - `generate4cs.sh`: 4x4 with constant speed
     - `generate4hard.sh`: 4x4 with non-default path-length range
+- The canonical checked-in generator entrypoint is `scripts/generate_maze_dataset.sh`.
+- One-off or experiment-specific generator helpers should live under `scripts/ad_hoc/` and should not be treated as repository-standard entrypoints.
 
 ## Exception Policy
 
